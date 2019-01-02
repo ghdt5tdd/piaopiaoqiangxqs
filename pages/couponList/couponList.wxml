@@ -1,0 +1,43 @@
+<!--pages/couponList/couponList.wxml-->
+<view class="order-status">
+  <block wx:for="{{orderStatus}}">
+    <view class="order-status-items {{selectStatus == index?'on':''}}" bindtap='selectStatus' data-index="{{index}}">
+      {{item.name}}
+    </view>
+  </block>
+</view>
+
+<scroll-view class='coupon-list' scroll-y style='height:calc(100vh - 146rpx)'>
+  <block wx:for="{{selectCoupon}}">
+    <view class="coupon-list-item">
+      <view class="coupon-list-introduce fl-l">
+        <view class="coupon-list-reduce">¥
+          <text>{{item.reduce}}</text>
+        </view>
+        <view wx:if="{{item.tag == 1}}" class="coupon-list-over">
+          运单金额满{{item.over}}可使用
+        </view>
+        <view wx:else class="coupon-list-over">
+          无使用门槛
+        </view>
+        <view class="coupon-list-time">
+          有效期{{item.timestart}}至{{item.endstart}}
+        </view>
+      </view>
+      <view class="coupon-list-opt fl-r">
+        <view wx:if="{{item.couponSelect == 1}}" data-index="{{index}}">
+          <image src='../../images/coupon_on.png'></image>
+          <text>去使用</text>
+        </view>
+        <view wx:if="{{item.couponSelect == 2}}">
+          <image src='../../images/coupon_over.png'></image>
+          <text>已使用</text>
+        </view>
+        <view wx:if="{{item.couponSelect == 3}}">
+          <image src='../../images/coupon_over.png'></image>
+          <text>已过期</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

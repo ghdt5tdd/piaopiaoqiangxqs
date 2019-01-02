@@ -1,0 +1,36 @@
+<!--pages/punch/punch.wxml-->
+<view class='card-order'>
+  <view class='punch-send'>
+    <view>本趟发货时间：{{sendTime}}</view>
+    <view class='orange'>
+      <navigator url="../punchList/punchList" hover-class='none'>查看记录</navigator>
+    </view>
+  </view>
+  <view class='punch-list'>
+    <view wx:for="{{punch}}" class='punch-item'>
+      <view class='punch-circle'></view>
+      <view class='punch-item-limit'>第{{item.num}}次签到截止时间：{{item.limit}}</view>
+      <view wx:if="{{item.over}}" class='punch-item-time orange'>缺席</view>
+      <view wx:else>
+        <view class='punch-item-time'>签到时间：{{item.time}}</view>
+        <view class='punch-item-location'>
+          <image src='../../images/location.png'></image>
+          <view>{{item.location}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='punch-now'>
+      <view class='punch-circle'></view>
+      <view class='punch-now-limit'>本次签到截止时间{{EndTime}}</view>
+      <navigator url="../punchLocation/punchLocation" hover-class='none'>
+        <view class='punch-now-clock'>
+          <view> 点击签到</view>
+          <view>{{clock}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+
+
+</view>

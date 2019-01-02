@@ -1,0 +1,51 @@
+<!--pages/personal/personal.wxml-->
+<view class='section'>
+  <view class="section-bar">
+    <view class="section-title">账号名称：</view>
+    <view class="section-info">
+      {{nickid}}
+    </view>
+  </view>
+  <view class="section-bar">
+    <view class="section-title">绑定手机：</view>
+    <view class="section-info">
+      {{tel}}
+    </view>
+  </view>
+  <view class="section-bar">
+    <view class="section-title">真实姓名：</view>
+    <view class="section-info">
+      {{name}}
+    </view>
+  </view>
+  <view class="section-bar">
+    <view class="section-title">单位名称：</view>
+    <view class="section-info">
+      {{company}}
+    </view>
+  </view>
+  <view class="section-bar section-multiline">
+    <view class="section-title">单位地址：</view>
+    <view class="section-info">
+      {{address}}
+    </view>
+  </view>
+
+</view>
+
+<view class='section'>
+  <view class="section-bar section-multiline">
+    <view class="section-title">账号身份：</view>
+    <view class="section-info">
+      {{identity}}
+    </view>
+  </view>
+  <view class="section-bar">
+    <view class="section-title">上传证件：</view>
+    <view class="section-info">
+      <navigator url="../bindcard/bindcard" hover-class='none' wx:if="this.data.status == '未认证'">{{status}}</navigator>
+      <view wx:else>{{status}}</view>
+    </view>
+    <image class='section-next' src='../../images/w_next.png'></image>
+  </view>
+</view>

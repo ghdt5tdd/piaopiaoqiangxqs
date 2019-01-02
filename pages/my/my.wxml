@@ -1,0 +1,68 @@
+<!--pages/my/my.wxml-->
+<view class="my-head">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <view>
+      <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+      <view class="userinfo-nicktel">{{nickTel}}</view>
+    </view>
+  </view>
+</view>
+<view class='my-content'>
+  <view class='card-title'>个人信息</view>
+  <view class='card-order'>
+    <navigator url="../personal/personal" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my1.png'></image>
+        <view class='my-bar-name'>个人资料</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+    <navigator url="../addList/addList" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my2.png'></image>
+        <view class='my-bar-name'>地址管理</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+    <navigator url="../wallet/wallet" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my7.png'></image>
+        <view class='my-bar-name'>我的钱包</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+    <navigator url="../set/set" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my3.png'></image>
+        <view class='my-bar-name'>我的设置</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+  </view>
+  <view class='card-title'>个人记录</view>
+  <view class='card-order'>
+    <navigator url="../punch/punch" hover-class='none'>
+      <view class='my-bar my-barinfo'>
+        <image class='my-bar-icon' src='../../images/my4.png'></image>
+        <view class='my-bar-name'>定位签到</view>
+        <view class='my-bar-text'>{{punchTip}}</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+    <navigator url="../truck/truck" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my6.png'></image>
+        <view class='my-bar-name'>货车定位</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+    <navigator url="../coupon/coupon" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my5.png'></image>
+        <view class='my-bar-name'>附近红包</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+  </view>
+</view>

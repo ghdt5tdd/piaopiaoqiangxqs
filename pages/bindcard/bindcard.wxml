@@ -1,0 +1,22 @@
+<!--pages/bindcard/bindcard.wxml-->
+<view class='card-order'>
+  <view class='bind-bar'>
+    <view class='bind-title'>请上传身份证</view>
+    <view class='bind-upload'>
+      <image bindtap="changePicface" src="{{realPicface}}" />
+      <image bindtap="changePicback" src="{{realPicback}}" />
+    </view>
+  </view>
+  <view class='bind-bar'>
+    <view class='bind-title'>请上传驾驶证</view>
+    <view class='bind-upload'>
+      <image bindtap="changeDrive1" src="{{realDrive1}}" />
+      <image bindtap="changeDrive2" src="{{realDrive2}}" />
+    </view>
+
+  </view>
+</view>
+
+<button class='button-bottom' bindtap='toFirst'>
+  确认绑定
+</button>

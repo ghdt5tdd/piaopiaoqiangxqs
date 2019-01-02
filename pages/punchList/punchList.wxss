@@ -1,0 +1,75 @@
+/* pages/punchList/punchList.wxss */
+
+.punchlist-bar {
+  background: #fff;
+  padding: 20rpx 70rpx 20rpx 20rpx;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e7e7e7;
+}
+
+.punchlist-bar image {
+  position: absolute;
+  width: 32rpx;
+  height: 32rpx;
+  top: 24rpx;
+  right: 20rpx;
+  transition: all 0.2s;
+}
+
+.on .punchlist-bar image {
+  transform: rotate(90deg);
+}
+
+.punchlist-code {
+  padding: 0 20rpx;
+}
+
+.punchlist-code-item {
+  padding: 15rpx 0;
+  font-size: 30rpx;
+  line-height: 46rpx;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.punchlist-code-item:last-child {
+  border: none;
+}
+
+.punchlist-code-location {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 36rpx;
+}
+
+.punchlist-head {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.punchlist-head-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background: #272d4d;
+}
+
+.punchlist-head-date {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx
+}
+
+.punchlist-head-date image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 20rpx;
+}

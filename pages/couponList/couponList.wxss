@@ -1,0 +1,49 @@
+/* pages/couponList/couponList.wxss */
+.coupon-list{
+  padding: 20rpx;
+  width: calc(100% - 40rpx)
+}
+.coupon-list-item {
+  height: 160rpx;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.coupon-list-introduce {
+  width: calc(100% - 260rpx);
+  font-size: 24rpx;
+  padding: 15rpx 20rpx 10rpx;
+  overflow: hidden;
+}
+
+.coupon-list-reduce {
+  color: #e52019;
+  margin-bottom: 10rpx;
+}
+
+.coupon-list-reduce text {
+  font-size: 42rpx;
+}
+
+.coupon-list-opt {
+  width: 214rpx;
+  height: 160rpx;
+  position: relative;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.coupon-list-opt image {
+  width: 214rpx;
+  height: 160rpx;
+}
+
+.coupon-list-opt text {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 60rpx;
+  top: 50rpx;
+}

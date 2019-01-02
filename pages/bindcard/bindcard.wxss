@@ -1,0 +1,2 @@
+/* pages/bindcard/bindcard.wxss */
+@import '../bind/bind.wxss';

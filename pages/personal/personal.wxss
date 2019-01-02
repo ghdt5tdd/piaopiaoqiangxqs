@@ -1,0 +1,14 @@
+/* pages/personal/personal.wxss */
+@import '../addEdit/addEdit.wxss';
+
+.section-multiline .section-info {
+  min-height: none;
+  height: auto;
+  width: calc(100% - 170rpx);
+}
+
+.section-next {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 7rpx 0 0 20rpx;
+}

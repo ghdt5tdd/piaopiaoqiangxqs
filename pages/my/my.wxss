@@ -1,0 +1,86 @@
+/* pages/my/my.wxss */
+
+.my-head {
+  background: #ba7a26;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-size: 0;
+}
+
+.userinfo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 20rpx;
+  color: #fff;
+}
+
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background: #272d4d;
+}
+
+.userinfo-nickname {
+  font-size: 30rpx;
+}
+
+.userinfo-nicktel {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}
+
+.my-content {
+  margin-top: 20rpx;
+}
+
+.card-title {
+  line-height: 40rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+}
+
+.my-bar {
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  background: #fff;
+  justify-content: space-between;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.card-order .my-bar {
+  margin: 0 20rpx;
+  padding: 20rpx 0;
+}
+
+.my-bar-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+
+.my-bar-next {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 20rpx;
+}
+
+.my-bar-name {
+  width: calc(100% - 125rpx);
+}
+
+.my-barinfo .my-bar-name {
+  width: 200rpx;
+}
+
+.my-bar-text {
+  width: calc(100% - 325rpx);
+  text-align: right;
+  color: #999;
+}

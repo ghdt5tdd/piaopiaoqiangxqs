@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/first/first",
+    "pages/pay/pay",
+    "pages/success/success",
+    "pages/sign/sign",
+    "pages/receipt/receipt",
+    "pages/bind/bind",
+    "pages/bindcard/bindcard",
+    "pages/point/point",
+    "pages/location/location",
+    "pages/transportdetail/transportdetail",
+    "pages/home/home",
+    "pages/send/send",
+    "pages/addSend/addSend",
+    "pages/addReceive/addReceive",
+    "pages/addCreate/addCreate",
+    "pages/addEdit/addEdit",
+    "pages/mapLocation/mapLocation",
+    "pages/mapLocation/searchMapLocation/searchMapLocation",
+    "pages/cargo/cargo",
+    "pages/service/service",
+    "pages/my/my",
+    "pages/personal/personal",
+    "pages/addList/addList",
+    "pages/punch/punch",
+    "pages/punchLocation/punchLocation",
+    "pages/punchList/punchList",
+    "pages/truck/truck",
+    "pages/coupon/coupon",
+    "pages/couponList/couponList",
+    "pages/wallet/wallet",
+    "pages/recharge/recharge",
+    "pages/set/set"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "票票签",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,28 @@
+<!--pages/receipt/receipt.wxml-->
+<view class='card-order'>
+  <view class='card-head'>签收信息</view>
+  <view class='order-block'>
+    <view class='order-bar'>
+      <view class='order-bar-label'>签收人</view>
+      <view class='order-bar-text'>{{receiptName}}</view>
+    </view>
+    <view class='order-bar'>
+      <view class='order-bar-label'>联系方式</view>
+      <view class='order-bar-text'>{{receiptTel}}</view>
+    </view>
+    <view class='order-bar'>
+      <view class='order-bar-label'>签收时间</view>
+      <view class='order-bar-text'>{{receiptTime}}</view>
+    </view>
+  </view>
+</view>
+<view class='card-order'>
+  <view class='card-head'>回单上传</view>
+  <view class='receipt-gallery'>
+    <image bindtap="changeReceipt" src='{{receiptPic}}'></image>
+  </view>
+</view>
+
+<view class='button-bottom'>
+  <navigator url="../home/home" hover-class='none' open-type='reLaunch'>确认</navigator>
+</view>

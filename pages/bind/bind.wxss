@@ -1,0 +1,61 @@
+/* pages/bind/bind.wxss */
+
+.card-order {
+  padding: 0 20rpx;
+}
+
+.bind-bar {
+  position: relative;
+  margin: 10rpx 0 30rpx;
+}
+
+.bind-title {
+  font-size: 34rpx;
+  padding: 20rpx 0;
+  line-height: 40rpx;
+}
+
+.bind-input {
+  font-size: 30rpx;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.bind-bar:last-child .bind-input {
+  border: none;
+}
+
+.bind-input input {
+  line-height: 70rpx;
+  height: 70rpx;
+}
+
+.bind-code {
+  position: absolute;
+  right: 20rpx;
+  bottom: 12rpx;
+  font-size: 24rpx;
+  background: none;
+  color: #ff5102;
+  border: 1px solid #ff5102;
+  line-height: 48rpx;
+  padding: 0 20rpx;
+  z-index: 22;
+}
+
+button[disabled].bind-code {
+  border-color: transparent;
+  color: #ff5102 !important;
+  background: none !important;
+}
+
+.bind-upload {
+  text-align: center;
+}
+
+.bind-upload image {
+  width: 258rpx;
+  height: 157rpx;
+  margin: 30rpx 20rpx;
+  vertical-align: center;
+  overflow: hidden;
+}

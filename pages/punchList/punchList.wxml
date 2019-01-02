@@ -1,0 +1,60 @@
+<!--pages/punchList/punchList.wxml-->
+<view class='punchlist-head'>
+  <image class="punchlist-head-avatar" src="{{avatar}}" mode="cover"></image>
+  <view>
+    <view class="punchlist-head-name">{{name}}</view>
+    <view class="punchlist-head-date">
+      <picker mode="date" fields="month" value="{{date}}" start="2015-01-01" end="2020-12-31" bindchange="bindDateChange">
+        <view class="picker">{{date}}</view>
+      </picker>
+      <image src='../../images/down.png'></image>
+    </view>
+  </view>
+
+
+</view>
+
+
+
+
+
+
+<view class="punchlist-item {{hideTrip?'':'on'}}">
+  <view class='punchlist-bar' bindtap='spreadTrip'>
+    <view>总趟数</view>
+    <view>{{trip}}</view>
+    <image src='../../images/next.png'></image>
+  </view>
+  <view class='punchlist-code' hidden="{{hideTrip}}">
+    <view wx:for="{{tripCode}}" class='punchlist-code-item'>
+      <view>发货时间：{{item.time}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="punchlist-item {{hidePunch?'':'on'}}">
+  <view class='punchlist-bar' bindtap='spreadPunch'>
+    <view>签到次数</view>
+    <view>{{punch}}</view>
+    <image src='../../images/next.png'></image>
+  </view>
+  <view class='punchlist-code' hidden="{{hidePunch}}">
+    <view wx:for="{{punchCode}}" class='punchlist-code-item'>
+      <view>签到时间：{{item.time}}</view>
+      <view class='punchlist-code-location'>签到地点：{{item.location}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="punchlist-item {{hideAbsence?'':'on'}}">
+  <view class='punchlist-bar' bindtap='spreadAbsence'>
+    <view>缺席次数</view>
+    <view>{{absence}}</view>
+    <image src='../../images/next.png'></image>
+  </view>
+  <view class='punchlist-code' hidden="{{hideAbsence}}">
+    <view wx:for="{{absenceCode}}" class='punchlist-code-item'>
+      <view>缺席时间：{{item.time}}</view>
+    </view>
+  </view>
+</view>

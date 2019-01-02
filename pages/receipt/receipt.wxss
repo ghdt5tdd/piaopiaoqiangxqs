@@ -1,0 +1,21 @@
+/* pages/receipt/receipt.wxss */
+
+.order-bar {
+  line-height: 40rpx;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+}
+.receipt-gallery {
+  padding: 20rpx;
+  background: #fff;
+  overflow: hidden;
+}
+
+.receipt-gallery image {
+  width: 140rpx;
+  height: 140rpx;
+  border: 1px solid #e7e7e7;
+}

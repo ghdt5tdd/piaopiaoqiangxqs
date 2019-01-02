@@ -1,0 +1,31 @@
+/* pages/first/first.wxss */
+
+page {
+  background: #fff;
+  text-align: center;
+}
+
+.card-order {
+  margin: 20rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  box-shadow: 0rpx -10rpx 10rpx #eee,
+                -10rpx 0rpx 10rpx #eee,
+                10rpx 0rpx 10rpx #eee,
+                0rpx 10rpx 10rpx #eee;
+}
+
+.card-bg image {
+  width: 70%;
+  margin: 5% 0;
+}
+
+.order-opt-node {
+  font-size: 30rpx;
+  border: none;
+  color: #ff5102;
+  width: 140rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 0;
+}

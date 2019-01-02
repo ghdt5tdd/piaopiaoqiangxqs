@@ -1,0 +1,70 @@
+/* pages/punch/punch.wxss */
+
+.card-order {
+  padding-bottom: 40rpx;
+}
+
+.punch-send {
+  font-size: 30rpx;
+  padding: 20rpx;
+  line-height: 40rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.punch-list {
+  margin: 20rpx 40rpx 0;
+}
+
+.punch-item, .punch-now {
+  position: relative;
+  border-left: 2rpx solid #e7e7e7;
+  padding: 0rpx 0 60rpx 40rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #666;
+}
+
+.punch-circle {
+  position: absolute;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #b4b4b4;
+  top: 0rpx;
+  left: -9rpx;
+}
+
+.punch-item-time {
+  font-size: 32rpx;
+  line-height: 60rpx;
+  color: #000;
+  margin: 10rpx 0;
+}
+
+.punch-item-location {
+  display: flex;
+  align-items: center;
+}
+
+.punch-item-location image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.punch-now-clock {
+  width: 180rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  line-height: 40rpx;
+  padding: 45rpx 0;
+  color: #fff;
+  text-align: center;
+  margin: 40rpx auto 0rpx;
+  background: radial-gradient(#ff5102, #fa5d16, #ffc056);
+  box-shadow: 0rpx -10rpx 10rpx #fbd18b,
+                -10rpx 0rpx 10rpx #fbd18b,
+                10rpx 0rpx 10rpx #fbd18b,
+                0rpx 10rpx 10rpx #fbd18b;
+}

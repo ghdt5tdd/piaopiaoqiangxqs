@@ -1,0 +1,69 @@
+/* pages/truck/truck.wxss */
+
+.search {
+  position: fixed;
+  top: 0%;
+  left: 0;
+  right: 0;
+}
+
+.location-map {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.location-map image {
+  width: 100%;
+}
+
+.location-truck-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.location-truck-info {
+  width: 500rpx;
+  background: #fff;
+  padding: 10rpx 20rpx;
+  border: 2px solid #e7e7e7;
+  position: absolute;
+  bottom: 90rpx;
+  left: -60rpx;
+}
+
+.location-truck-info::after, .location-truck-info::before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  top: 100%;
+  position: absolute;
+  width: 0;
+}
+
+.location-truck-info::after {
+  border-width: 10px;
+  border-top-color: #fff;
+  left: 20px;
+}
+
+.location-truck-info::before {
+  border-width: 12px;
+  border-top-color: #e7e7e7;
+  left: 18px;
+}
+
+.location-truck-info view {
+  font-size: 30rpx;
+  margin: 10rpx 0;
+}
+
+.location-truck-info icon {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  font-size: 40rpx;
+}

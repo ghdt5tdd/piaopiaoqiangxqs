@@ -1,0 +1,19 @@
+<!--pages/pay/pay.wxml-->
+<view class='card-order'>
+  <view class='pay-head'>¥
+    <text>{{payAmount}}</text>
+  </view>
+  <view class="pay-list">
+    <view wx:for="{{pays}}" data-select="{{item.select}}" class="pay-item {{item.select == paySelect ? 'active':''}}" bindtap="choosePay" data-name="{{item.payName}}">
+      <view class='pay-name' hidden>
+        {{item.payName}}
+      </view>
+      <image class='pay-image' src="{{item.image}}" />
+      <image class='pay-icon' src="{{item.icon}}" />
+    </view>
+  </view>
+</view>
+
+<view class='button-bottom'>
+  <navigator url="../success/success" hover-class='none'>立即付款</navigator>
+</view>

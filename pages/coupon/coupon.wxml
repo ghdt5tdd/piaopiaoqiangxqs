@@ -1,0 +1,29 @@
+<!--pages/coupon/coupon.wxml-->
+<view class='location-map'>
+  <image src='{{map}}' mode="widthFix"></image>
+</view>
+
+<view class='near-map'>
+  <image style='top:20%;left:30%' class='near-map-coupon' src='../../images/mapcoupon.png' bindtap='showCoupon'></image>
+  <image style='top:50%;left:40%' class='near-map-coupon' src='../../images/mapcoupon.png' bindtap='showCoupon'></image>
+  <image style='top:30%;left:70%' class='near-map-coupon' src='../../images/mapcoupon.png' bindtap='showCoupon'></image>
+</view>
+
+<navigator url="../couponList/couponList" hover-class='none'>
+  <view class='fixed-bottom-button'>红包管理</view>
+</navigator>
+
+
+<view class='pop-shadow' bindtap="hide" hidden="{{hide}}"></view>
+<view class='pop-up pop-coupon' hidden="{{hideCoupon}}">
+  <image mode='widthFix' src='../../images/coupon.png'></image>
+  <view class='pop-coupon-info'>
+    <view class='pop-coupon-amount'>¥
+      <text>{{couponAmount}}</text>
+    </view>
+    <view wx:if="{{couponLimit == ''}}">无使用门槛</view>
+    <view wx:else>满{{couponLimit}}使用</view>
+
+  </view>
+  <button bindtap="hideCoupon">立即领取</button>
+</view>

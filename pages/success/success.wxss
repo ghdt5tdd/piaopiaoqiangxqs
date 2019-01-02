@@ -1,0 +1,21 @@
+/* pages/success/success.wxss */
+
+.pay-status {
+  text-align: center;
+  padding: 120rpx 0 170rpx;
+}
+
+.pay-status image {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.pay-status view {
+  font-size: 30rpx;
+  margin-top: 40rpx;
+  line-height: 46rpx;
+}
+
+.pay-status view text {
+  display: block;
+}

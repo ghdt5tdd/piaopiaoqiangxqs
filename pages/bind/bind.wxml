@@ -1,0 +1,23 @@
+<!--pages/bind/bind.wxml-->
+<view class='card-order'>
+  <view class='bind-bar'>
+    <view class='bind-title'>请输入手机号</view>
+    <view class='bind-input'>
+      <input type="number" name="tel" bindinput='getPhoneValue' placeholder="{{tel}}" />
+    </view>
+  </view>
+  <view class='bind-bar'>
+    <view class='bind-title'>请输入验证码</view>
+    <button class="bind-code" hover-class='none' bindtap='getVerificationCode' disabled='{{disabled}}'>{{codename}}</button>
+    <view class='bind-input'>
+      <input type="number" name="code" bindinput='getCodeValue' placeholder="{{code}}" />
+    </view>
+  </view>
+</view>
+<view class='button-tip'>
+  <navigator url="../transportdetail/transportdetail" hover-class='none'>我是收货人，点击确认；我是货站/司机，点击下一步</navigator>
+</view>
+<view class='button-bottom-half'>
+  <button class='bg-red' bindtap='toNext'>下一步</button>
+  <button bindtap='toFirst'>确认绑定</button>
+</view>
