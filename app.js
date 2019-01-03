@@ -90,7 +90,7 @@ App({
   },
   getMemberInfo(callback) {
     const signature = md5.hexMD5(this.globalData.openId + this.globalData.appId)
-    ajax.postApi('mini/program/miniLogin', {
+    ajax.postApi('mini/program/member/miniLogin', {
       signature,
       openId: this.globalData.openId
     }, (err, res) => {

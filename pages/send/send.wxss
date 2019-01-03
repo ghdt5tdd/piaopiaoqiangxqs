@@ -93,6 +93,14 @@
   color: #666;
 }
 
+.send-bar-forwarder {
+  border-top: 1px solid #e7e7e7;
+}
+
+.send-bar-forwarder .send-bar-info {
+  width: calc(100% - 170rpx);
+}
+
 .send-remark {
   display: flex;
   align-items: flex-start;
@@ -245,7 +253,7 @@
   border-radius: 10rpx;
 }
 
-.pop-tip-content{
+.pop-tip-content {
   height: calc(100% - 260rpx);
   font-size: 30rpx;
   color: #999;

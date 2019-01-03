@@ -19,6 +19,7 @@ Page({
     ruleStatus: false,
     ruleIcon: "../../images/uncheck.png",
 
+    sendForwarder: "请选择承运商",
 
 
     hideShadow: true,
@@ -126,6 +127,17 @@ Page({
       url: '../service/service'
     })
   },
+
+
+  //承运商选择
+  toforwarder: function (e) {
+    wx.navigateTo({
+      url: '../forwarder/forwarder'
+    })
+  },
+
+
+
 
   //预约时间
   showTime: function(e) {
@@ -374,9 +386,9 @@ Page({
       hideTip: true,
       markFcous: false,
     })
- //   wx.navigateTo({
- //     url: '../orderinfo/orderinfo?status=' + e.currentTarget.dataset.status + '&orderId=' + e.currentTarget.dataset.id + '&orderTime=' + e.currentTarget.dataset.time
- //   })
+    //   wx.navigateTo({
+    //     url: '../orderinfo/orderinfo?status=' + e.currentTarget.dataset.status + '&orderId=' + e.currentTarget.dataset.id + '&orderTime=' + e.currentTarget.dataset.time
+    //   })
   },
 
 

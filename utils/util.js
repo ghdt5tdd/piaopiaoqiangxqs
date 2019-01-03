@@ -107,7 +107,6 @@ function RandomUUID() {
 }
 
 function ImgPathToBase64(imgPath, callback) {
-  console.log(imgPath)
   wx.getFileSystemManager().readFile({
     filePath: imgPath, //选择图片返回的相对路径
     encoding: 'base64', //编码格式

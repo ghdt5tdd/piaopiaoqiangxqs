@@ -58,6 +58,12 @@
   <image class='send-bar-next' src='../../images/w_next.png'></image>
 </view>
 
+<view class='send-bar send-bar-forwarder'>
+  <view class='send-bar-label'>承运商</view>
+  <view class='send-bar-info' bindtap='toforwarder'>{{sendForwarder}}</view>
+  <image class='send-bar-next' src='../../images/w_next.png'></image>
+</view>
+
 <view class='send-remark'>
   <view class='send-remark-label'>备注信息</view>
   <textarea placeholder='例：请开大车提货'  hidden="{{markFcous}}" ></textarea>

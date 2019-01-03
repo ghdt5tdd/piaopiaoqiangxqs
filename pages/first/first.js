@@ -1,5 +1,6 @@
 // pages/first/first.js
 const app = getApp()
+const ajax = require('../../utils/ajax.js')
 Page({
 
   /**
@@ -9,7 +10,8 @@ Page({
     hasUserInfo: false, //未登录
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    
+    shopOrderId:'',
+    shopOrderDetail: {},
     id: "18352790283072",
     time: "2018-01-10",
     start: "浙江温州",
@@ -57,7 +59,7 @@ Page({
     console.log(app.globalData.memberInfo)
     if (this.data.payStyle == '到付') {
       wx.navigateTo({
-        url: '../pay/pay'
+        url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
       })
     } else {
       wx.navigateTo({
@@ -66,11 +68,7 @@ Page({
     }
   },
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
+  loadUserInfo () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -100,6 +98,42 @@ Page({
       })
 
     }
+  },
+
+  getShopOrderDetail(shopOrderId){
+    wx.showLoading({
+      title: '运单加载中...',
+    })
+    ajax.getApi('mini/program/order/getShopOrderDetail', {
+      shopOrderId
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        console.log(res)
+        this.setData({
+          shopOrderDetail: res.data
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    const shopOrderId = 'b5e4ae0b20be449288b8e3e4f0a5394d'
+    this.setData({
+      shopOrderId
+    })
+    this.getShopOrderDetail(shopOrderId)
+    this.loadUserInfo()
   },
 
   /**

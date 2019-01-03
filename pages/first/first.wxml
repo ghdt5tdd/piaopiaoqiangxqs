@@ -5,24 +5,24 @@
 <view class='card-order'>
   <view class="order-table-items">
     <view class='order-table-head'>
-      <view class='order-table-id'>货运单号：{{id}}</view>
-      <view class='order-table-time'>{{time}}</view>
+      <view class='order-table-id'>货运单号：{{shopOrderDetail.bill_no}}</view>
+      <view class='order-table-time'>{{shopOrderDetail.start_departing_date}}</view>
     </view>
     <view class='order-table-content'>
       <view class='order-table-line'>
         <view class='order-line-route'>
-          <view class='order-route-point'>{{start}}</view>
+          <view class='order-route-point'>{{shopOrderDetail.consignment_station_name}}</view>
           <image mode="widthFix" src="../../images/arrow.png"></image>
-          <view class='order-route-point'>{{end}}</view>
+          <view class='order-route-point'>{{shopOrderDetail.receiving_station_name}}</view>
         </view>
         <view class='order-line-cargo'>
           <view class='order-cargo-receive'>
             <image src="../../images/person.png"></image>
-            <view>{{receive}}收</view>
+            <view>{{shopOrderDetail.consignee_name}}收</view>
           </view>
           <view class='order-cargo-num'>
             <image src="../../images/cargo.png"></image>
-            <view>{{num}}件</view>
+            <view>{{shopOrderDetail.total_packing_quantity}}件</view>
           </view>
         </view>
       </view>
@@ -30,7 +30,7 @@
 
     <view class='order-table-opt' wx:if="{{payStyle == '到付'}}">
       <view class='order-opt-status'>{{payStyle}}
-        <text class='red'>¥{{payAmount}}</text>
+        <text class='red'>¥{{shopOrderDetail.insured_amount}}</text>
       </view>
       <view class='order-opt-node'><navigator url="../point/point" hover-class='none'>节点查询</navigator></view>
     </view>

@@ -21,6 +21,7 @@
     "pages/cargo/cargo",
     "pages/service/service",
     "pages/my/my",
+    "pages/forwarder/forwarder",
     "pages/personal/personal",
     "pages/addList/addList",
     "pages/punch/punch",
