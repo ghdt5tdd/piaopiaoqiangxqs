@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/first/first",
+    "pages/home/home",
     "pages/pay/pay",
     "pages/success/success",
     "pages/sign/sign",
@@ -10,7 +11,6 @@
     "pages/point/point",
     "pages/location/location",
     "pages/transportdetail/transportdetail",
-    "pages/home/home",
     "pages/send/send",
     "pages/addSend/addSend",
     "pages/addReceive/addReceive",
@@ -32,7 +32,9 @@
     "pages/couponList/couponList",
     "pages/wallet/wallet",
     "pages/recharge/recharge",
-    "pages/set/set"
+    "pages/set/set",
+    "pages/gateway",
+    "pages/gateway/gateway"
   ],
   "window": {
     "backgroundTextStyle": "light",

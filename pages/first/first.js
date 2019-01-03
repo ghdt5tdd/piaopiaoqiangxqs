@@ -57,7 +57,7 @@ Page({
   //签收
   toSign: function(e) {
     console.log(app.globalData.memberInfo)
-    if (this.data.payStyle == '到付') {
+    if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
       wx.navigateTo({
         url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
       })
