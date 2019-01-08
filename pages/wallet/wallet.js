@@ -4,7 +4,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
+  data: { 
     name: "可用余额",
     account: "12",
     opt: "去充值",

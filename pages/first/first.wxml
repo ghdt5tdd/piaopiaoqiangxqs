@@ -2,7 +2,7 @@
 <view class='card-bg'>
   <image src='../../images/cardbg.png' mode='widthFix'></image>
 </view>
-<view class='card-order'>
+<view class='card-order' wx:if="{{shopOrderDetail}}">
   <view class="order-table-items">
     <view class='order-table-head'>
       <view class='order-table-id'>货运单号：{{shopOrderDetail.bill_no}}</view>
@@ -44,8 +44,10 @@
   </button>
 </view>
 <view wx:else>
+  <block wx:if="{{shopOrderDetail}}">
   <view class='button-tip'>
     <navigator url="../transportdetail/transportdetail" hover-class='none'>点击查看运单详情 </navigator>
   </view>
   <view class='button-bottom' bindtap='toSign'>一键签收</view>
+  </block>
 </view>

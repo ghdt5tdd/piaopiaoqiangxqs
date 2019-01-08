@@ -99,6 +99,10 @@ App({
           callback(res.data)
         }
         this.globalData.memberInfo = res.data
+        if(res.data.phone) {
+          this.globalData.isBindPhone = true
+        }
+        console.log(this.globalData)
       }
     })
   },
@@ -113,6 +117,7 @@ App({
     sessionKey: '',
     unionId: '',
     memberInfo: null,
+    isBindPhone: false,
     userInfo: null,
     jsSessionId: null,
   }

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/first/first",
     "pages/home/home",
+    "pages/first/first",
     "pages/pay/pay",
     "pages/success/success",
     "pages/sign/sign",
@@ -32,9 +32,7 @@
     "pages/couponList/couponList",
     "pages/wallet/wallet",
     "pages/recharge/recharge",
-    "pages/set/set",
-    "pages/gateway",
-    "pages/gateway/gateway"
+    "pages/set/set"
   ],
   "window": {
     "backgroundTextStyle": "light",

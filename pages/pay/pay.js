@@ -1,4 +1,7 @@
 // pages/pay/pay.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const app = getApp()
 Page({
 
   /**
@@ -7,6 +10,7 @@ Page({
   data: {
     //默认选中的支付方式
     payAmount:'20.00',
+    orderId: '',
     pays: [
       {
         "payName": "余额",
@@ -48,7 +52,49 @@ Page({
 
   },
 
-
+  pay() {
+    wx.showLoading({
+      title: '正在发起支付请求...',
+    })
+    const id = this.data.orderId
+    ajax.getApi('mini/program/order/shopOrderPayment', {
+      id,
+      app_id: app.globalData.appId,
+      open_id: app.globalData.openId
+    }, (err, res) => {
+      if (res && res.success) {
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: function (res) {
+            // success
+            wx.showModal({
+              title: '支付结果',
+              content: JSON.stringify(res),
+            });
+          },
+          fail: function (res) {
+            // fail
+            console.log(res);
+          },
+          complete: function (res) {
+            // complete
+            console.log(res);
+          }
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
 
   /**
    * 生命周期函数--监听页面加载

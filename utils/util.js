@@ -133,6 +133,23 @@ function compareDate(date1, date2) {
   return result
 }
 
+function callIf(func, ifFuc, maxCall) {
+  if (!maxCall) {
+    maxCall = 0
+  }
+  if (maxCall > 20) {
+    return;
+  }
+  if(ifFuc()) {
+    func()
+    return; 
+  }else {
+    setTimeout(() => {
+      callIf(func, ifFuc, ++maxCall)
+    }, 500)
+  }
+}
+
 module.exports = {
   formatTime,
   handleImgUrl,
@@ -141,4 +158,5 @@ module.exports = {
   getFormatDate,
   compareDate,
   addDate,
+  callIf,
 }

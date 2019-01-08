@@ -479,10 +479,7 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
+  loadUserInfo() {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -514,6 +511,18 @@ Page({
     }
   },
 
+  lower(){
+
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    
+    this.loadUserInfo()
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -525,7 +534,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    // if (!app.globalData.isBindPhone) {
+    //   wx.navigateTo({
+    //     url: '../bind/bind'
+    //   })
+    // }
   },
 
   /**

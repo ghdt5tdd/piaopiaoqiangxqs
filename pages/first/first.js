@@ -1,6 +1,7 @@
 // pages/first/first.js
 const app = getApp()
 const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     shopOrderId:'',
-    shopOrderDetail: {},
+    shopOrderDetail: undefined,
     id: "18352790283072",
     time: "2018-01-10",
     start: "浙江温州",
@@ -56,7 +57,16 @@ Page({
 
   //签收
   toSign: function(e) {
-    console.log(app.globalData.memberInfo)
+    //如果用户信息没有初始化完毕，拒绝访问
+    if (!app.globalData.memberInfo){
+      return;
+    }
+    // if (!app.globalData.isBindPhone) {
+    //   wx.navigateTo({
+    //     url: '../bind/bind'
+    //   }) 
+    // }
+
     if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
       wx.navigateTo({
         url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
@@ -128,11 +138,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options.q)
+    // const q = options.q
+    // if(!q) {
+    //   wx.showToast({
+    //     title: '非法错误',
+    //   })
+    //   return ;
+    // }
+    // const scanUrl = decodeURIComponent(options.q)
+    
+    //测试
     const shopOrderId = 'b5e4ae0b20be449288b8e3e4f0a5394d'
     this.setData({
       shopOrderId
     })
-    this.getShopOrderDetail(shopOrderId)
+    util.callIf(() => {
+      this.getShopOrderDetail(shopOrderId)
+    }, () => {
+      return app.globalData.memberInfo !== null
+    })
+    
     this.loadUserInfo()
   },
 
