@@ -1,0 +1,28 @@
+<!--pages/point/point.wxml-->
+<view class='node-logistics'>
+  <view wx:for="{{logistics}}" class="logistics-list">
+    <view class="logistics-list-item">
+      <view class="logistics-list-circle">
+        <image wx:if="{{index == 0}}" src="../../images/track-on.png" mode="widthFix"></image>
+        <image wx:else src="../../images/track.png" mode="widthFix"></image>
+      </view>
+      <view class="logistics-list-txt">
+        <view class="logistics-list-status">{{item.status}}</view>
+        <view class='logistics-list-content'>
+          <view wx:for="{{item.detail}}" wx:for-index="secondIndex" class='logistics-list-detail'>
+            <view class='logistics-list-point'></view>
+            <view class="logistics-list-info">
+              <view>{{item.location}}</view>
+              <view>经度：{{item.longitude}}  维度：{{item.latitude}}</view>
+              <view>行驶方向：{{item.direction}}  当前车速：{{item.speed}}</view>
+            </view>
+            <view class="logistics-list-time">
+              <view class='logistics-list-date'>{{item.logdate}}</view>
+              <view class='logistics-list-hour'>{{item.logtime}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

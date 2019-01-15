@@ -1,20 +1,87 @@
 <!--pages/truck/truck.wxml-->
-<view class='location-map'>
-  <map id="myMap" longitude="120.22" latitude="85.22" scale="16"  style="width: 100%; height: 600rpx" />
-</view>
-<view class='search'>
-  <input placeholder='输入车牌号查询'></input>
-  <icon type='search'></icon>
-</view>
-
-<view class='location-truck' style='position:fixed;top:60%;left:30%'>
-  <image bindtap='show' class='location-truck-icon' src='../../images/truck2.png' style='transform: rotate(30deg)'></image>
-  <view class='location-truck-info' hidden='{{hideInfo}}'>
-    <view>车牌号码：{{vclN}}</view>
-    <view>当前车速：{{locationDetail.spd}}km/h</view>
-    <view>位置信息：{{locationDetail.province + locationDetail.city + locationDetail.country}}</view>
-    <view>行驶方向：{{locationDetail.drc}}</view>
-    <view>更新时间：{{locationDetail.utc}}</view>
-    <icon type='clear' bindtap='hide'></icon>
+<view wx:if="{{firstTruck == 0}}">
+  <view class='pop-shadow'></view>
+  <view class='pop-up pop-rule'>
+    <view class='pop-title'>货车定位查询条款</view>
+    <scroll-view class='pop-rule-content' scroll-y>
+      <view>尊敬的客户：</view>
+      <view wx:for="{{Rule}}">
+        <view class="pop-rule-item {{item.indent?'textIndent':''}}">{{item.info}}</view>
+      </view>
+    </scroll-view>
+    <view class='pop-bottom' bindtap='agreeRule'>同意并不再提醒</view>
   </view>
 </view>
+<view wx:else>
+  <view class='location-map'>
+  <map id="myMap" subkey="{{qqMapKey}}" markers="{{locationMarkers}}" longitude="{{locationDetail.lon}}" latitude="{{locationDetail.lat}}" bindcallouttap="truckcallout"  show-location style="width: 100%; height: 100%" />
+  </view>
+
+  <cover-view class='search'>
+    <cover-view class='input' data-plate="{{plateli}}" bindtap='showTruck'>
+      <cover-view class='input-placeholder' wx:if="{{placeholder}}">请选择车牌号码</cover-view>
+      <cover-view wx:else>{{plateone}}{{platetwo}}</cover-view>
+    </cover-view>
+    <cover-image class="delete-btn" hidden='{{hideClear}}' bindtap='clearTruck' src="../../images/clear.png" />
+    <cover-image class="search-btn" bindtap='searchTruck' src="../../images/search.png" />
+  </cover-view>
+
+  <!-- <view class='location-truck' style='position:fixed;top:60%;left:30%'> -->
+    <!-- <image bindtap='showInfo' class='location-truck-icon' src='../../images/truck2.png' style='transform: rotate(30deg)'></image> -->
+    <!-- <view class='location-truck-info' hidden='{{hideInfo}}'>
+      <view>车牌号码：{{vclN}}</view>
+      <view>当前车速：{{locationDetail.spd}}km/h</view>
+      <view>位置信息：{{locationDetail.province + locationDetail.city + locationDetail.country}}</view>
+      <view>行驶方向：{{locationDetail.drc}}</view>
+      <view>更新时间：{{locationDetail.utc}}</view>
+      <icon type='clear' bindtap='hideInfo'></icon>
+      <navigator url="../truckTrail/truckTrail" hover-class='none'>
+        <view class='location-truck-opt orange'>
+          查看行驶轨迹 >>
+        </view>
+      </navigator>
+    </view>
+  </view> -->
+ <cover-view class='pop-up pop-truck' hidden="{{hideTruck}}">
+    <cover-view class='pop-head'>
+      <cover-view bindtap="hide">关闭</cover-view>
+      <cover-view class='pop-head-name'>选择车牌号码</cover-view>
+      <cover-view class='orange' bindtap="deleteTruck">删除</cover-view>
+    </cover-view>
+    <cover-view class='pop-truck-select' wx:if="{{truckOrder == 0}}">
+      <cover-view class="pop-truck-item {{index==fristIndex? 'active':''}} " wx:for="{{plateFrist}}" data-index="{{index}}" bindtap='selectFrist'>
+        {{item.name}}
+      </cover-view>
+      <cover-view class='pop-truck-opt orange' bindtap='nextPlate'>下一步</cover-view>
+    </cover-view>
+    <cover-view class='pop-truck-select' wx:else>
+      <cover-view class="pop-truck-item" wx:for="{{plateOther}}" data-index="{{index}}" bindtap='selectOther'>
+        {{item.name}}
+      </cover-view>
+      <cover-view class='pop-truck-sure orange' bindtap='sureTruck'>确认</cover-view>
+    </cover-view>
+  </cover-view>
+
+</view>
+
+<!-- 
+<view class='pop-shadow' bindtap="hide" hidden="{{hideShadow}}"></view>
+<view class='pop-up pop-truck' hidden="{{hideTruck}}">
+  <view class='pop-head'>
+    <view bindtap="hide">关闭</view>
+    <view class='pop-head-name'>选择车牌号码</view>
+    <view class='orange' bindtap="deleteTruck">删除</view>
+  </view>
+  <view class='pop-truck-select' wx:if="{{truckOrder == 0}}">
+    <view class="pop-truck-item {{index==fristIndex? 'active':''}} " wx:for="{{plateFrist}}" data-index="{{index}}" bindtap='selectFrist'>
+      {{item.name}}
+    </view>
+    <view class='pop-truck-opt orange' bindtap='nextPlate'>下一步</view>
+  </view>
+  <view class='pop-truck-select' wx:else>
+    <view class="pop-truck-item" wx:for="{{plateOther}}" data-index="{{index}}" bindtap='selectOther'>
+      {{item.name}}
+    </view>
+    <view class='pop-truck-sure orange' bindtap='sureTruck'>确认</view>
+  </view>
+</view> -->

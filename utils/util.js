@@ -21,6 +21,7 @@ const formatNumber = n => {
 function getFormatDate(state, dateStr) {
   var now = new Date();
   if (dateStr) {
+    dateStr = parseInt(dateStr)
     now = new Date(dateStr)
   }
   var year = now.getFullYear(); //得到年份
@@ -150,6 +151,21 @@ function callIf(func, ifFuc, maxCall) {
   }
 }
 
+/**
+ * 获取url中的参数
+ * @url 完整url
+ * @key 参数键值
+ */
+function getQueryString(url, key) {
+  var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
+  const paramsIndex = url.indexOf('?')
+  var r = url.substr(paramsIndex + 1).match(reg);
+  if (r != null) {
+    return unescape(r[2]);   
+  }
+  return null;
+} 
+
 module.exports = {
   formatTime,
   handleImgUrl,
@@ -159,4 +175,5 @@ module.exports = {
   compareDate,
   addDate,
   callIf,
+  getQueryString,
 }

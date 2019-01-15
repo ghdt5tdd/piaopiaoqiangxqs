@@ -1,4 +1,5 @@
 /* pages/point/point.wxss */
+
 .node-logistics {
   background: #fff;
   padding: 50rpx 20rpx 50rpx 190rpx;
@@ -51,9 +52,8 @@
 }
 
 .logistics-list-detail {
-  margin: 10rpx 0 20rpx;
+  margin: 20rpx 0 40rpx;
   position: relative;
-  min-height: 80rpx;
 }
 
 .logistics-list-point {
@@ -68,6 +68,10 @@
 
 .logistics-list-detail:first-child .logistics-list-point {
   display: none;
+}
+
+.logistics-list-info view {
+  line-height: 46rpx;
 }
 
 .logistics-list-time {

@@ -99,7 +99,7 @@ button::after {
   border-radius: 10rpx;
   margin: 20rpx;
   background: #fff;
-  padding: 10rpx 80rpx 10rpx 50rpx;
+  padding: 10rpx 80rpx 10rpx 30rpx;
   font-size: 30rpx;
   position: relative;
 }

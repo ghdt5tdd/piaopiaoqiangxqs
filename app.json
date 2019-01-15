@@ -28,6 +28,7 @@
     "pages/punchLocation/punchLocation",
     "pages/punchList/punchList",
     "pages/truck/truck",
+    "pages/truckTrail/truckTrail",
     "pages/coupon/coupon",
     "pages/couponList/couponList",
     "pages/wallet/wallet",

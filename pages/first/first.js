@@ -138,18 +138,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.q)
-    // const q = options.q
-    // if(!q) {
-    //   wx.showToast({
-    //     title: '非法错误',
-    //   })
-    //   return ;
-    // }
-    // const scanUrl = decodeURIComponent(options.q)
-    
+    const q = options.q
+    if(!q) {
+      wx.showToast({
+        title: '非法错误',
+      })
+      return ;
+    }
+    this.loadUserInfo()
+    const scanUrl = decodeURIComponent(options.q)
+    const shopOrderId = util.getQueryString(scanUrl, 'id')
+    const ac = util.getQueryString(scanUrl, 'ac')
+
     //测试
-    const shopOrderId = 'b5e4ae0b20be449288b8e3e4f0a5394d'
     this.setData({
       shopOrderId
     })
@@ -159,7 +160,7 @@ Page({
       return app.globalData.memberInfo !== null
     })
     
-    this.loadUserInfo()
+
   },
 
   /**

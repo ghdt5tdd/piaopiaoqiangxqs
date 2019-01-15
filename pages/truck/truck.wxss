@@ -1,18 +1,37 @@
 /* pages/truck/truck.wxss */
 
 .search {
-  position: fixed;
+  position: absolute;
   top: 0%;
   left: 0;
   right: 0;
+  padding: 10rpx 160rpx 10rpx 30rpx;
+}
+
+.search .input,.search .input cover-view {
+  line-height: 60rpx;
+  height: 60rpx;
+}
+
+.input-placeholder {
+  color: #999;
+}
+
+.search .delete-btn, .search .search-btn {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.search .delete-btn {
+  right: 80rpx;
 }
 
 .location-map {
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -20,50 +39,76 @@
   width: 100%;
 }
 
-.location-truck-icon {
-  width: 60rpx;
-  height: 60rpx;
-}
-
-.location-truck-info {
-  width: 500rpx;
-  background: #fff;
-  padding: 10rpx 20rpx;
-  border: 2px solid #e7e7e7;
+.pop-truck {
   position: absolute;
-  bottom: 90rpx;
-  left: -60rpx;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
-.location-truck-info::after, .location-truck-info::before {
-  border: solid transparent;
-  content: ' ';
-  height: 0;
-  top: 100%;
-  position: absolute;
-  width: 0;
+.pop-truck-select {
+  margin-right: -2rpx;
 }
 
-.location-truck-info::after {
-  border-width: 10px;
-  border-top-color: #fff;
-  left: 20px;
+.pop-truck-item {
+  float: left;
+  width: calc(14.2857% - 2rpx);
+  border-right: 2rpx solid #e7e7e7;
+  border-top: 2rpx solid #e7e7e7;
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 100rpx;
 }
 
-.location-truck-info::before {
-  border-width: 12px;
-  border-top-color: #e7e7e7;
-  left: 18px;
+.pop-truck-item.active {
+  color: #fd914c;
 }
 
-.location-truck-info view {
-  font-size: 30rpx;
-  margin: 10rpx 0;
+.pop-truck-opt {
+  float: left;
+  width: 57.142857%;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  border-top: 2rpx solid #e7e7e7;
+  text-align: center;
 }
 
-.location-truck-info icon {
-  position: absolute;
-  top: 10rpx;
-  right: 10rpx;
-  font-size: 40rpx;
+.pop-truck-sure {
+  float: left;
+  width: 14.2857%;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  border-top: 2rpx solid #e7e7e7;
+  text-align: center;
+}
+
+/*服务条款弹窗*/
+
+.pop-rule {
+  top: 7%;
+  left: 7%;
+  width: 86%;
+  height: 86%;
+  border-radius: 10rpx 10rpx;
+  overflow: hidden;
+}
+
+.pop-rule .pop-title {
+  margin-top: 20rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 34rpx;
+  border-bottom: 1px dashed #e7e7e7;
+}
+
+.pop-rule-content {
+  height: calc(100% - 250rpx);
+  width: calc(100% - 40rpx);
+  margin: 20rpx;
+  font-size: 28rpx;
+  line-height: 48rpx;
+}
+
+.textIndent {
+  text-indent: 2em;
 }
