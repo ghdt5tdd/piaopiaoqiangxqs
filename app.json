@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/first/first",
+    "pages/home/home",
     "pages/pay/pay",
     "pages/success/success",
     "pages/sign/sign",
@@ -40,5 +40,10 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "票票签",
     "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }

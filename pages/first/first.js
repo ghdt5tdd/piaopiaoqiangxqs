@@ -12,6 +12,8 @@ Page({
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     shopOrderId:'',
+    ac:'',
+    acText:'一键签收',
     shopOrderDetail: undefined,
     id: "18352790283072",
     time: "2018-01-10",
@@ -31,15 +33,15 @@ Page({
     const userInfo = e.detail.userInfo
     if (userInfo == undefined) {
       wx.showToast({
-        title: '扫描请先登录账号',
+        title: '请先登录账号',
         icon: 'none',
         duration: 3000,
         mask: true
       })
     } else {
       app.globalData.userInfo = userInfo
-      app.bindMember(userInfo, res => {
-        if(!res.data.phone) {
+      app.bindMember(userInfo, data => {
+        if(!data.phone) {
           wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
             url: '../bind/bind'
           })
@@ -61,20 +63,33 @@ Page({
     if (!app.globalData.memberInfo){
       return;
     }
+
     // if (!app.globalData.isBindPhone) {
     //   wx.navigateTo({
     //     url: '../bind/bind'
     //   }) 
     // }
 
-    if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
+    const ac = this.data.ac
+    if (ac === 'jj') {
       wx.navigateTo({
-        url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
-      })
-    } else {
-      wx.navigateTo({
-        url: '../sign/sign'
+        url: '../handover/handover?id=' + this.data.shopOrderId
       }) 
+    } else if(ac === 'qs'){
+      //这里还需要判断支付状态，已支付的话也是直接跳转到签收
+      if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
+        wx.navigateTo({
+          url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
+        })
+      } else {
+        wx.navigateTo({
+          url: '../sign/sign?id=' + this.data.shopOrderId
+        })
+      }
+    } else {
+      wx.showLoading({
+        title: '错误',
+      })
     }
   },
 
@@ -119,9 +134,17 @@ Page({
     }, (err, res) => {
       wx.hideLoading()
       if (res && res.success) {
-        console.log(res)
+        let ac = this.data.ac
+        let acText = this.data.acText
+        //判断当前用户手机号与收件人手机号是否一致，一致则强制判断该用户动作为签收
+        if (app.globalData.memberInfo.phone === res.data.consignee_tel) {
+          ac = 'qs'
+          acText = this.getAcText(ac)
+        }
         this.setData({
-          shopOrderDetail: res.data
+          shopOrderDetail: res.data,
+          ac,
+          acText
         })
       } else {
         if (res.text) {
@@ -138,29 +161,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const q = options.q
-    if(!q) {
-      wx.showToast({
-        title: '非法错误',
-      })
-      return ;
-    }
-    this.loadUserInfo()
-    const scanUrl = decodeURIComponent(options.q)
-    const shopOrderId = util.getQueryString(scanUrl, 'id')
-    const ac = util.getQueryString(scanUrl, 'ac')
+    // const q = options.q
+    // if(!q) {
+    //   wx.showToast({
+    //     title: '非法错误',
+    //   })
+    //   return ;
+    // }
+    // this.loadUserInfo()
+    // const scanUrl = decodeURIComponent(options.q)
+    // const shopOrderId = util.getQueryString(scanUrl, 'id')
+    // const ac = util.getQueryString(scanUrl, 'ac')
+    
 
     //测试
+    const shopOrderId = 'b5e4ae0b20be449288b8e3e4f0a5394d' 
+    const ac = 'jj' 
+
+    let acText = this.getAcText(ac)
+
+    if (acText === 'error') {
+      return;
+    }
+
     this.setData({
-      shopOrderId
+      shopOrderId,
+      ac,
+      acText
     })
     util.callIf(() => {
       this.getShopOrderDetail(shopOrderId)
     }, () => {
       return app.globalData.memberInfo !== null
     })
-    
 
+  },
+
+  getAcText(ac) {
+    switch (ac) {
+      case 'qs':
+        return '一键签收'
+      case 'jj':
+        return '一键交接'
+      default:
+        return 'error'
+    }
   },
 
   /**

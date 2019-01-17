@@ -48,6 +48,6 @@
   <view class='button-tip'>
     <navigator url="../transportdetail/transportdetail" hover-class='none'>点击查看运单详情 </navigator>
   </view>
-  <view class='button-bottom' bindtap='toSign'>一键签收</view>
+  <view class='button-bottom' bindtap='toSign'>{{acText}}</view>
   </block>
 </view>

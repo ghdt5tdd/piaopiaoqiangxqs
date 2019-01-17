@@ -3,32 +3,37 @@
   <view class='order-table'>
     <view class="order-table-items">
       <view class='order-table-head'>
-        <view class='order-table-id'>货运单号：{{id}}</view>
-        <view class='order-table-time'>{{time}}</view>
+        <view class='order-table-id'>货运单号：{{selectOrder.bill_no}}</view>
+      </view>
+      <view class='order-table-head'>
+        <view class='order-table-id'>起运时间：{{selectOrder.start_departing_date}}</view>
+      </view>
+      <view class='order-table-head'>
+        <view class='order-table-id'>预计到达时间：{{selectOrder.estimated_arriver_date}}</view>
       </view>
 
       <view class='order-table-bar'>
         <view class='order-bar-route'>
-          <view class='order-route-point'>{{start}}</view>
+          <view class='order-route-point'>{{selectOrder.consignment_station_name}}</view>
           <image mode="widthFix" src="../../images/arrow.png"></image>
-          <view class='order-route-point'>{{end}}</view>
+          <view class='order-route-point'>{{selectOrder.consignment_station_name}}</view> 
         </view>
         <view class='order-bar-cargo'>
           <view class='order-bar-dispatch'>
             <image src="../../images/line-start.png"></image>
-            <view>{{dispatch}}发</view>
-            <view>{{dispatchTel}}</view>
+            <view>{{selectOrder.consigner_name}}发</view>
+            <view>{{selectOrder.consigner_tel}}</view>
 
           </view>
           <view class='order-bar-receive'>
             <image src="../../images/line-end.png"></image>
-            <view>{{receive}}收</view>
-            <view>{{receiveTel}}</view>
+            <view>{{selectOrder.consignee_name}}收</view>
+            <view>{{selectOrder.consignee_tel}}</view>
 
           </view>
           <view class='order-bar-num'>
             <image src="../../images/cargo.png"></image>
-            <view>{{num}}件</view>
+            <view>{{selectOrder.total_packing_quantity}}件</view>
           </view>
         </view>
       </view>
@@ -38,23 +43,23 @@
   </view>
 
   <view class='order-other'>
+      <view class='order-other-bar'>
+        <text>实收件数：</text>
+        <input value="{{actualNumber}}" bindinput='bindActualNumberInput' ></input>
+      </view>
     <view class='order-other-bar'>
-      <text>实收件数：</text>
-      <input placeholder='{{actualNum}}' style='width:120rpx'></input>件
-    </view>
-    <view class='order-other-bar'>
-      <text>起运时间：</text>
-      <view>{{startTime}}</view>
-    </view>
-    <view class='order-other-bar'>
-      <text>预计到达时间：</text>
-      <view>{{expectedTime}}</view>
+      <text>实际到货日期：</text>
+      <view class='query-date-val' bindtap='showDate' data-key="actualDate" >{{actualDate}}</view>
     </view>
     <view class='order-other-bar'>
       <text>实际到货时间：</text>
-      <view>{{actualTime}}</view>
+      <picker mode="time" value="{{actualTime}}" disabled="{{timely}}"  bindchange="bindTimeChange">
+        <view class="picker">
+          {{actualTime}}
+        </view>
+      </picker>
     </view>
-    <view class='order-other-bar'>
+    <!-- <view class='order-other-bar'>
       <text>是否及时：</text>
       <view class='order-other-radio'>
         <view wx:for="{{orderRadio}}" bindtap='selectRadio' data-index="{{index}}">
@@ -62,11 +67,30 @@
           <text>{{item.name}}</text>
         </view>
       </view>
-    </view>
+    </view> -->
     <view class='order-other-bar'>
+        <text>是否及时：</text>
+        <view class='order-other-radio'>
+          <block wx:if="{{isHideTimeLy}}">
+            <view>
+              <image src="../../images/check.png"></image>
+              <text>{{timelyArray[0].text}}</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view wx:for="{{timelyArray}}" bindtap='selectRadio' data-index="{{index}}">
+              <image src="{{timelyIndex === index ? '../../images/check.png' : '../../images/uncheck.png'}}"></image>
+              <text>{{item.text}}</text>
+            </view>
+          </block>
+        </view>
+        <!-- <view wx:if="{{timely}}"><image src="../../images/time1.png" />及时</view>
+        <view wx:else><image src="../../images/time2.png" />不及时</view> -->
+      </view>
+    <!-- <view class='order-other-bar'>
       <text>操作人：</text>
       <input placeholder='可不填'></input>
-    </view>
+    </view> -->
     <view class='order-other-bar'>
       <text>操作时间：</text>
       <view>{{operatingTime}}</view>
@@ -75,7 +99,7 @@
 </view>
 
 
-<view class='button-bottom' bindtap='toSelect'>确认签收</view>
+<view class='button-bottom' bindtap='toSelect' >确认签收</view>
 
 <view class='pop-shadow' bindtap="hide" hidden="{{hide}}"></view>
 <view class='pop-up pop-coupon' hidden="{{hideCoupon}}">
@@ -105,4 +129,29 @@
     </view>
 
   </view>
+</view>
+<view class='popup-shadow' hidden="{{hide}}" bindtap='hide'></view>
+
+<view class="canlendarBgView" wx:if="{{showDate}}">
+  <view class="canlendarView">
+    <view class="canlendarTopView">
+      <view class="leftBgView" bindtap="handleCalendar" data-handle="prev">
+        <view class="leftView">《</view>
+      </view>
+      <view class="centerView">{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
+      <view class="rightBgView" bindtap="handleCalendar" data-handle="next">
+        <view class="rightView">》</view>
+      </view>
+    </view>
+    <view class="weekBgView">
+      <view class="weekView" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
+    </view>
+    <view class="dateBgView">
+      <view wx:if="{{hasEmptyGrid}}" class="dateEmptyView" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}"> </view>
+      <view class="dateView" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap="dateSelectAction">
+        <view class="datesView {{index == todayIndex ? 'dateSelectView' : ''}}">{{item}}</view>
+      </view>
+    </view>
+  </view>
+
 </view>

@@ -436,3 +436,59 @@ button::after {
   display: flex;
   align-items: center;
 }
+
+
+/**日历插件**/
+
+.canlendarBgView {
+  background: #fff;
+  position: fixed;
+  width: 80%;
+  top: 50%;
+  left: 10%;
+  margin-top: -308rpx;
+  z-index: 1001;
+}
+
+.canlendarTopView {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+.centerView {
+  padding: 0 80rpx;
+}
+
+.weekBgView, .dateBgView {
+  overflow: hidden;
+  font-size: 28rpx;
+}
+
+.weekView {
+  float: left;
+  width: 14.2857%;
+  text-align: center;
+}
+
+.dateEmptyView, .dateView {
+  float: left;
+  width: 14.2857%;
+  text-align: center;
+  height: 60rpx;
+  padding: 20rpx 0;
+}
+
+.datesView {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.dateSelectView {
+  background: #e52019;
+  color: #fff;
+}
