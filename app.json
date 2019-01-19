@@ -33,7 +33,8 @@
     "pages/couponList/couponList",
     "pages/wallet/wallet",
     "pages/recharge/recharge",
-    "pages/set/set"
+    "pages/set/set",
+    "pages/handover/handover"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,12 +1,16 @@
 // pages/bind/bind.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tel: "11位手机号",
-    code: "6位数字验证码",
+    tel: "",
+    code: "",
     codename: "获取验证码",
   },
 
@@ -27,16 +31,16 @@ Page({
 
   //获取验证码  
   getVerificationCode(e) {
-    var _this = this;
+    const phone = this.data.tel
     var myreg = /^(14[0-9]|13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$$/;
-    if (this.data.tel == "请输入手机号") {
+    if (phone == "请输入手机号") {
       wx.showToast({
         title: '手机号不能为空',
         icon: 'none',
         duration: 1000
       })
       return false;
-    } else if (!myreg.test(this.data.tel)) {
+    } else if (!myreg.test(phone)) {
       wx.showToast({
         title: '请输入正确的手机号',
         icon: 'none',
@@ -44,50 +48,67 @@ Page({
       })
       return false;
     } else {
-      var num = 60
-      var timer = setInterval(function() {
+      let num = 60
+      var timer = setInterval(() => {
         num--;
         if (num <= 0) {
           clearInterval(timer);
-          _this.setData({
+          this.setData({
             codename: '重新发送',
             disabled: false,
           })
         } else {
-          _this.setData({
+          this.setData({
             codename: num + "s",
             disabled: true
           })
         }
       }, 1000)
+
+      ajax.getApi('mini/program/member/sendSMS', {
+        phone,
+        mToken: 'bindMemberToken'
+      }, (err, res) => {
+        if (res && res.success) {
+          wx.showToast({
+            title: '发送成功',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      })	
+
     }
 
-    _this.setData({
+    this.setData({
       disabled: true
     })
   },
 
 
-
-
-  //确认绑定
-  toFirst: function(e) {
+  bindPhone (callback = () => 1) {
+    const phone = this.data.tel
+    const code = this.data.code
     var myreg = /^(14[0-9]|13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$$/;
-    if (this.data.tel == "11位手机号") {
+    if (phone == "11位手机号") {
       wx.showToast({
         title: '手机号不能为空',
         icon: 'none',
         duration: 1000
       })
       return false;
-    } else if (!myreg.test(this.data.tel)) {
+    } else if (!myreg.test(phone)) {
       wx.showToast({
         title: '请输入正确的手机号',
         icon: 'none',
         duration: 1000
       })
       return false;
-    } else if (this.data.code == "6位数字验证码") {
+    } else if (code == "6位数字验证码") {
       wx.showToast({
         title: '请输入验证码',
         icon: 'none',
@@ -95,50 +116,53 @@ Page({
       })
       return false;
     } else {
+      wx.showLoading({
+        title: '绑定中...',
+      })
+      ajax.postApi('mini/program/member/bindPhone', {
+        phone,
+        mCode: code,
+        mToken: 'bindMemberToken',
+      }, (err, res) => {
+        wx.hideLoading()
+        if (res && res.success) {
+          app.globalData.memberInfo.phone = phone
+          app.globalData.isBindPhone = true
+          callback()
+          // var pages = getCurrentPages();
+          // var prevPage = pages[pages.length - 2]; //上一个页面
+          // //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+
+          // prevPage.setData({
+          //   first: false,
+          // })
+        } else {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      })
+    }
+  },
+
+  //确认绑定
+  toFirst: function(e) {
+    this.bindPhone(() => {
       wx.navigateBack({ //返回
         delta: 1
       })
-      var pages = getCurrentPages();
-      var prevPage = pages[pages.length - 2]; //上一个页面
-      //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-
-      prevPage.setData({
-        first: false,
-      })
-    }
-
+    })
   },
 
 
   //下一步
   toNext: function(e) {
-    var myreg = /^(14[0-9]|13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$$/;
-    if (this.data.tel == "11位手机号") {
-      wx.showToast({
-        title: '手机号不能为空',
-        icon: 'none',
-        duration: 1000
-      })
-      return false;
-    } else if (!myreg.test(this.data.tel)) {
-      wx.showToast({
-        title: '请输入正确的手机号',
-        icon: 'none',
-        duration: 1000
-      })
-      return false;
-    } else if (this.data.code == "6位数字验证码") {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none',
-        duration: 1000
-      })
-      return false;
-    } else {
+    this.bindPhone(() => {
       wx.navigateTo({
         url: '../bindcard/bindcard'
       })
-    }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

@@ -99,7 +99,7 @@
 </view>
 
 
-<view class='button-bottom' bindtap='toSelect' >确认签收</view>
+<view class='button-bottom' bindtap='signOrder' >确认签收</view>
 
 <view class='pop-shadow' bindtap="hide" hidden="{{hide}}"></view>
 <view class='pop-up pop-coupon' hidden="{{hideCoupon}}">

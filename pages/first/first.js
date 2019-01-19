@@ -40,13 +40,7 @@ Page({
       })
     } else {
       app.globalData.userInfo = userInfo
-      app.bindMember(userInfo, data => {
-        if(!data.phone) {
-          wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
-            url: '../bind/bind'
-          })
-        }
-      })
+      app.bindMember(userInfo)
 
       this.setData({
         userInfo: e.detail.userInfo,
@@ -64,23 +58,37 @@ Page({
       return;
     }
 
-    // if (!app.globalData.isBindPhone) {
-    //   wx.navigateTo({
-    //     url: '../bind/bind'
-    //   }) 
-    // }
+    if (!app.globalData.memberInfo.phone) {
+      wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
+        url: '../bind/bind'
+      })
+    }
 
     const ac = this.data.ac
     if (ac === 'jj') {
+      //判断当前用户是否已经通过司机身份审核，通过才能进行交接
+      // if (!app.globalData.memberInfo.司机身份){
+      //   wx.navigateTo({
+      //     url: '../bindcard/bindcard'
+      //   })
+      // }
+      //前往交接页面
       wx.navigateTo({
         url: '../handover/handover?id=' + this.data.shopOrderId
       }) 
     } else if(ac === 'qs'){
-      //这里还需要判断支付状态，已支付的话也是直接跳转到签收
+      //判断运单是否为接收人到付，到付则先须先进行付款，不为到付则直接进入签收页面
       if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
-        wx.navigateTo({
-          url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
-        })
+        //这里还需要判断运单的支付状态，已支付的话也是直接跳转到签收
+        // if (this.data.shopOrderDetail.已支付){
+        //   wx.navigateTo({
+        //     url: '../sign/sign?id=' + this.data.shopOrderId
+        //   })
+        // }else {
+          wx.navigateTo({
+            url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
+          })
+        // }
       } else {
         wx.navigateTo({
           url: '../sign/sign?id=' + this.data.shopOrderId
@@ -137,7 +145,9 @@ Page({
         let ac = this.data.ac
         let acText = this.data.acText
         //判断当前用户手机号与收件人手机号是否一致，一致则强制判断该用户动作为签收
-        if (app.globalData.memberInfo.phone === res.data.consignee_tel) {
+        const phone = app.globalData.memberInfo.phone
+        const consignee_tel = res.data.consignee_tel
+        if (phone && consignee_tel && consignee_tel.indexOf(phone) !== -1) {
           ac = 'qs'
           acText = this.getAcText(ac)
         }
@@ -175,7 +185,7 @@ Page({
     
 
     //测试
-    const shopOrderId = 'b5e4ae0b20be449288b8e3e4f0a5394d' 
+    const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
     const ac = 'jj' 
 
     let acText = this.getAcText(ac)
@@ -219,7 +229,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+
   },
 
   /**

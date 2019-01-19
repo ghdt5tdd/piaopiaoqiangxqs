@@ -80,7 +80,7 @@ Page({
       wx.showLoading({
         title: '正在签收中...',
       })
-      ajax.postApi('app/order/receiptShopOrder', {
+      ajax.postApi('mini/program/order/receiptShopOrder', {
         idList,
         location: longitude + ',' + latitude,
         actual_arrive_date: this.data.actualDate + ' ' + this.data.actualTime,
@@ -92,6 +92,11 @@ Page({
         if (res && res.success) {
           wx.showToast({
             title: '签收成功',
+            success: function () {
+              wx.reLaunch({
+                url: '../home/home',
+              })
+            }
           })
         } else {
           wx.showToast({

@@ -1,0 +1,84 @@
+/* pages/sign/sign.wxss */
+
+.pop-coupon {
+  position: fixed;
+  width: 500rpx;
+  height: 500rpx;
+  top: 50%;
+  left: 50%;
+  margin: -250rpx 0 0 -250rpx;
+  background: none
+}
+
+.pop-coupon image {
+  width: 100%;
+}
+
+.pop-coupon  button {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 24rpx;
+  bottom: 70rpx;
+  color: #e51c24;
+  background: none;
+}
+
+.pop-coupon-info {
+  position: absolute;
+  width: 100%;
+  top: 80rpx;
+  text-align: center;
+  color: #e51c24;
+  font-size: 30rpx;
+}
+
+.pop-coupon-amount {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.pop-coupon-amount text{
+  display: block;
+  font-size: 68rpx;
+  margin: -10rpx 0 20rpx 10rpx
+}
+
+
+.pop-tip {
+  background: #fff;
+  width: 80%;
+  height: 400rpx;
+  left: 10%;
+  top: 50%;
+  margin-top: -200rpx;
+  border-radius: 10rpx;
+}
+
+.pop-tip-content{
+  height: calc(100% - 260rpx);
+  font-size: 30rpx;
+  color: #999;
+  padding: 20rpx 30rpx;
+  line-height: 42rpx;
+}
+
+.pop-head-left {
+  font-size: 34rpx;
+  padding: 30rpx;
+  line-height: 60rpx;
+}
+
+.pop-opt-right {
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 30rpx;
+  line-height: 40rpx;
+}
+
+.pop-opt-right view {
+  margin-left: 20rpx;
+}

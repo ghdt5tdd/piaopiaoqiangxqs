@@ -108,9 +108,7 @@ App({
   },
 
   globalData: {
-    platformAppArea: 'wlhn',
-    piaopiaoQianAppArea: 'def2dbc9fddf415e8b96dc167ccea5dc',
-    piaopiaoQianMemberId: 'ba154b8a17d94b298e3fb6feb3593a39',
+    platformAppArea: 'wlhnGxqs',
     qqMapKey: 'ZJIBZ-2DZLR-BTNWK-WNUAG-JCMJ6-C4BHJ',
     appId: 'wxd1789c4a058f433d',
     openId: '',
