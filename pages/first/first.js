@@ -171,22 +171,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // const q = options.q
-    // if(!q) {
-    //   wx.showToast({
-    //     title: '非法错误',
-    //   })
-    //   return ;
-    // }
-    // this.loadUserInfo()
-    // const scanUrl = decodeURIComponent(options.q)
-    // const shopOrderId = util.getQueryString(scanUrl, 'id')
-    // const ac = util.getQueryString(scanUrl, 'ac')
+    const q = options.q
+    if(!q) {
+      wx.showToast({
+        title: '非法错误',
+      })
+      return ;
+    }
+    this.loadUserInfo()
+    const scanUrl = decodeURIComponent(options.q)
+    const shopOrderId = util.getQueryString(scanUrl, 'id')
+    const ac = util.getQueryString(scanUrl, 'ac')
     
 
     //测试
-    const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
-    const ac = 'jj' 
+    // const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
+    // const ac = 'jj' 
 
     let acText = this.getAcText(ac)
 
