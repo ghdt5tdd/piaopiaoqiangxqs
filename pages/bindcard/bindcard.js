@@ -1,28 +1,34 @@
 // pages/bindcard/bindcard.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    realPicface: "../../images/picface.jpg",
-    realPicback: "../../images/picback.jpg",
-    realDrive1: "../../images/drive1.jpg",
-    realDrive2: "../../images/drive2.jpg",
+    idcard_front_img: "../../images/picface.jpg",
+    idcard_reverse_img: "../../images/picback.jpg",
+    driving_license_front_img: "../../images/drive1.jpg",
+    driving_license_reverse_img: "../../images/drive2.jpg",
   },
 
-  //上传身份证、驾驶证
+  //上传身份证、驾驶证 
   changePicface: function (e) {
     var _this = this // 不能直接用this，留坑
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'], // 指定是原图还是压缩图
       sourceType: ['album', 'camera'],  // 指定来源是相册还是相机
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths; //可以作为img标签的src属性显示图片
-        _this.setData({
-          realPicface: tempFilePaths
-        });
+      success: res => {
+        util.ImgPathToBase64(res.tempFilePaths[0], base64 => {
+          const idcard_front_img = 'data:image/png;base64,' + base64
+          this.setData({
+            idcard_front_img
+          })
+        })
       }
     })
   },
@@ -33,11 +39,13 @@ Page({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        _this.setData({
-          realPicback: tempFilePaths
-        });
+      success: res => {
+        util.ImgPathToBase64(res.tempFilePaths[0], base64 => {
+          const idcard_reverse_img = 'data:image/png;base64,' + base64
+          this.setData({
+            idcard_reverse_img
+          })
+        })
       }
     })
   },
@@ -49,11 +57,13 @@ Page({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        _this.setData({
-          realDrive1: tempFilePaths
-        });
+      success: res => {
+        util.ImgPathToBase64(res.tempFilePaths[0], base64 => {
+          const driving_license_front_img = 'data:image/png;base64,' + base64
+          this.setData({
+            driving_license_front_img
+          })
+        })
       }
     })
   },
@@ -65,11 +75,13 @@ Page({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        _this.setData({
-          realDrive2: tempFilePaths
-        });
+      success: res => {
+        util.ImgPathToBase64(res.tempFilePaths[0], base64 => {
+          const driving_license_reverse_img = 'data:image/png;base64,' + base64
+          this.setData({
+            driving_license_reverse_img
+          })
+        })
       }
     })
   },
@@ -79,29 +91,64 @@ Page({
 
   //确认绑定
   toFirst: function(e) {
-    wx.navigateBack({ //返回
-      delta: 2
-    })
-    var pages = getCurrentPages();
-    var prevPage = pages[pages.length - 3]; //上上个页面
-    //直接调用上一个页面的setData()方法，把数据存到上上个页面中去
-
-    prevPage.setData({
-      first: false,
+    const idcard_front_img = this.data.idcard_front_img
+    const idcard_reverse_img = this.data.idcard_reverse_img
+    const driving_license_front_img = this.data.driving_license_front_img
+    const driving_license_reverse_img = this.data.driving_license_reverse_img
+    wx.showLoading({
+      title: '绑定中...',
     })
 
-
+    ajax.postApi('mini/program/member/uploadLicense', {
+      idcard_front_img,
+      idcard_reverse_img,
+      driving_license_front_img,
+      driving_license_reverse_img
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        wx.showToast({
+          title: '上传成功',
+        })
+      } else {
+        wx.showToast({
+          title: res.text,
+          duration: 1000
+        })
+      }
+    })	
   },
 
 
 
+  getMyLicense() {
+    wx.showLoading({
+      title: '获取中...',
+    })
+    ajax.getApi('mini/program/member/myLicense', {
 
+    }, (err, res) => {
+      if (res && res.success) {
+        wx.hideLoading()
+        this.setData({
+
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getMyLicense()
   },
 
   /**

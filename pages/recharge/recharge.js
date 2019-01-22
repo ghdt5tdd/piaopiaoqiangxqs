@@ -1,101 +1,149 @@
 // pages/recharge/recharge.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    amount: 50,
     paynum: [
       {
-        "num": "50",
-        "icon": "../../images/gou.png",
+        "name" : "50元",
+        "amount": 50,
         "select": 0
       },
       {
-        "num": "100",
-        "icon": "",
+        "name": "100元",
+        "amount": 100,
         "select": 1
       },
       {
-        "num": "200",
-        "icon": "",
+        "name": "200元",
+        "amount": 200,
         "select": 2
       },
       {
-        "num": "500",
-        "icon": "",
+        "name": "500元",
+        "amount": 500,
         "select": 3
       },
       {
-        "num": "1000",
-        "icon": "",
+        "name": "1000元",
+        "amount": 1000,
         "select": 4
+      },
+      {
+        "name": "其他",
+        "amount": 0,
+        "select": 5
       }
     ],
     numSelect: 0,
     //默认选中的充值方式
-    pays: [
-      {
-        "payName": "支付宝",
-        "image": "../../images/zhifu2.jpg",
-        "icon": "../../images/check.png",
-        "select": 0
-      },
-      {
-        "payName": "微信",
-        "image": "../../images/zhifu3.png",
-        "icon": "../../images/uncheck.png",
-        "select": 1
-      }
-    ],
-    paySelect: 0,
+    // pays: [
+      // {
+      //   "payName": "支付宝",
+      //   "image": "../../images/zhifu2.jpg",
+      //   "icon": "../../images/check.png",
+      //   "select": 0
+      // },
+      // {
+      //   "payName": "微信",
+      //   "image": "../../images/zhifu3.png",
+      //   "icon": "../../images/uncheck.png",
+      //   "select": 1
+      // }
+    // ],
+    // paySelect: 0,
   },
 
 
   //选择支付金额
   chooseNum: function (data) {
-    var Index = data.currentTarget.dataset.select
-    for (var i = 0; i < this.data.paynum.length; i++) {
+    const index = data.currentTarget.dataset.select
+    this.setData({
+      amount: this.data.paynum[index].amount,
+      numSelect: index
+    })
+  },
 
-      var I = "paynum[" + i + "].icon"
-      if (i == Index) {
-        this.setData({
-          [I]: "../../images/gou.png",
-          numSelect: Index,
+  recharge() {
+    wx.showLoading({
+      title: '正在发起支付请求...',
+    })
+    const id = this.data.orderId
+    const app_id = app.globalData.appId
+    const open_id = app.globalData.openId
+    const amount = this.data.amount
+    ajax.getApi('mini/program/member/recharge', {
+      app_id,
+      open_id,
+      amount
+    }, (err, res) => {
+      if (res && res.success) {
+        wx.hideLoading()
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: function (res) {
+            // success
+            wx.showModal({
+              title: '支付结果',
+              content: JSON.stringify(res),
+            });
+            // wx.navigateBack({
+            //   delta: 1
+            // })
+          },
+          fail: function (res) {
+            // fail
+            console.log(res);
+          },
+          complete: function (res) {
+            // complete
+            console.log(res);
+          }
         })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
       }
-      else {
-        this.setData({
-          [I]: "",
-          numSelect: Index,
-        })
-      }
-    }
+    })
   },
 
 
-  //选择支付方式
-  choosePay: function (data) {
-    var Index = data.currentTarget.dataset.select
+  // //选择支付方式
+  // choosePay: function (data) {
+  //   var Index = data.currentTarget.dataset.select
 
-    for (var i = 0; i < this.data.pays.length; i++) {
+  //   for (var i = 0; i < this.data.pays.length; i++) {
 
-      var I = "pays[" + i + "].icon"
-      if (i == Index) {
-        this.setData({
-          [I]: "../../images/check.png",
-          paySelect: Index,
-        })
-      }
-      else {
-        this.setData({
-          [I]: "../../images/uncheck.png",
-          paySelect: Index,
-        })
-      }
-    }
-  },
+  //     var I = "pays[" + i + "].icon"
+  //     if (i == Index) {
+  //       this.setData({
+  //         [I]: "../../images/check.png",
+  //         paySelect: Index,
+  //       })
+  //     }
+  //     else {
+  //       this.setData({
+  //         [I]: "../../images/uncheck.png",
+  //         paySelect: Index,
+  //       })
+  //     }
+  //   }
+  // },
 
 
 

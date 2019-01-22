@@ -40,7 +40,9 @@ Page({
       })
     } else {
       app.globalData.userInfo = userInfo
-      app.bindMember(userInfo)
+      app.bindMember(userInfo, () => {
+        this.getShopOrderDetail(this.data.shopOrderId)
+      })
 
       this.setData({
         userInfo: e.detail.userInfo,
@@ -62,6 +64,7 @@ Page({
       wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
         url: '../bind/bind'
       })
+      return;
     }
 
     const ac = this.data.ac
@@ -76,6 +79,7 @@ Page({
       wx.navigateTo({
         url: '../handover/handover?id=' + this.data.shopOrderId
       }) 
+      return;
     } else if(ac === 'qs'){
       //判断运单是否为接收人到付，到付则先须先进行付款，不为到付则直接进入签收页面
       if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
@@ -84,15 +88,18 @@ Page({
         //   wx.navigateTo({
         //     url: '../sign/sign?id=' + this.data.shopOrderId
         //   })
+        //   return;
         // }else {
           wx.navigateTo({
             url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
           })
+          return;
         // }
       } else {
         wx.navigateTo({
           url: '../sign/sign?id=' + this.data.shopOrderId
         })
+        return;
       }
     } else {
       wx.showLoading({
@@ -140,6 +147,7 @@ Page({
     ajax.getApi('mini/program/order/getShopOrderDetail', {
       shopOrderId
     }, (err, res) => {
+      console.log(err)
       wx.hideLoading()
       if (res && res.success) {
         let ac = this.data.ac
@@ -181,8 +189,7 @@ Page({
     this.loadUserInfo()
     const scanUrl = decodeURIComponent(options.q)
     const shopOrderId = util.getQueryString(scanUrl, 'id')
-    const ac = util.getQueryString(scanUrl, 'ac')
-    
+    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     //测试
     // const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 

@@ -3,15 +3,15 @@
   <view class='bind-bar'>
     <view class='bind-title'>请上传身份证</view>
     <view class='bind-upload'>
-      <image bindtap="changePicface" src="{{realPicface}}" />
-      <image bindtap="changePicback" src="{{realPicback}}" />
+      <image bindtap="changePicface" src="{{idcard_front_img}}" />
+      <image bindtap="changePicback" src="{{idcard_reverse_img}}" />
     </view>
   </view>
   <view class='bind-bar'>
     <view class='bind-title'>请上传驾驶证</view>
     <view class='bind-upload'>
-      <image bindtap="changeDrive1" src="{{realDrive1}}" />
-      <image bindtap="changeDrive2" src="{{realDrive2}}" />
+      <image bindtap="changeDrive1" src="{{driving_license_front_img}}" />
+      <image bindtap="changeDrive2" src="{{driving_license_reverse_img}}" />
     </view>
 
   </view>

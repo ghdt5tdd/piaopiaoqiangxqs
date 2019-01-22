@@ -18,12 +18,12 @@ Page({
         "icon": "../../images/uncheck.png",
         "select": 0
       },
-      {
-        "payName": "支付宝",
-        "image": "../../images/zhifu2.jpg",
-        "icon": "../../images/check.png",
-        "select": 1
-      },
+      // {
+      //   "payName": "支付宝",
+      //   "image": "../../images/zhifu2.jpg",
+      //   "icon": "../../images/check.png",
+      //   "select": 1
+      // },
       {
         "payName": "微信",
         "image": "../../images/zhifu3.png",
