@@ -24,7 +24,8 @@ Page({
     payStyle: "到付1",
     payAmount: "20.00",
     first: true,
-    sign: "toEnvelope"
+    sign: "toEnvelope",
+    signedState:"415,420,425,430,435,440,490,500"
   },
 
 
@@ -52,6 +53,23 @@ Page({
     }
   },
 
+  toDetail() {
+    //如果用户信息没有初始化完毕，拒绝访问
+    if (!app.globalData.memberInfo) {
+      return;
+    }
+
+    if (!app.globalData.memberInfo.phone) {
+      wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
+        url: '../bind/bind'
+      })
+      return;
+    }
+    
+    wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
+      url: '../transportdetail/transportdetail'
+    })
+  },
 
   //签收
   toSign: function(e) {
@@ -179,21 +197,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const q = options.q
-    if(!q) {
-      wx.showToast({
-        title: '非法错误',
-      })
-      return ;
-    }
-    this.loadUserInfo()
-    const scanUrl = decodeURIComponent(options.q)
-    const shopOrderId = util.getQueryString(scanUrl, 'id')
-    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+    // const q = options.q
+    // if(!q) {
+    //   wx.showToast({
+    //     title: '非法错误',
+    //   })
+    //   return ;
+    // }
+    // this.loadUserInfo()
+    // const scanUrl = decodeURIComponent(options.q)
+    // const shopOrderId = util.getQueryString(scanUrl, 'id')
+    // const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     //测试
-    // const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
-    // const ac = 'jj' 
+    const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
+    const ac = 'jj' 
 
     let acText = this.getAcText(ac)
 

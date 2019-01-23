@@ -1,37 +1,34 @@
 // pages/wallet/wallet.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: { 
-    name: "可用余额",
-    account: "12",
-    opt: "去充值",
-    toW: "toRecharge",
-
+    account: 0.0,
+    page: 1,
+    pageSize: 10,
+    count: 0,
+    loadCompleted: false,
     orderStatus: [{
         name: '全部',
+        value: 0
       },
       {
         name: '收入',
+        value: 1
       },
       {
         name: '支出',
+        value: 2
       },
     ],
     firstStatus: 0,
-    record: [{
-      name: "购买商品",
-      account: "12",
-      time: "2018-08-16",
-      spec: "-88",
-    }, {
-      name: "充值",
-      account: "100",
-      time: "2018-08-15",
-      spec: "+100",
-    }]
+    record: []
 
   },
 
@@ -40,7 +37,13 @@ Page({
   selectStatus: function(e) {
     var index = parseInt(e.target.dataset.index);
     this.setData({
-      firstStatus: index
+      firstStatus: index,
+      page: 1,
+      count: 0,
+      record: [],
+      loadCompleted: false
+    }, () => {
+      this.getRechargeLog()
     })
   },
 
@@ -51,13 +54,97 @@ Page({
     })
   },
 
+  getRecharge () {
+    ajax.getApi('mini/program/member/recharge/query', {
 
+    }, (err, res) => {
+      if (res && res.success) {
+        this.setData({
+          account: res.data.recharge
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
+
+  getRechargeLog() {
+    const page = this.data.page
+    const pageSize = this.data.pageSize
+    const status = this.data.firstStatus
+    wx.showLoading({
+      title: '查询中',
+    })
+    ajax.getApi('mini/program/member/recharge/log', {
+      page,
+      pageSize,
+      status
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        console.log(res.data)
+        if (res.data.length > 0) {
+          const record = this.data.record
+          Array.prototype.push.apply(record, res.data)
+          this.setData({
+            record
+          })
+        } else {
+          this.setData({
+            loadCompleted: true
+          })
+          wx.showToast({
+            title: '数据已全部加载完毕',
+            duration: 1000
+          })
+        }
+ 
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
+
+  lower: function (e) {
+    let page = this.data.page
+    const pageSize = this.data.pageSize
+    const loadCompleted = this.data.loadCompleted
+    if (!loadCompleted) {
+      wx.showLoading({
+        title: '更多数据加载中...',
+      })
+      page++
+      this.setData({
+        page
+      }, () => {
+        this.getRechargeLog(() => {
+          wx.hideLoading()
+        })
+      })
+    } else {
+      wx.showToast({
+        title: '数据已全部加载完毕',
+        duration: 1000
+      })
+    }
+  },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面加载 
    */
   onLoad: function(options) {
-
+    this.getRecharge()
+    this.getRechargeLog()
   },
 
   /**
