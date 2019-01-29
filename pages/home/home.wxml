@@ -1,13 +1,13 @@
 <!--pages/home/home.wxml-->
 <view class='search-head'>
   <view class='search-info'>
-    <input placeholder='输入货运单号查询' bindconfirm="confirmInput"></input>
+    <input placeholder='输入货运单号查询' value="{{billNo}}" bindinput='bindBillNo' bindconfirm="confirmInput"></input>
   </view>
-  <view class='search-head-news'>
+  <!-- <view class='search-head-news'>
     <image src='../../images/news.png'></image>
     <text>{{newsnum}}</text>
     <view>消息</view>
-  </view>
+  </view> -->
 </view>
 <view class='login-box' wx:if="{{!hasUserInfo && canIUse}}">
   <button class='login-bottom' open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
@@ -24,8 +24,8 @@
 <view wx:else>
   <view class='order-status ul-4'>
     <block wx:for="{{orderStatus}}">
-      <view class="order-status-items  {{selectStatus == index?'on':''}}" bindtap='selectStatus' data-index="{{index}}">
-        {{item.name}} {{item.num}}
+      <view class="order-status-items  {{selectStatus == item.value?'on':''}}" bindtap='selectStatus' data-index="{{item.value}}">
+        {{item.name}} {{orderCount[item.value]? orderCount[item.value] : 0}}
       </view>
     </block>
   </view>
@@ -33,47 +33,50 @@
   <scroll-view scroll-y="true" style="height:calc(100vh - 348rpx);" bindscrolltolower="lower">
     <view class='card-box'>
       <view class='order-table'>
-        <block wx:for="{{orderTable}}">
+        <block wx:for="{{shopOrders}}" wx:key="id">
           <view class="order-table-items">
             <view class='order-table-head'>
-              <view class='order-table-id'>货运单号：{{item.id}}</view>
-              <view class='order-table-time'>{{item.time}}</view>
+              <view class='order-table-id'>货运单号：{{item.bill_no}}</view>
+              <view class='order-table-time'>{{item.start_departing_date}}</view>
             </view>
-            <view class='order-table-content'>
+            <view class='order-table-content' bindtap="toDetail"  data-id="{{item.id}}">
 
               <view class='order-table-line'>
                 <view class='order-line-route'>
-                  <view class='order-route-point'>{{item.start}}</view>
+                  <view class='order-route-point'>{{item.consignment_station_name}}</view>
                   <image mode="widthFix" src="../../images/arrow.png"></image>
-                  <view class='order-route-point'>{{item.end}}</view>
+                  <view class='order-route-point'>{{item.receiving_station_name}}</view>
                 </view>
                 <view class='order-line-cargo'>
                   <view class='order-cargo-receive'>
                     <image src="../../images/person.png"></image>
-                    <view>{{item.receive}}收</view>
+                    <view>{{item.consignee_name}}收</view>
                   </view>
                   <view class='order-cargo-num'>
                     <image src="../../images/cargo.png"></image>
-                    <view>{{item.num}}件</view>
+                    <view>{{item.total_packing_quantity}}件</view>
                   </view>
                 </view>
               </view>
 
-              <navigator url="../transportdetail/transportdetail" hover-class='none'>
-                <image class='order-table-to' src='../../images/next.png'></image>
-              </navigator>
+              <view >
+               <image class='order-table-to' src='../../images/next.png'></image>
+              </view>
 
             </view>
 
             <view class='order-table-opt'>
-              <view class='order-opt-status' wx:if="{{item.payStyle == '到付'}}">{{item.payStyle}}
-                <text class='red'>¥{{item.payAmount}}</text>
+              <view class='order-opt-status' wx:if="{{item.settlement_mode === 'receiver_pay'}}">{{item.order_state}}
+                <text class='red'>¥{{item.needPay}}</text>
               </view>
-              <view class='order-opt-status' wx:else>{{item.status}}</view>
+              <view class='order-opt-status' wx:else>{{item.order_state}}</view>
               <view class='order-opt-node'>
-                <navigator url="../point/point" hover-class='none'>节点查询</navigator>
+                <view bindtap='toNode' data-id="{{item.id}}">节点查询</view>
               </view>
-              <view class='order-opt-item' wx:if="{{item.btn != undefined}}" bindtap='{{item.open}}' data-coupon="{{item.couponAmount}}" data-couponlimit="{{item.couponLimit}}">{{item.btn}}</view>
+              <!-- <view class='order-opt-item' wx:if="{{selectStatus === 0}}" bindtap='{{item.open}}' data-coupon="{{item.couponAmount}}" data-couponlimit="{{item.couponLimit}}">{{item.btn}}</view> -->
+              <view class='order-opt-item' wx:if="{{selectStatus === 0}}" bindtap='showPay' data-amount="{{item.needPay}}" data-id="{{item.id}}">在线支付</view>
+              <view class='order-opt-item' wx:elif="{{selectStatus === 1}}" bindtap='showSign' data-index="{{index}}" data-id="{{item.id}}">一键签收</view>
+              <view class='order-opt-item' wx:elif="{{selectStatus === 2}}" bindtap='showComment' data-index="{{index}}" data-id="{{item.id}}">去评价</view>
             </view>
           </view>
         </block>
@@ -94,7 +97,7 @@
       <image src='../../images/bottom1.png'></image>
     </navigator>
   </view>
-  <view class='fixed-bottom-scan'>立即扫码</view>
+  <view class='fixed-bottom-scan' bindtap="showscan">立即扫码</view>
   <view class='fixed-bottom-button'>
     <view wx:if="{{!hasUserInfo && canIUse}}">
       <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
@@ -287,7 +290,7 @@
     </view>
 
     <view class="comment-mark">
-      <textarea name="comment" value="{{comment}}" placeholder='写下您对货运单的评价吧'></textarea>
+      <textarea name="comment" value="{{comment}}" bindinput='bindCommentInput' placeholder='写下您对货运单的评价吧'></textarea>
     </view>
 
     <view class='comment-gallery'>
@@ -306,6 +309,6 @@
 
   <view class='pop-bottom'>
     <view class='pop-bottom-opt' bindtap='hide'>取消</view>
-    <view class='pop-bottom-opt bg-orange'>确认</view>
+    <view class='pop-bottom-opt bg-orange' bindtap='commitComment'>确认</view>
   </view>
 </view>

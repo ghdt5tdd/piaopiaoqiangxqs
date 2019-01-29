@@ -18,7 +18,7 @@
       {{name}}
     </view>
   </view>
-  <view class="section-bar">
+  <!-- <view class="section-bar">
     <view class="section-title">单位名称：</view>
     <view class="section-info">
       {{company}}
@@ -29,11 +29,11 @@
     <view class="section-info">
       {{address}}
     </view>
-  </view>
+  </view> -->
 
 </view>
 
-<view class='section'>
+<!-- <view class='section'>
   <view class="section-bar section-multiline">
     <view class="section-title">账号身份：</view>
     <view class="section-info">
@@ -48,4 +48,4 @@
     </view>
     <image class='section-next' src='../../images/w_next.png'></image>
   </view>
-</view>
+</view> -->

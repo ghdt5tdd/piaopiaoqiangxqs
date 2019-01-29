@@ -7,6 +7,12 @@
     </view>
   </view>
   <view class='bind-bar'>
+    <view class='bind-title'>请输入真实姓名</view>
+    <view class='bind-input'>
+      <input type="number" value="{{true_name}}" bindinput='getTrueName' placeholder="真实姓名" />
+    </view>
+  </view>
+  <view class='bind-bar'>
     <view class='bind-title'>请输入验证码</view>
     <button class="bind-code" hover-class='none' bindtap='getVerificationCode' disabled='{{disabled}}'>{{codename}}</button>
     <view class='bind-input'>

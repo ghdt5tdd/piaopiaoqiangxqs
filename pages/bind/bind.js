@@ -11,6 +11,7 @@ Page({
   data: {
     tel: "",
     code: "",
+    true_name: "",
     codename: "获取验证码",
   },
 
@@ -25,6 +26,11 @@ Page({
   getCodeValue: function(e) {
     this.setData({
       code: e.detail.value
+    })
+  },
+  getTrueName: function(e) {
+    this.setData({
+      true_name: e.detail.value
     })
   },
 
@@ -93,8 +99,9 @@ Page({
   bindPhone (callback = () => 1) {
     const phone = this.data.tel
     const code = this.data.code
+    const true_name = this.data.true_name
     var myreg = /^(14[0-9]|13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$$/;
-    if (phone == "11位手机号") {
+    if (phone === "") {
       wx.showToast({
         title: '手机号不能为空',
         icon: 'none',
@@ -104,6 +111,13 @@ Page({
     } else if (!myreg.test(phone)) {
       wx.showToast({
         title: '请输入正确的手机号',
+        icon: 'none',
+        duration: 1000
+      })
+      return false;
+    } else if (true_name === "") {
+      wx.showToast({
+        title: '请输入真实姓名',
         icon: 'none',
         duration: 1000
       })
@@ -122,6 +136,7 @@ Page({
       ajax.postApi('mini/program/member/bindPhone', {
         phone,
         mCode: code,
+        trueName: true_name,
         mToken: 'bindMemberToken',
       }, (err, res) => {
         wx.hideLoading()

@@ -3,7 +3,7 @@
   background: #fff;
   padding: 50rpx 20rpx 50rpx 190rpx;
   margin-top: 1px;
-  min-height: calc(100vh - 100rpx - 1px);
+  min-height: 100vh;
 }
 
 .logistics-list-item {

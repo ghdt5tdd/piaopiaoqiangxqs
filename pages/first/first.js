@@ -109,7 +109,7 @@ Page({
         //   return;
         // }else {
           wx.navigateTo({
-            url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount
+            url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount + '&id=' + this.data.shopOrderDetail.id
           })
           return;
         // }
@@ -165,7 +165,6 @@ Page({
     ajax.getApi('mini/program/order/getShopOrderDetail', {
       shopOrderId
     }, (err, res) => {
-      console.log(err)
       wx.hideLoading()
       if (res && res.success) {
         let ac = this.data.ac
@@ -197,21 +196,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // const q = options.q
-    // if(!q) {
-    //   wx.showToast({
-    //     title: '非法错误',
-    //   })
-    //   return ;
-    // }
-    // this.loadUserInfo()
-    // const scanUrl = decodeURIComponent(options.q)
-    // const shopOrderId = util.getQueryString(scanUrl, 'id')
-    // const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+    const q = options.q
+    if(!q) {
+      wx.showToast({
+        title: '非法错误',
+      })
+      return ;
+    }
+    this.loadUserInfo()
+    const scanUrl = decodeURIComponent(options.q)
+    const shopOrderId = util.getQueryString(scanUrl, 'id')
+    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     //测试
-    const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
-    const ac = 'jj' 
+    // const shopOrderId = 'c8595a673d50492c9cbef928314b587a' 
+    // const ac = 'jj' 
 
     let acText = this.getAcText(ac)
 
@@ -224,6 +223,7 @@ Page({
       ac,
       acText
     })
+
     util.callIf(() => {
       this.getShopOrderDetail(shopOrderId)
     }, () => {

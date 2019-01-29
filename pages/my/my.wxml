@@ -4,7 +4,7 @@
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
     <view>
       <view class="userinfo-nickname">{{userInfo.nickName}}</view>
-      <view class="userinfo-nicktel">{{nickTel}}</view>
+      <view class="userinfo-nicktel">{{phone}}</view>
     </view>
   </view>
 </view>
@@ -32,24 +32,24 @@
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator>
-    <navigator url="../set/set" hover-class='none'>
+    <!-- <navigator url="../set/set" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my3.png'></image>
         <view class='my-bar-name'>我的设置</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator>
+    </navigator> -->
   </view>
   <view class='card-title'>个人记录</view>
   <view class='card-order'>
-    <navigator url="../punch/punch" hover-class='none'>
+    <!-- <navigator url="../punch/punch" hover-class='none'>
       <view class='my-bar my-barinfo'>
         <image class='my-bar-icon' src='../../images/my4.png'></image>
         <view class='my-bar-name'>定位签到</view>
         <view class='my-bar-text'>{{punchTip}}</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator>
+    </navigator> -->
     <navigator url="../truck/truck" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my6.png'></image>
@@ -57,12 +57,12 @@
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator>
-    <navigator url="../coupon/coupon" hover-class='none'>
+    <!-- <navigator url="../coupon/coupon" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my5.png'></image>
         <view class='my-bar-name'>附近红包</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator>
+    </navigator> -->
   </view>
 </view>

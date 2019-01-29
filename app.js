@@ -71,6 +71,9 @@ App({
   },
 
   bindMember(userInfo, callback) {
+    if (this.globalData.memberInfo) {
+      return;
+    }
     ajax.getApi('mini/program/createMember', {
       ...userInfo,
       openId: this.globalData.openId,

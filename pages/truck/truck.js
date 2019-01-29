@@ -403,10 +403,17 @@ Page({
 
         } else {
           if (res.text) {
-            wx.showToast({
-              title: res.text,
-              duration: 1000
-            })
+            if(res.text == 1006) {
+              wx.showToast({
+                title: '车辆无信息',
+                duration: 1000
+              })
+            } else {
+              wx.showToast({
+                title: res.text,
+                duration: 1000
+              })
+            }
           }
         }
       })	
