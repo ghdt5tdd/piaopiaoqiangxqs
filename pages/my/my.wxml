@@ -18,13 +18,13 @@
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator>
-    <navigator url="../addList/addList" hover-class='none'>
+    <!-- <navigator url="../addList/addList" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my2.png'></image>
         <view class='my-bar-name'>地址管理</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator>
+    </navigator> -->
     <navigator url="../wallet/wallet" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my7.png'></image>

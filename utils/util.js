@@ -147,7 +147,7 @@ function callIf(func, ifFuc, maxCall) {
   }else {
     setTimeout(() => {
       callIf(func, ifFuc, ++maxCall)
-    }, 500)
+    }, 300)
   }
 }
 

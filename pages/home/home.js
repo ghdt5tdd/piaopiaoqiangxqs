@@ -577,6 +577,27 @@ Page({
     })
   },
 
+  getShopOrderCount() {
+    ajax.getApi('mini/program/order/getMiniShopOrderCount', {}, (err, res) => {
+      if (res && res.success) {
+        const orderCount = this.data.orderCount
+        if (!orderCount) {
+          this.setData({
+            orderCount: res.data.orderCount
+          })
+        }
+
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+
   getShopOrderList(orderNo) {
     const page = this.data.page
     const pageSize = this.data.pageSize
@@ -592,16 +613,9 @@ Page({
     if(orderNo) {
       params.orderNo = orderNo
     }
-    ajax.getApi('mini/program/order/getShopOrderListAndCount', params, (err, res) => {
+    ajax.getApi('mini/program/order/getMiniShopOrderList', params, (err, res) => {
       wx.hideLoading()
       if (res && res.success) {
-        const orderCount = this.data.orderCount
-        if (!orderCount) {
-          this.setData({
-            orderCount: res.data.orderCount
-          })
-        }
-
         if (res.data.orderList.length > 0) {
           const shopOrders = this.data.shopOrders
           Array.prototype.push.apply(shopOrders, res.data.orderList)
@@ -656,6 +670,7 @@ Page({
     this.loadUserInfo()
     util.callIf(() => {
       this.getShopOrderList()
+      this.getShopOrderCount()
     }, () => {
       return app.globalData.memberInfo !== null
     })

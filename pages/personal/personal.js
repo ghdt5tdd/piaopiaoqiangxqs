@@ -1,15 +1,19 @@
 // pages/personal/personal.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    nickid:"昨夜星辰",
-    tel:"13522661524",
-    name:"张三",
-    company:"武汉恒望科技有限公司",
-    address:"湖北省武汉市江夏区现代·光谷世贸中心A栋1907室-1908室",
+    user_nickname:"",
+    tel:"",
+    name:"",
+    company:"",
+    address:"",
     identity:"司机",
     status:"未认证"
   },
@@ -18,7 +22,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      user_nickname: app.globalData.memberInfo.user_nickname,
+      tel: app.globalData.memberInfo.phone,
+      name: app.globalData.memberInfo.full_name,
+    })
   },
 
   /**

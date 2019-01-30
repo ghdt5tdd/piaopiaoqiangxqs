@@ -3,7 +3,7 @@
   <view class="section-bar">
     <view class="section-title">账号名称：</view>
     <view class="section-info">
-      {{nickid}}
+      {{user_nickname}}
     </view>
   </view>
   <view class="section-bar">

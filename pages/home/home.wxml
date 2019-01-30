@@ -89,13 +89,13 @@
 
 <view class='fixed-bottom'>
   <view class='fixed-bottom-button'>
-    <view wx:if="{{!hasUserInfo && canIUse}}">
+    <!-- <view wx:if="{{!hasUserInfo && canIUse}}">
       <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
       <image src='../../images/bottom1.png'></image>
     </view>
     <navigator wx:else url="../send/send" hover-class='none'>
       <image src='../../images/bottom1.png'></image>
-    </navigator>
+    </navigator> -->
   </view>
   <view class='fixed-bottom-scan' bindtap="showscan">立即扫码</view>
   <view class='fixed-bottom-button'>
