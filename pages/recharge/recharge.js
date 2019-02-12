@@ -61,7 +61,11 @@ Page({
     // paySelect: 0,
   },
 
-
+  bindAmount (e) {
+    this.setData({
+      amount: e.detail.value
+    })
+  },
   //选择支付金额
   chooseNum: function (data) {
     const index = data.currentTarget.dataset.select
