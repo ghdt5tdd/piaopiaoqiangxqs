@@ -140,9 +140,9 @@ Page({
     prevPage.setData({
 
       //将要传递给新增地址或者编辑地址页面的参数
-      province: locationData.ad_info.province,
-      city: locationData.ad_info.city,
-      district: locationData.ad_info.district,
+      // province: locationData.ad_info.province,
+      // city: locationData.ad_info.city,
+      // district: locationData.ad_info.district,
       door: locationData.title,
       sign: 1,
 

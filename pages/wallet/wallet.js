@@ -16,7 +16,7 @@ Page({
     loadCompleted: false,
     orderStatus: [{
         name: '全部',
-        value: 0
+        value: 0 
       },
       {
         name: '收入',
