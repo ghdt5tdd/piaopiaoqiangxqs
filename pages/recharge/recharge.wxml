@@ -6,7 +6,7 @@
  
   <view class="pay-num">
     <view wx:for="{{paynum}}" data-select="{{item.select}}" class="num_item {{item.select == numSelect ? 'active':''}}" bindtap="chooseNum">
-      <view>{{item.name}}</view> 
+      <view>{{item.name}}</view>
       <image  src="{{numSelect === item.select? '../../images/gou.png' : ''}}" />
     </view>
   </view>

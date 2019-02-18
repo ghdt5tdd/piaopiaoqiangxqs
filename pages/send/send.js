@@ -1,24 +1,29 @@
 // pages/send/send.js
 Page({
-
+  
   /**
    * 页面的初始数据
    */
   data: {
-    WSend: false, //这里表示有设为默认的寄件地址
+    WSend: true, //这里表示有设为默认的寄件地址
     WReceive: true,
 
-    sendName: "黄晓克", //设为默认的寄件地址信息
-    sendTel: "13355888988",
-    sendLocation: "浙江省温州市鹿城区黎明工业区36号楼505室",
+    sendName: "", //设为默认的寄件地址信息
+    sendTel: "",
+    sendLocation: "",
 
+    receiveName: "", //设为默认的寄件地址信息
+    receiveTel: "",
+    receiveLocation: "",
+
+    carrier: undefined,
     WCargo: true,
     WService: true,
 
     sendTime: "请选择提货时间（选填）",
     ruleStatus: false,
     ruleIcon: "../../images/uncheck.png",
-
+    remark:'',
     sendForwarder: "请选择承运商",
 
 
@@ -96,12 +101,18 @@ Page({
 
   },
 
+  bindInput(e) {
+    const key = e.currentTarget.dataset.key
+    this.setData({
+      [key] : e.detail.value
+    })
+  },
 
 
   //寄件地址选择
   toSend: function(e) {
     wx.navigateTo({
-      url: '../addSend/addSend'
+      url: '../addSend/addSend?select=1'
     })
   },
 
@@ -110,7 +121,7 @@ Page({
   //收件地址选择
   toReceive: function(e) {
     wx.navigateTo({
-      url: '../addReceive/addReceive'
+      url: '../addSend/addSend?select=2'
     })
   },
 
@@ -158,9 +169,15 @@ Page({
     }
     const date = new Date();
     const cur_year = date.getFullYear();
-    const cur_month = date.getMonth() + 1;
-    const cur_date = date.getDate();
+    let cur_month = date.getMonth() + 1;
+    let cur_date = date.getDate();
     const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
+    if (cur_date < 10) {
+      cur_date = "0" + cur_date
+    }
+    if (cur_month < 10) {
+      cur_month = "0" + cur_month
+    }
     //利用构造函数创建对象
     function calendar(date, week) {
       this.date = cur_year + '-' + cur_month + '-' + date;
@@ -249,7 +266,8 @@ Page({
       })
     } else {
       var chooseSendDate = this.data.calendar[chooseDate].date
-      var chooseSendTime = this.data.timeArr[chooseTime].timeBegin + "-" + this.data.timeArr[chooseTime].timeEnd
+      // var chooseSendTime = this.data.timeArr[chooseTime].timeBegin + "-" + this.data.timeArr[chooseTime].timeEnd
+      var chooseSendTime = this.data.timeArr[chooseTime].timeEnd
       this.setData({
         sendDate: chooseSendDate,
         sendTime: chooseSendTime,

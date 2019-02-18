@@ -31,6 +31,20 @@
 </view>
 
 <view class='send-block'>
+  <view class='send-bar send-bar-forwarder'>
+    <view class='send-bar-label'>承运商</view>
+    <view class='send-bar-info' bindtap='toforwarder'>{{sendForwarder}}</view>
+    <image class='send-bar-next' src='../../images/w_next.png'></image>
+  </view>
+
+  <view class='send-bar'>
+    <view class='send-bar-label'>预约提货时间</view>
+    <view class='send-bar-info' bindtap='showTime'>{{sendDate}} {{sendTime}}</view>
+    <image class='send-bar-next' src='../../images/w_next.png'></image>
+  </view>
+</view>
+
+<view class='send-block'>
   <view class='send-block-item' bindtap='toCargo'>
     <view class='send-block-label'>货物信息</view>
     <view class='send-block-default' wx:if="{{WCargo}}">必填</view>
@@ -52,21 +66,13 @@
   </view>
 </view>
 
-<view class='send-bar'>
-  <view class='send-bar-label'>预约提货时间</view>
-  <view class='send-bar-info' bindtap='showTime'>{{sendDate}} {{sendTime}}</view>
-  <image class='send-bar-next' src='../../images/w_next.png'></image>
-</view>
 
-<view class='send-bar send-bar-forwarder'>
-  <view class='send-bar-label'>承运商</view>
-  <view class='send-bar-info' bindtap='toforwarder'>{{sendForwarder}}</view>
-  <image class='send-bar-next' src='../../images/w_next.png'></image>
-</view>
+
+
 
 <view class='send-remark'>
   <view class='send-remark-label'>备注信息</view>
-  <textarea placeholder='例：请开大车提货'  hidden="{{markFcous}}" ></textarea>
+  <textarea hidden="{{markFcous}}" value="{{remark}}" bindinput='bindInput' data-key="remark"></textarea>
 </view>
 
 <view class='send-bottom'>
@@ -97,7 +103,7 @@
 
   <view class='timelist'>
     <view wx:for="{{ timeArr }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }} {{ timeItem.overtime? "over":"" }}'>
-      <view>{{ timeItem.timeBegin }}-{{ timeItem.timeEnd }}</view>
+      <view>{{ timeItem.timeEnd }}</view>
     </view>
   </view>
 

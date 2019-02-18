@@ -38,6 +38,13 @@ Page({
 
   },
 
+  bindInput(e) {
+    const key = e.currentTarget.dataset.key
+    this.setData({
+      [key]: e.detail.value
+    })
+  },
+
   //商品名名称
   selectname: function(e) {
     var cargoList = this.data.cargoList

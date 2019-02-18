@@ -73,7 +73,7 @@ Page({
     }, {
       name: "渝"
     }, {
-      name: "翼"
+      name: "冀"
     }, {
       name: "豫"
     }, {
@@ -447,7 +447,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    plateli = []
   },
 
   /**

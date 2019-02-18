@@ -4,7 +4,7 @@
 </view> 
 
 <view class='search'>
-  <input placeholder='输入联系人姓名/手机号码查询' bindinput='bindQuery' value="{{query}}"></input>
+  <input placeholder='输入联系人姓名' bindinput='bindQuery' value="{{query}}"></input>
   <icon type='search' bindtap='search'></icon>
 </view>
 <scroll-view wx:if="{{addressList.length > 0}}" scroll-y style='height:calc(100vh - 392rpx)' class='address-content' bindscrolltolower="lower">
