@@ -1,0 +1,39 @@
+<!--pages/order/order.wxml-->
+<view class='order-status ul-3'>
+  <view class="order-status-items {{select == index?'on':''}} " wx:for="{{status}}" bindtap='select' data-index="{{index}}">{{item.name}}({{item.num}})</view>
+</view>
+
+<scroll-view scroll-y class='order-content'>
+  <view class='order-list'>
+    <view class='order-bar' wx:for="{{order}}" bindtap='toInfo' data-status="{{item.sta}}" data-id="{{item.id}}" data-time="{{item.time}}">
+      <view class='order-bar-head'>
+        <view class='order-bar-id'>订单号码
+          <text>{{item.id}}</text>
+        </view>
+        <view class='order-bar-time'>{{item.time}}</view>
+      </view>
+      <view class='order-bar-info'>
+        <view class='order-bar-send'>
+          <view class='order-bar-city'>{{item.sendCity}}</view>
+          <view>{{item.sendName}}</view>
+        </view>
+        <view class='order-bar-status {{item.sta}}'>
+          <text class='order-bar-line'></text>
+          <image src='{{item.statusPic}}' mode="widthFix"></image>
+        </view>
+        <view class='order-bar-recive'>
+          <view class='order-bar-city'>{{item.reciveCity}}</view>
+          <view>{{item.reciveName}}</view>
+        </view>
+      </view>
+      
+      <view class='order-bar-forwarder'>
+承运商：{{item.forwarder}}
+      </view>
+      <view class='order-bar-cargo'>
+        <view>货物名称：{{item.cargoName}}</view>
+        <view>货物件数：{{item.cargoNum}}件</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,101 @@
+/* pages/order/order.wxss */
+
+.order-status {
+  margin-top: 0;
+}
+
+.order-content {
+  height: calc(100vh - 86rpx);
+}
+
+.order-list {
+  overflow: hidden;
+}
+
+.order-bar {
+  background: #fff;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+  margin: 20rpx;
+  padding: 0 20rpx;
+  overflow: hidden;
+}
+
+.order-bar-head {
+  line-height: 40rpx;
+  margin: 20rpx 0 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-bar-id text, .order-bar-time {
+  font-size: 26rpx;
+}
+
+.order-bar-info {
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.order-bar-send {
+  width: calc(50% - 100rpx);
+}
+
+.order-bar-recive {
+  width: calc(50% - 100rpx);
+  text-align: right;
+}
+
+.order-bar-city {
+  font-size: 34rpx;
+  line-height: 50rpx;
+  margin: 5rpx 0;
+}
+
+.order-bar-status {
+  width: 160rpx;
+  margin: 0 20rpx;
+  text-align: center;
+  position: relative;
+  font-size: 0;
+}
+
+.order-bar-line {
+  display: block;
+  position: absolute;
+  height: 2rpx;
+  top: 50%;
+  width: 100%;
+  background: #272d4d;
+  z-index: 1;
+}
+
+.order-bar-status image {
+  width: 115rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.s2 .order-bar-line {
+  background: #fb6a6d;
+}
+
+.order-bar-forwarder {
+  margin-top: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-bar-cargo {
+  margin-top: 20rpx;
+  border-top: 1px solid #e7e7e7;
+  color: #999;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 80rpx;
+}

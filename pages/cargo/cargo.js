@@ -1,28 +1,19 @@
 // pages/cargo/cargo.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cargoList: [{
-      name: "电子"
-    }, {
-      name: "服装鞋帽"
-    }, {
-      name: "小型家电"
-    }, {
-      name: "汽配"
-    }, {
-      name: "食品"
-    }, {
-      name: "图书印刷品"
-    }, {
-      name: "其他",
-    }],
+    cargoList: [],
     select: 0,
+    cargo: undefined,
     cargoName: "电子",
-
+    settlementMode: undefined,
 
     cargoPay: [{
       pic: "../../images/check.png",
@@ -35,6 +26,10 @@ Page({
       name: "月结"
     }],
 
+    count: undefined,
+    volumn: undefined,
+    package: undefined,
+    weight: undefined,
 
   },
 
@@ -49,20 +44,22 @@ Page({
   selectname: function(e) {
     var cargoList = this.data.cargoList
     var index = e.currentTarget.dataset.index
-    if (cargoList[index].name == '其他') {
-      cargoList[index].input = true
-      var cargoName = ''
-    } else {
-      for (var i = 0; i < cargoList.length; i++) {
-        cargoList[i].input = false
-      }
-      var cargoName = cargoList[index].name
-    }
+    // if (cargoList[index].name == '其他') {
+    //   cargoList[index].input = true
+    //   var cargoName = ''
+    // } else {
+    //   for (var i = 0; i < cargoList.length; i++) {
+    //     cargoList[i].input = false
+    //   }
+    //   var cargoName = cargoList[index].name
+    // }
+    const cargo = cargoList[index]
 
     this.setData({
-      select: index,
-      cargoList: cargoList,
-      cargoName: cargoName
+      cargo
+      // select: index,
+      // cargoList: cargoList,
+      // cargoName: cargoName
     })
 
   },
@@ -71,15 +68,11 @@ Page({
 
   //结算方式
   selectpay: function(e) {
-    var cargoPay = this.data.cargoPay
+    var settlementMode = this.data.settlementMode
     var index = e.currentTarget.dataset.index
-    for (var i = 0; i < cargoPay.length; i++) {
-      cargoPay[i].pic = "../../images/uncheck.png"
-    }
-    cargoPay[index].pic = "../../images/check.png"
-
+ 
     this.setData({
-      cargoPay: cargoPay
+      selectMode: settlementMode[index]
     })
 
   },
@@ -87,17 +80,47 @@ Page({
 
   //保存
   formSubmit: function(e) {
-    if (e.detail.value.name == "") {
+    const cargo = this.data.cargo
+    const count = this.data.count
+    const volumn = this.data.volumn
+    const packaged = this.data.package
+    const weight = this.data.weight
+    const selectMode = this.data.selectMode
+    if (!cargo) {
       wx.showToast({
-        title: '请输入货物名称！',
+        title: '请选择货物类型！',
         icon: 'none',
-        duration: 3000,
+        duration: 2000,
       })
-    } else if (e.detail.value.num == "") {
+    } else if (!count) {
       wx.showToast({
         title: '请输入货物件数！',
         icon: 'none',
-        duration: 3000,
+        duration: 2000,
+      })
+    } else if (!volumn) {
+      wx.showToast({
+        title: '请输入货物体积！',
+        icon: 'none',
+        duration: 2000,
+      })
+    } else if (!packaged) {
+      wx.showToast({
+        title: '请输入货物包装！',
+        icon: 'none',
+        duration: 2000,
+      })
+    } else if (!weight) {
+      wx.showToast({
+        title: '请输入货物重量！',
+        icon: 'none',
+        duration: 2000,
+      })
+    } else if (!selectMode) {
+      wx.showToast({
+        title: '请选择结算方式！',
+        icon: 'none',
+        duration: 2000,
       })
     } else {
 
@@ -109,30 +132,33 @@ Page({
       //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
 
 
-      if (this.data.cargoName == '') { //货物名称是选择的还是自己写的
-        var cargoName = e.detail.value.name
-      } else {
-        var cargoName = this.data.cargoName
-      }
+      // if (this.data.cargoName == '') { //货物名称是选择的还是自己写的
+      //   var cargoName = e.detail.value.name
+      // } else {
+      //   var cargoName = this.data.cargoName
+      // }
 
-      if (e.detail.value.weight != '') { //填了货物重量
-        prevPage.setData({
-          cargoWeight: e.detail.value.weight + 'kg',
-        })
-      }
+      // if (e.detail.value.weight != '') { //填了货物重量
+      //   prevPage.setData({
+      //     cargoWeight: e.detail.value.weight + 'kg',
+      //   })
+      // }
 
-      if (e.detail.value.cub != '') { //填了货物体积
-        prevPage.setData({
-          cargoCub: e.detail.value.cub + 'm³',
-        })
-      }
+      // if (e.detail.value.cub != '') { //填了货物体积
+      //   prevPage.setData({
+      //     cargoCub: e.detail.value.cub + 'm³',
+      //   })
+      // }
 
 
       prevPage.setData({ //货物名称、件数、包装等信息
         WCargo: false,
-        cargoName: cargoName,
-        cargoNum: e.detail.value.num + '件',
-        cargoPack: e.detail.value.pack,
+        cargoType: cargo,
+        cargoNum: count,
+        cargoPack: packaged,
+        cargoVolumn: volumn,
+        cargoWeight: weight,
+        cargoSelectMode: selectMode,
       })
 
     }
@@ -140,12 +166,88 @@ Page({
   },
 
 
+  getGoodsClassList(cargo){ 
+    wx.showLoading({
+      title: '获取中',
+    })
+
+    ajax.getApi('mini/program/order/getGoodsClassList', {
+
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        if(res.data.length > 0) {
+          if (cargo) {
+            this.setData({
+              cargoList: res.data,
+              cargo: cargo.cargoType,
+              count: cargo.cargoNum,
+              packaged: cargo.cargoPack,
+              volumn: cargo.cargoVolumn,
+              weight: cargo.cargoWeight,
+            })
+          } else {
+            this.setData({
+              cargoList: res.data,
+              cargo: res.data[0]
+            })
+          }
+          
+        }
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
+
+  getDic(cargo) {
+    ajax.getApi('app/common/getDic', {
+      dic_key: 'settlement_mode'
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        if(res.data.length > 0) {
+          const settlementMode = res.data
+          const selectMode = settlementMode[0]
+          if(cargo) {
+            this.setData({
+              settlementMode,
+              selectMode: cargo.cargoSelectMode
+            })
+          } else {
+            this.setData({
+              settlementMode,
+              selectMode
+            })
+          }
+
+        }
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let cargo = options.cargo
+    if (cargo) {
+      cargo = JSON.parse(cargo)
+    }
+    this.getGoodsClassList(cargo)
+    this.getDic(cargo)
   },
 
   /**

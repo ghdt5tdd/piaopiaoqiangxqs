@@ -1,0 +1,140 @@
+<!--pages/orderinfo/orderinfo.wxml-->
+<view class='orderinfo-bar'>
+  <view class='orderinfo-bar-head'>
+    <view class='orderinfo-bar-id'>
+      订单号码
+      <text>{{orderId}}</text>
+    </view>
+    <view class='orderinfo-bar-time'>{{orderTime}}</view>
+  </view>
+  <view class='orderinfo-receive'>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>收货人</view>
+      <view class='orderinfo-line-info'>{{reciveName}}</view>
+    </view>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>联系电话</view>
+      <view class='orderinfo-line-info'>{{reciveTel}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{reciveTel}}">
+        <image src='../../images/call.png'></image>拨打电话</view>
+    </view>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>收货地址</view>
+      <view class='orderinfo-line-info'>{{reciveLocation}}</view>
+    </view>
+  </view>
+</view>
+
+
+<view class='orderinfo-bar'>
+  <view class='orderinfo-bar-head'>
+    货物详情
+  </view>
+  <view class='orderinfo-cargo'>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>货物名称：</view>
+      <view class='orderinfo-cargo-info'>{{cargoName}}</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>货物件数：</view>
+      <view class='orderinfo-cargo-info'>{{cargoNum}}件</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>货物重量：</view>
+      <view class='orderinfo-cargo-info'>{{cargoWeight}}kg</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>货物包装：</view>
+      <view class='orderinfo-cargo-info'>{{cargoPack}}</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>备注信息：</view>
+      <view class='orderinfo-cargo-info'>{{cargoNotice}}</view>
+    </view>
+  </view>
+
+  <image wx:if="{{status == 's1'}}" class='orderinfo-status' src='../../images/status1.png'></image>
+  <image wx:if="{{status == 's2'}}" class='orderinfo-status' src='../../images/status2.png'></image>
+</view>
+
+
+<view class='orderinfo-bar'>
+  <view class='orderinfo-bar-head'>
+    承运商信息
+  </view>
+   <view class='orderinfo-receive'>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>承运商</view>
+      <view class='orderinfo-line-info'>{{forwarder}}</view>
+    </view>
+        <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>联系人</view>
+      <view class='orderinfo-line-info'>{{forwarderName}}</view>
+    </view>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>联系电话</view>
+      <view class='orderinfo-line-info'>{{forwarderTel}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{forwarderTel}}">
+        <image src='../../images/call.png'></image>拨打电话</view>
+    </view>
+  </view> 
+</view>
+
+<view class='orderinfo-bar'>
+  <view class='orderinfo-bar-head'>
+    预计费用
+  </view>
+  <view class='orderinfo-pay'>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>运费：</view>
+      <view class='orderinfo-cargo-info'>{{freight}}元</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>代收：</view>
+      <view class='orderinfo-cargo-info'>{{collect}}元</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>保价：</view>
+      <view class='orderinfo-cargo-info'>{{support}}元</view>
+    </view>
+    <view class='orderinfo-cargo-item'>
+      <view class='orderinfo-cargo-label'>送货费：</view>
+      <view class='orderinfo-cargo-info'>{{delivery}}元</view>
+    </view>
+  </view>
+</view>
+
+
+<view wx:if="{{status == 's1'}}" class='order-opt'>
+  <view class='cancel' bindtap='cancel'>取消下单</view>
+  <view>我要催单</view>
+</view>
+<view wx:if="{{status == 's2'}}" class='orderinfo-bar'>
+  <view class='orderinfo-bar-head'>
+    取消原因
+  </view>
+  <view class='orderinfo-cancel'>
+    <text>{{cancelReasons}}</text>
+    <text class='gray'>{{cancelTime}}</text>
+  </view>
+</view>
+
+
+<view class='pop-shadow' bindtap="hide" hidden="{{hideShadow}}"></view>
+<view class='pop-up pop-abolish' hidden="{{hideAbolish}}">
+  <view class='pop-cancel' bindtap="hide">×</view>
+  <view class='pop-abolish-content'>
+    <view class='pop-abolish-head'>
+      <view>取消原因</view>
+      <view class='gray'>请选择取消原因（必填）</view>
+    </view>
+    <view class='pop-abolish-info'>
+      <view class="pop-abolish-item" wx:for="{{abolish}}" bindtap='selectabolish' data-index="{{index}}" data-select="{{selectabolish}}">
+        <image src='{{item.pic}}'></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='button-bottom' bindtap='sure'>确认</view>
+</view>

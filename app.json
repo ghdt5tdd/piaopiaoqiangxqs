@@ -34,7 +34,9 @@
     "pages/wallet/wallet",
     "pages/recharge/recharge",
     "pages/set/set",
-    "pages/handover/handover"
+    "pages/handover/handover",
+    "pages/order/order",
+    "pages/orderinfo/orderinfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

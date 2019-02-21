@@ -33,7 +33,8 @@
 <view class='send-block'>
   <view class='send-bar send-bar-forwarder'>
     <view class='send-bar-label'>承运商</view>
-    <view class='send-bar-info' bindtap='toforwarder'>{{sendForwarder}}</view>
+    <view wx:if="{{carrier}}" class='send-bar-info' bindtap='toforwarder'>{{carrier.contact_man}}</view>
+    <view wx:else class='send-bar-info' bindtap='toforwarder'>{{sendForwarder}}</view>
     <image class='send-bar-next' src='../../images/w_next.png'></image>
   </view>
 
@@ -49,8 +50,8 @@
     <view class='send-block-label'>货物信息</view>
     <view class='send-block-default' wx:if="{{WCargo}}">必填</view>
     <view class='send-block-info' wx:else>
-      <view>{{cargoName}} {{cargoNum}}</view>
-      <view>{{cargoPack}} {{cargoWeight}} {{cargoCub}}</view>
+      <view>{{cargoType.name}} {{cargoNum + "件"}}</view>
+      <view>{{cargoPack}} {{cargoWeight + "kg"}} {{cargoVolumn + "m³"}}</view>
     </view>
     <image class='send-block-next' src='../../images/w_next.png'></image>
   </view>
@@ -58,7 +59,7 @@
     <view class='send-block-label'>增值服务</view>
     <view class='send-block-default' wx:if="{{WService}}">选填</view>
     <view class='send-block-info' wx:else>
-      <view>{{support}}</view>
+      <view wx:for="{{tServices}}" wx:key="set_id">{{item.name}} <block wx:if="{{item.html_items === 'radio'}}">{{item.text}} </block><block wx:else>{{item.value}} </block></view>
       <view>{{collect}}</view>
       <view>{{bill}}</view>
     </view>
@@ -115,10 +116,11 @@
   </view>
   <view class='pop-title'>发货服务条款</view>
   <scroll-view class='pop-rule-content' scroll-y>
-    <view>尊敬的客户：</view>
+    <!-- <view>尊敬的客户：</view>
     <view wx:for="{{Rule}}">
       <view class="pop-rule-item {{item.indent?'textIndent':''}}">{{item.info}}</view>
-    </view>
+    </view> -->
+    <rich-text nodes="{{agreement}}" ></rich-text>
   </scroll-view>
   <view class='pop-bottom' bindtap='agreeRule'>同意并不再提醒</view>
 </view>
