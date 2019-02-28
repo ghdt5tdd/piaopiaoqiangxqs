@@ -2,25 +2,25 @@
 <view class='orderinfo-bar'>
   <view class='orderinfo-bar-head'>
     <view class='orderinfo-bar-id'>
-      订单号码
-      <text>{{orderId}}</text>
+      订单号
+      <text>{{bookingOrder.code}}</text>
     </view>
-    <view class='orderinfo-bar-time'>{{orderTime}}</view>
+    <view class='orderinfo-bar-time'>{{bookingOrder.booking_time}}</view>
   </view>
   <view class='orderinfo-receive'>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>收货人</view>
-      <view class='orderinfo-line-info'>{{reciveName}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_man}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系电话</view>
-      <view class='orderinfo-line-info'>{{reciveTel}}</view>
-      <view class='orderinfo-line-call' bindtap='call' data-tel="{{reciveTel}}">
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_phone}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.consignee_phone}}">
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>收货地址</view>
-      <view class='orderinfo-line-info'>{{reciveLocation}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_province_name + bookingOrder.consignee_city_name + bookingOrder.consignee_district_name + bookingOrder.consigner_address}}</view>
     </view>
   </view>
 </view>
@@ -33,23 +33,23 @@
   <view class='orderinfo-cargo'>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物名称：</view>
-      <view class='orderinfo-cargo-info'>{{cargoName}}</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.goods_class_name}}</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物件数：</view>
-      <view class='orderinfo-cargo-info'>{{cargoNum}}件</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.total_packing_quantity}}件</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物重量：</view>
-      <view class='orderinfo-cargo-info'>{{cargoWeight}}kg</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.total_weight}}kg</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物包装：</view>
-      <view class='orderinfo-cargo-info'>{{cargoPack}}</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.pack}}</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>备注信息：</view>
-      <view class='orderinfo-cargo-info'>{{cargoNotice}}</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.remark}}</view>
     </view>
   </view>
 
@@ -65,22 +65,35 @@
    <view class='orderinfo-receive'>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>承运商</view>
-      <view class='orderinfo-line-info'>{{forwarder}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.carrier_name}}</view>
     </view>
         <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系人</view>
-      <view class='orderinfo-line-info'>{{forwarderName}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.carrier_contact_man}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系电话</view>
-      <view class='orderinfo-line-info'>{{forwarderTel}}</view>
-      <view class='orderinfo-line-call' bindtap='call' data-tel="{{forwarderTel}}">
+      <view class='orderinfo-line-info'>{{bookingOrder.carrier_contact_way}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.carrier_contact_way}}">
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
   </view> 
 </view>
 
-<view class='orderinfo-bar'>
+<view class='orderinfo-bar' wx:if="{{bookingOrder.add_services && bookingOrder.add_services.length > 0}}">
+  <view class='orderinfo-bar-head'>
+    增值服务
+  </view>
+  <view class='orderinfo-pay'>
+    <view class='orderinfo-cargo-item' wx:for="{{bookingOrder.add_services}}" wx:key="set_id">
+      <view class='orderinfo-cargo-label'>{{item.name}}：</view>
+      <view class='orderinfo-cargo-info' wx:if="{{item.html_items === 'radio'}}">{{item.text}}</view>
+      <view class='orderinfo-cargo-info' wx:else>{{item.value}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- <view class='orderinfo-bar'>
   <view class='orderinfo-bar-head'>
     预计费用
   </view>
@@ -102,10 +115,10 @@
       <view class='orderinfo-cargo-info'>{{delivery}}元</view>
     </view>
   </view>
-</view>
+</view> -->
 
 
-<view wx:if="{{status == 's1'}}" class='order-opt'>
+<view class='order-opt'>
   <view class='cancel' bindtap='cancel'>取消下单</view>
   <view>我要催单</view>
 </view>

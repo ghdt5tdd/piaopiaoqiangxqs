@@ -11,18 +11,12 @@ Page({
   data: {
     WSend: true, //这里表示有设为默认的寄件地址
     WReceive: true,
-
-    sendName: "", //设为默认的寄件地址信息
-    sendTel: "",
-    sendLocation: "",
-
-    receiveName: "", //设为默认的寄件地址信息
-    receiveTel: "",
-    receiveLocation: "",
-
-    carrier: undefined,
     WCargo: true,
     WService: true,
+
+    sendAddr: undefined,  //寄件地址
+    receiveAddr: undefined, //收件地址
+    carrier: undefined, //承运商信息
 
     cargoType: undefined,
     cargoNum: undefined,
@@ -37,7 +31,6 @@ Page({
     ruleStatus: false,
     ruleIcon: "../../images/uncheck.png",
     remark:'', 
-    sendForwarder: "请选择承运商",
     hideShadow: true,
     hideTime: true,
 
@@ -101,16 +94,9 @@ Page({
 
   //货物信息
   toCargo: function(e) {
-    const cargo = {
-      cargoType: this.data.cargoType,
-      cargoNum: this.data.cargoNum,
-      cargoPack: this.data.cargoPack,
-      cargoVolumn: this.data.cargoVolumn,
-      cargoWeight: this.data.cargoWeight,
-      cargoSelectMode: this.data.cargoSelectMode,
-    }
+    const cargo = this.data.cargo
 
-    if (this.data.cargoType) {
+    if (cargo) {
       wx.navigateTo({
         url: '../cargo/cargo?cargo=' + JSON.stringify(cargo)
       })
@@ -371,15 +357,63 @@ Page({
       return false;
 
     } else {
-      this.setData({
-        hideShadow: false,
-        hideTip: false,
-        orderId: 'QY20181127542', //订单编号、下单时间这里是虚拟数据
-        orderTime: '2018-11-27 12:30',
-        markFcous: true,
+      wx.showLoading({
+        title: '提交中...',
       })
 
-      wx.setStorageSync('hasOrder', true) //此时用户有运单了
+      const cargo = this.data.cargo
+      const tServices = this.data.tServices
+      const sendAddr = this.data.sendAddr
+      const receiveAddr = this.data.receiveAddr
+      const carrier = this.data.carrier
+      const bookingTime = this.data.sendDate + ' ' + this.data.sendTime 
+      const remark = this.data.remark
+
+      const params = {
+        goodsClassId: cargo.cargoType.id,
+
+        consignerMan: sendAddr.sendName,
+        consignerWay: sendAddr.sendTel,
+        consignerProvince: sendAddr.sendProvince,
+        consignerCity: sendAddr.sendCity,
+        consignerDistrict: sendAddr.sendDistrict,
+        consignerAddress: sendAddr.sendAddress,
+
+        consigneeMan: receiveAddr.receiveName,
+        consigneeWay: receiveAddr.receiveTel,
+        consigneeProvince: receiveAddr.receiveProvince,
+        consigneeCity: receiveAddr.receiveCity,
+        consigneeDistrict: receiveAddr.receiveDistrict,
+        consigneeAddress: receiveAddr.receiveAddress,
+
+        volume: cargo.cargoVolumn,
+        weight: cargo.cargoWeight,
+        goodsPack: cargo.cargoPack,
+        packingAmount: cargo.cargoNum,
+        bookingTime: bookingTime,
+        settlementMode: cargo.cargoSelectMode.itemKey,
+        sendservice: JSON.stringify(tServices),
+        carrierId: carrier.id,
+        remark: remark,
+      }
+      ajax.postApi('mini/program/order/createBookingOrder', params, (err, res) => {
+        wx.hideLoading()
+        if (res && res.success) {
+          wx.showToast({
+            title: '下单成功',
+            success: () => {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        } else {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      })	
     }
   },
 

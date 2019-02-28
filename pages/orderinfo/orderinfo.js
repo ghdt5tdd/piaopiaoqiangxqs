@@ -1,4 +1,8 @@
 // pages/orderinfo/orderinfo.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
@@ -22,6 +26,7 @@ Page({
       name: "其他"
     }],
     selectabolish:'',
+    bookingOrder: undefined
     
   },
 
@@ -89,32 +94,38 @@ Page({
     })
   },
 
+  getBookingOrderById(id) {
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    ajax.getApi('mini/program/order/getBookingOrderById', {
+      id
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        const bookingOrder = res.data
+        bookingOrder.add_services = JSON.parse(bookingOrder.add_services)
+        this.setData({
+          bookingOrder
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      status: options.status,
-      orderId: options.orderId,
-      orderTime: options.orderTime,
-      reciveName: '黄晓克',
-      reciveTel: '13355888988',
-      reciveLocation: '浙江省温州市鹿城区黎明工业区36号楼505室',
-      forwarder:"浙江乐清物流公司",
-      forwarderName: "安振龙",
-      forwarderTel: "13628353926",
-      cargoName: '电子',
-      cargoNum: '1',
-      cargoWeight: '0.6',
-      cargoPack: '无',
-      cargoNotice: '无',
-      freight: '40',
-      collect: '0',
-      support: '2000',
-      delivery: '5',
-      cancelReasons: '地址错误', //已取消状态才有,其他状态不需要获取
-      cancelTime: '2018-11-23 10:26',
-    })
+    const id = options.id
+    this.getBookingOrderById(id)
   },
 
   /**

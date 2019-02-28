@@ -33,7 +33,7 @@ Page({
     var forwarderList = this.data.forwarderList
     var index = e.currentTarget.dataset.index
     var contact_man = forwarderList[index].contact_man
-    var id = forwarderList[index].id
+    var id = forwarderList[index].client_id
 
     prevPage.setData({
       carrier: {

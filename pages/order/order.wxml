@@ -1,38 +1,38 @@
 <!--pages/order/order.wxml-->
 <view class='order-status ul-3'>
-  <view class="order-status-items {{select == index?'on':''}} " wx:for="{{status}}" bindtap='select' data-index="{{index}}">{{item.name}}({{item.num}})</view>
+  <view class="order-status-items {{select == index?'on':''}} " wx:for="{{status}}" bindtap='selectStatus' data-value="{{item.value}}">{{item.name}}</view>
 </view>
-
+ 
 <scroll-view scroll-y class='order-content'>
   <view class='order-list'>
-    <view class='order-bar' wx:for="{{order}}" bindtap='toInfo' data-status="{{item.sta}}" data-id="{{item.id}}" data-time="{{item.time}}">
+    <view class='order-bar' wx:for="{{bookingOrders}}" wx:key="id" bindtap='toInfo' data-id="{{item.id}}" >
       <view class='order-bar-head'>
         <view class='order-bar-id'>订单号码
-          <text>{{item.id}}</text>
+          <text>{{item.code}}</text>
         </view>
-        <view class='order-bar-time'>{{item.time}}</view>
+        <view class='order-bar-time'>{{item.booking_time}}</view>
       </view>
       <view class='order-bar-info'>
         <view class='order-bar-send'>
-          <view class='order-bar-city'>{{item.sendCity}}</view>
-          <view>{{item.sendName}}</view>
+          <view class='order-bar-city'>{{item.consigner_city_name}}</view>
+          <view>{{item.consigner_man}}</view>
         </view>
-        <view class='order-bar-status {{item.sta}}'>
+        <view class='order-bar-status s1'>
           <text class='order-bar-line'></text>
-          <image src='{{item.statusPic}}' mode="widthFix"></image>
+          <image src='../../images/order1.png' mode="widthFix"></image>
         </view>
         <view class='order-bar-recive'>
-          <view class='order-bar-city'>{{item.reciveCity}}</view>
-          <view>{{item.reciveName}}</view>
+          <view class='order-bar-city'>{{item.consignee_city_name}}</view>
+          <view>{{item.consignee_man}}</view>
         </view>
       </view>
       
       <view class='order-bar-forwarder'>
-承运商：{{item.forwarder}}
+承运商：{{item.carrier_name}}
       </view>
       <view class='order-bar-cargo'>
-        <view>货物名称：{{item.cargoName}}</view>
-        <view>货物件数：{{item.cargoNum}}件</view>
+        <view>货物类型：{{item.goods_class_name}}</view>
+        <view>货物件数：{{item.total_packing_quantity}}件</view>
       </view>
     </view>
   </view>

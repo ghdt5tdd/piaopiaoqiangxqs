@@ -36,24 +36,43 @@ Page({
     var index = e.currentTarget.dataset.index
     var name = addressList[index].contact_name
     var tel = addressList[index].contact_way
-    var location = addressList[index].province 
-    + addressList[index].city 
-    + addressList[index].district 
-    + addressList[index].address 
+    var province = addressList[index].province
+    var province_id = addressList[index].province_id
+    var city = addressList[index].city
+    var city_id = addressList[index].city_id
+    var district = addressList[index].district
+    var district_id = addressList[index].district_id
+    var address = addressList[index].address
+    var location = province
+      + city
+      + district
+      + address
 
     if(this.data.select == 1) {
       prevPage.setData({
-        sendName: name,
-        sendTel: tel,
-        sendLocation: location,
+        sendAddr: {
+          sendName: name,
+          sendTel: tel,
+          sendProvince: province_id,
+          sendCity: city_id,
+          sendDistrict: district_id,
+          sendAddress: address,
+          sendLocation: location
+        },
         WSend: false,
       })
     } else if (this.data.select == 2) {
       console.log(name)
       prevPage.setData({
-        receiveName: name,
-        receiveTel: tel,
-        receiveLocation: location,
+        receiveAddr: {
+          receiveName: name,
+          receiveTel: tel,
+          receiveProvince: province_id,
+          receiveCity: city_id,
+          receiveDistrict: district_id,
+          receiveAddress: address,
+          receiveLocation: location,
+        },
         WReceive: false,
       })
     } else {

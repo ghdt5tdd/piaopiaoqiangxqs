@@ -153,12 +153,14 @@ Page({
 
       prevPage.setData({ //货物名称、件数、包装等信息
         WCargo: false,
-        cargoType: cargo,
-        cargoNum: count,
-        cargoPack: packaged,
-        cargoVolumn: volumn,
-        cargoWeight: weight,
-        cargoSelectMode: selectMode,
+        cargo: {
+          cargoType: cargo,
+          cargoNum: count,
+          cargoPack: packaged,
+          cargoVolumn: volumn,
+          cargoWeight: weight,
+          cargoSelectMode: selectMode,
+        }
       })
 
     }
