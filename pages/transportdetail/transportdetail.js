@@ -234,7 +234,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const shopOrderId = 'b5e4ae0b20be449288b8e3e4f0a5394d'
+    const shopOrderId = options.id
     this.setData({
       shopOrderId
     })

@@ -25,7 +25,7 @@
       <view class="cargo-bar">
         <view class="cargo-bar-title">包装</view>
         <view class="cargo-bar-info">
-          <input name="pack" type='text' placeholder='输入货物包装' value="{{packaged}}" bindinput='bindInput' data-key="package"></input>
+          <input name="pack" type='text' placeholder='输入货物包装' value="{{packaged}}" bindinput='bindInput' data-key="packaged"></input>
         </view>
       </view>
       <view class="cargo-bar">

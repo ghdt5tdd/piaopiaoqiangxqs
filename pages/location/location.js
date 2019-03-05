@@ -39,27 +39,26 @@ Page({
    */
   onLoad: function(options) {
     const shopOrderId = options.shop_order_id
-    const shopOrderDetailId = options.shop_order_detail_id
-    console.log(shopOrderId)
-    console.log(shopOrderDetailId)
+    // const shopOrderDetailId = options.shop_order_detail_id
+
     wx.showLoading({
       title: '信息加载中',
     })
 
-    if (shopOrderId) {
+    // if (shopOrderId) {
       this.getOrderGPSByOrderId(shopOrderId)
-    } else if (shopOrderDetailId) {
-      this.getOrderGPSByOrderDetailId(shopOrderDetailId)
-    }else {
-      wx.showToast({
-        title: '缺少运单ID或运单详情ID',
-      })
-    }
+    // } else if (shopOrderDetailId) {
+    //   this.getOrderGPSByOrderDetailId(shopOrderDetailId)
+    // }else {
+    //   wx.showToast({
+    //     title: '缺少运单ID或运单详情ID',
+    //   })
+    // }
     
   },
   
   getOrderGPSByOrderId: function (shopOrderId){
-    ajax.getApi('app/order/getGPSByShopOrderId', {
+    ajax.getApi('mini/program/order/getGPSByShopOrderId', {
       shopOrderId,
       pageSize: 1
     }, (err, res) => {
@@ -96,7 +95,7 @@ Page({
   },
 
   getOrderDetailByOrderId: function (shopOrderId) {
-    ajax.getApi('app/order/getShopOrderRealTimeTrackingByShopOrderId', {
+    ajax.getApi('mini/program/order/getShopOrderRealTimeTrackingByShopOrderId', {
       shopOrderId,
     }, (err, res) => {
       wx.hideLoading()

@@ -1,7 +1,7 @@
 const util = require('util.js')
 const _config = {
-  // serverUrl: 'https://fall.wlhn.com/fallapp-main-wlhn/'
-  serverUrl: 'https://fall.wlhn.com/fallapp-child-dlxapp-userlla/'
+  serverUrl: 'https://fall.wlhn.com/fallapp-main-wlhn/'
+  // serverUrl: 'https://fall.wlhn.com/fallapp-child-dlxapp-userlla/'
 }
 
 function getApi(apiName, params, cb, isOwnAddress) {
@@ -40,12 +40,14 @@ function postApi(apiName, params, cb, isOwnAddress) {
   })
 }
 function request(requestSetting) {
+
   let JSSESSIONID = wx.getStorageSync('JSSESSIONID')
   if (JSSESSIONID === '') {
     JSSESSIONID = util.RandomUUID()
     wx.setStorageSync('JSSESSIONID', JSSESSIONID)
   }
   requestSetting.header['cookie'] = 'JSESSIONID=' + JSSESSIONID
+  requestSetting.header['Platform-Area'] = 'wlhnGxqs'
   wx.request(requestSetting)
 }
 

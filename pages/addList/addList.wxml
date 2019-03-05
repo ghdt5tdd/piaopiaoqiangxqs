@@ -18,17 +18,17 @@
         <view class='address-item-location'>{{item.province + item.city + item.district + item.address }}</view>
       </view>
       <view class='address-item-opt'>
-        <view class='address-item-button' bindtap='defaultSet' data-id="{{item.id}}" data-index="{{index}}">
+        <view class='address-item-button' catchtap='defaultSet' data-id="{{item.id}}" data-index="{{index}}">
           <image wx:if="{{item.is_default == 0}}" src='../../images/uncheck.png'></image>
           <image wx:else src='../../images/check.png'></image>
           <view>设为默认</view>
         </view>
         <view class='address-opt-list'>
-          <view bindtap='toEdit' data-id="{{item.id}}" >
+          <view catchtap='toEdit' data-id="{{item.id}}" >
             <image src='../../images/w_edit.png'></image>
             <text>编辑</text>
           </view>
-          <view bindtap='delete' data-id="{{item.id}}" data-index="{{index}}">
+          <view catchtap='delete' data-id="{{item.id}}" data-index="{{index}}">
             <image src='../../images/w_delete.png'></image>
             <text>删除</text>
           </view>

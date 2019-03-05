@@ -59,9 +59,10 @@
     <view class='send-block-label'>增值服务</view>
     <view class='send-block-default' wx:if="{{WService}}">选填</view>
     <view class='send-block-info' wx:else>
-      <view wx:for="{{tServices}}" wx:key="set_id">{{item.name}} <block wx:if="{{item.html_items === 'radio'}}">{{item.text}} </block><block wx:else>{{item.value}} </block></view>
-      <view>{{collect}}</view>
-      <view>{{bill}}</view>
+      <view wx:for="{{tServices}}" wx:key="set_id">{{item.name}} 
+        <block wx:if="{{item.html_items === 'radio'}}">{{item.text}} </block>
+        <block wx:else>{{item.value}} </block>
+      </view>
     </view>
     <image class='send-block-next' src='../../images/w_next.png'></image>
   </view>

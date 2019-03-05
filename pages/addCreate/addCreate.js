@@ -118,8 +118,8 @@ Page({
 
       const params = {
         send_place_type,
-        contect_name: name,
-        contect_way: tel,
+        contact_name: name,
+        contact_way: tel,
         province_id: province.code,
         province: province.value,
         city_id: city.code,

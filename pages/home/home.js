@@ -108,8 +108,23 @@ Page({
   },
 
   toDetail(e){
+    if (!app.globalData.memberInfo.phone) {
+      wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
+        url: '../bind/bind'
+      })
+      return;
+    }
+
+    const index = e.currentTarget.dataset.index
+    const shopOrder = this.data.shopOrders[index]
+    if (shopOrder.consignee_tel && shopOrder.consignee_tel.indexOf(app.globalData.memberInfo.phone) === -1) {
+      wx.showToast({
+        title: '非收件人不能查看',
+      })
+      return;
+    }
     wx.navigateTo({
-      url: '../transportdetail/transportdetail?id=' + e.target.dataset.id,
+      url: '../transportdetail/transportdetail?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -537,7 +552,7 @@ Page({
     wx.showLoading({
       title: '评价提交中...',
     })
-    ajax.postApi('app/order/evaluateShopOrder', {
+    ajax.postApi('mini/program/order/evaluateShopOrder', {
       id,
       comment_content: comment,
       comment_star,

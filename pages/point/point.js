@@ -55,7 +55,7 @@ Page({
       title: '节点加载中',
     })
 
-    ajax.getApi('app/order/getNodeDataByShopOrder', {
+    ajax.getApi('mini/program/order/getNodeDataByShopOrder', {
       shopOrderId
     }, (err, res) => {
       wx.hideLoading()

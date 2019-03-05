@@ -1,7 +1,7 @@
 //app.js
 const ajax = require('utils/ajax.js')
 const util = require('utils/util.js')
-const md5 = require('utils/md5.js');  
+const md5 = require('utils/md5.js')
 App({
   onLaunch: function (e) {
     // 展示本地存储能力
