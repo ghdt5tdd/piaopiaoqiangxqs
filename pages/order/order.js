@@ -10,20 +10,14 @@ Page({
    */
   data: {
     status: [{
-      name: '待揽件',
-      value: 0 
-    }, {
-      name: '待签收',
-      value: 1
-    }, {
       name: '全部',
-      value: 2
+      value: 0
     }],
     page: 1,
     pageSize: 10,
     count: 0,
     loadCompleted: false,
-    select: 2,
+    select: 0,
     bookingOrders:[],
 
     order: [{
@@ -114,14 +108,14 @@ Page({
   getListBookingOrder() {
     const page = this.data.page
     const pageSize = this.data.pageSize
-    const status = this.data.select
+    const state = this.data.select
     wx.showLoading({
       title: '查询中',
     })
     ajax.getApi('mini/program/order/listBookingOrder', {
       page,
       pageSize,
-      status
+      state
     }, (err, res) => {
       wx.hideLoading()
       if (res && res.success) {

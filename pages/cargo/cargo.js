@@ -28,7 +28,7 @@ Page({
 
     count: undefined,
     volumn: undefined,
-    package: undefined,
+    packaged: undefined,
     weight: undefined,
 
   },
@@ -83,7 +83,7 @@ Page({
     const cargo = this.data.cargo
     const count = this.data.count
     const volumn = this.data.volumn
-    const packaged = this.data.package
+    const packaged = this.data.packaged
     const weight = this.data.weight
     const selectMode = this.data.selectMode
     if (!cargo) {
