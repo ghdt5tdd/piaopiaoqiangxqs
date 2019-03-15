@@ -12,6 +12,21 @@ Page({
     status: [{
       name: '全部',
       value: 0
+    }, {
+      name: '待发布',
+      value: 1
+    }, {
+      name: '待接单',
+      value: 2
+    }, {
+      name: '待指派',
+      value: 3
+    }, {
+      name: '待取件',
+      value: 4
+    }, {
+      name: '已完成',
+      value: 5
     }],
     page: 1,
     pageSize: 10,
@@ -181,7 +196,19 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    var that = this;
+    let query = wx.createSelectorQuery()
+    var statusWidth = 0
 
+    query.selectAll('.order-status-items').boundingClientRect(function (rect) {
+      for (var i = 0; i < that.data.status.length; i++) {
+        statusWidth += (rect[i].width + 40 / 750 * wx.getSystemInfoSync().windowWidth)
+      }
+
+      that.setData({
+        statusWidth: statusWidth
+      })
+    }).exec()
   },
 
   /**

@@ -20,7 +20,7 @@
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>收货地址</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consignee_province_name + bookingOrder.consignee_city_name + bookingOrder.consignee_district_name + bookingOrder.consigner_address}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_province_name + bookingOrder.consignee_city_name + bookingOrder.consignee_district_name + bookingOrder.consignee_address}}</view>
     </view>
   </view>
 </view>

@@ -11,19 +11,19 @@ Page({
   data: {
     name: "",
     tel: "",
-    location: "广东省广州市海珠区",
-    region: ['广东省', '广州市', '海珠区'],
+    location: "浙江省温州市鹿城区",
+    region: ['浙江省', '温州市', '鹿城区'],
     province: {
-      value:'广东省',
-      code: 440000
+      value:'浙江省',
+      code: 330000
     },
     city : {
-      value: '广州市',
-      code: 440100
+      value: '温州市',
+      code: 330300
     },
     district: {
-      value: '海珠区',
-      code: 440105
+      value: '鹿城区',
+      code: 330302
     },
     door: "",
     address_id: undefined,

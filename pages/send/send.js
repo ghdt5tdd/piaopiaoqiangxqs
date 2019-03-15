@@ -356,6 +356,13 @@ Page({
       })
       return false;
 
+    } else if (!this.data.sendDate) {
+      wx.showToast({
+        title: '请选择大概提货时间！',
+        icon: 'none',
+        duration: 3000,
+      })
+      return false;
     } else {
       wx.showLoading({
         title: '提交中...',
@@ -392,10 +399,14 @@ Page({
         packingAmount: cargo.cargoNum,
         bookingTime: bookingTime,
         settlementMode: cargo.cargoSelectMode.itemKey,
-        sendservice: JSON.stringify(tServices),
         carrierId: carrier.id,
         remark: remark,
       }
+
+      if (tServices) {
+        params.sendservice = JSON.stringify(tServices)
+      }
+
       ajax.postApi('mini/program/order/createBookingOrder', params, (err, res) => {
         wx.hideLoading()
         if (res && res.success) {

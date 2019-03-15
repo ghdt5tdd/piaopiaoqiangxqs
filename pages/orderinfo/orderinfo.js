@@ -39,11 +39,31 @@ Page({
 
 
   //取消下单
-  cancel: function(e) {
-    this.setData({
-      hideShadow: false,
-      hideAbolish: false,
+  cancel: function (e) {
+    wx.showLoading({
+      title: '取消中..',
     })
+
+    ajax.postApi('mini/program/order/cancelBookingOrder', {
+      id: this.data.bookingOrder.id
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        wx.navigateBack({ //返回上页
+          delta: 1
+        })
+      } else {
+        wx.showToast({
+          title: res.text,
+          duration: 1000
+        })
+      }
+    })
+
+    // this.setData({
+    //   hideShadow: false,
+    //   hideAbolish: false,
+    // })
   },
 
   //选择取消原因
@@ -105,7 +125,10 @@ Page({
       wx.hideLoading()
       if (res && res.success) {
         const bookingOrder = res.data
-        bookingOrder.add_services = JSON.parse(bookingOrder.add_services)
+        const add_services = bookingOrder.add_services
+        if (add_services) {
+          bookingOrder.add_services = JSON.parse(add_services)
+        }
         this.setData({
           bookingOrder
         })

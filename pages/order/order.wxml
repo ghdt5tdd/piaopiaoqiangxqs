@@ -1,5 +1,5 @@
 <!--pages/order/order.wxml-->
-<view class='order-status ul-3'>
+<view class='order-status'  style="width:{{statusWidth}}px">
   <view class="order-status-items {{select == index?'on':''}} " wx:for="{{status}}" bindtap='selectStatus' data-value="{{item.value}}">{{item.name}}</view>
 </view>
  

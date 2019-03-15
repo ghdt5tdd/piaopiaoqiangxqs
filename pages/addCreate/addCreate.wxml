@@ -19,7 +19,7 @@
         <view class="section-info">
           <picker mode="region" data-location="{{location}}" bindchange="changeRegin" value="{{region}}" custom-item="{{customItem}}">
             <view class="picker">
-              {{region[0]}}，{{region[1]}}，{{region[2]}}
+              {{region[0]}}{{region[1]}}{{region[2]}}
             </view>
           </picker>
         </view>
@@ -28,7 +28,7 @@
         <view class="section-title">详细地址：</view>
         <view class="section-info">
           <view class='textvalue'>{{door}}</view>
-          <textarea name="door" placeholder='详细到门牌号' bindinput='bindinput' data-key='door' value='{{door}}'></textarea>
+          <textarea name="door" placeholder='详细到门牌号' bindinput="getInput" value='{{door}}'></textarea>
         </view>
         <view class='section-location red' data-map="{{door}}" bindtap="location">定位</view>
       </view>
