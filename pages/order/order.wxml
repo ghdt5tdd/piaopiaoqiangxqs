@@ -7,10 +7,10 @@
   <view class='order-list'>
     <view class='order-bar' wx:for="{{bookingOrders}}" wx:key="id" bindtap='toInfo' data-id="{{item.id}}" >
       <view class='order-bar-head'>
-        <view class='order-bar-id'>订单号码
+        <view class='order-bar-id'>订单
           <text>{{item.code}}</text>
         </view>
-        <view class='order-bar-time'>{{item.booking_time}}</view>
+        <view class='order-bar-time'>{{item.create_date}}</view>
       </view>
       <view class='order-bar-info'>
         <view class='order-bar-send'>

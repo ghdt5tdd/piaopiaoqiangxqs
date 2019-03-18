@@ -1,19 +1,19 @@
 <!--pages/bind/bind.wxml-->
 <view class='card-order'>
   <view class='bind-bar'>
-    <view class='bind-title'>请输入手机号</view>
+    <view class='bind-title'>手机号</view>
     <view class='bind-input'>
       <input type="number" value="{{tel}}" bindinput='getPhoneValue' placeholder="11位手机号" />
     </view>
   </view>
   <view class='bind-bar'>
-    <view class='bind-title'>请输入真实姓名</view>
+    <view class='bind-title'>真实姓名</view>
     <view class='bind-input'>
-      <input type="number" value="{{true_name}}" bindinput='getTrueName' placeholder="真实姓名" />
+      <input value="{{true_name}}" bindinput='getTrueName' placeholder="真实姓名" />
     </view>
   </view>
   <view class='bind-bar'>
-    <view class='bind-title'>请输入验证码</view>
+    <view class='bind-title'>验证码</view>
     <button class="bind-code" hover-class='none' bindtap='getVerificationCode' disabled='{{disabled}}'>{{codename}}</button>
     <view class='bind-input'>
       <input type="number" value="{{code}}" bindinput='getCodeValue' placeholder="4位数字验证码" />

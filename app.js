@@ -105,7 +105,7 @@ App({
         if(res.data.phone) {
           this.globalData.isBindPhone = true
         }
-        console.log(this.globalData)
+        // console.log(this.globalData)
       }
     })
   },

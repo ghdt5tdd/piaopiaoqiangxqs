@@ -32,6 +32,7 @@ Page({
 
   // 选择省市区函数
   changeRegin(e) {
+    console.log(e)
     this.setData({
       region: e.detail.value,
       location: e.detail.value[0] + e.detail.value[1] + e.detail.value[2],
@@ -85,6 +86,8 @@ Page({
     const district = this.data.district
     const send_place_type = this.data.send_place_type
     const address_id = this.data.address_id
+    const company_code = this.data.company_code
+    const contact_company = this.data.contact_company
 
     if (!name) {
       wx.showToast({
@@ -127,6 +130,8 @@ Page({
         district_id: district.code,
         district: district.value,
         address: door,
+        company_code,
+        contact_company
       }
 
       if (address_id) {
@@ -174,6 +179,8 @@ Page({
           tel: address.contact_way,
           door: address.address,
           region: [address.province, address.city, address.district],
+          company_code: address.company_code,
+          contact_company: address.contact_company,
           province: {
             value: address.province,
             code: address.province_id

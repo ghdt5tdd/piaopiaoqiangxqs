@@ -3,8 +3,8 @@
 const app = getApp()
 var QQMapWX = require('../../qqmap/qqmap-wx-jssdk.js');
 var demo = new QQMapWX({
-  // key: app.globalData.qqMapKey // 必填 换成自己申请到的
-  key: 'I5GBZ-ZQULP-6MTD5-L4RVA-XAPAJ-DKB4G' // 必填 换成自己申请到的
+  key: app.globalData.qqMapKey // 必填 换成自己申请到的
+  // key: 'I5GBZ-ZQULP-6MTD5-L4RVA-XAPAJ-DKB4G' // 必填 换成自己申请到的
 });
 Page({
 
@@ -92,8 +92,8 @@ Page({
       return false;
     }
     var qqmapsdk = new QQMapWX({
-      // key: app.globalData.qqMapKey
-      key: 'I5GBZ-ZQULP-6MTD5-L4RVA-XAPAJ-DKB4G'
+      key: app.globalData.qqMapKey
+      // key: 'I5GBZ-ZQULP-6MTD5-L4RVA-XAPAJ-DKB4G'
     });
     console.log(e);
     qqmapsdk.getSuggestion({
@@ -130,13 +130,20 @@ Page({
     var locationData = this.data.tips[index];
     var latitude = locationData.location.lat//locationStr.split(',')[0]
     var longitude = locationData.location.lng;//locationStr.split(',')[1]
-    prevPage.setData({
 
+    const province = locationData.province || ''
+    const city = locationData.city || ''
+    const district = locationData.district || ''
+    const title = locationData.title || ''
+    let door = locationData.address.replace(province, '').replace(city, '').replace(district, '')
+    door += title
+
+    prevPage.setData({
       //将要传递给新增地址或者编辑地址页面的参数
-      province: locationData.province,
-      city: locationData.city,
-      district: locationData.district,
-      door: locationData.title,
+      // province: locationData.province,
+      // city: locationData.city,
+      // district: locationData.district,
+      door: door,
       sign: 1,
 
       sendAddress: locationData.province + ',' + locationData.city + ',' + (locationData.district == undefined ? '' : locationData.district),

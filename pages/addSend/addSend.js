@@ -214,10 +214,6 @@ Page({
         })
       }
     })
-
-    this.setData({
-      addressList: addressList
-    })
   },
 
 
