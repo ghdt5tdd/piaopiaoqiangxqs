@@ -67,7 +67,7 @@ Page({
     }
     
     wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
-      url: '../transportdetail/transportdetail'
+      url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
     })
   },
 

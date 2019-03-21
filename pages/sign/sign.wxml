@@ -69,7 +69,7 @@
       </view>
     </view> -->
     <view class='order-other-bar'>
-        <text>是否及时：</text>
+        <text>是否及时：</text> 
         <view class='order-other-radio'>
           <block wx:if="{{isHideTimeLy}}">
             <view>

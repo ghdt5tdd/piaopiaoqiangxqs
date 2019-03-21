@@ -19,13 +19,13 @@ Page({
       name: '待接单',
       value: 2
     }, {
-      name: '待指派',
+      name: '待取货',
       value: 3
     }, {
-      name: '待取件',
+      name: '待收货',
       value: 4
     }, {
-      name: '已完成',
+      name: '待评价',
       value: 5
     }],
     page: 1,
