@@ -1,4 +1,4 @@
-// pages/transportdetail/transportdetail.js
+//pages/transportdetail/transportdetail.js
 const ajax = require('../../utils/ajax.js')
 const barcode = require('../../utils/weapp-barcode.js')
 const starMap = new Map()
@@ -235,7 +235,7 @@ Page({
    */
   onLoad: function(options) {
     const shopOrderId = options.id
-    this.setData({
+    this.setData({ 
       shopOrderId
     })
     this.getShopOrderDetail(shopOrderId)
@@ -263,8 +263,12 @@ Page({
       wx.hideLoading()
       if (res && res.success) {
         const shoporderDetail = res.data
-        shoporderDetail.start_departing_date_short = shoporderDetail.start_departing_date.substring(0, 10)
-        shoporderDetail.estimated_arriver_date_short = shoporderDetail.estimated_arriver_date.substring(0, 10)
+        if (shoporderDetail.start_departing_date_short) {
+          shoporderDetail.start_departing_date_short = shoporderDetail.start_departing_date.substring(0, 10)
+        }
+        if (shoporderDetail.estimated_arriver_date_short) {
+          shoporderDetail.estimated_arriver_date_short = shoporderDetail.estimated_arriver_date.substring(0, 10)
+        }
         if (shoporderDetail.bill_no) {
           this.createBarCode('canvas', shoporderDetail.bill_no)
           // 

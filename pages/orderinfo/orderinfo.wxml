@@ -145,10 +145,10 @@
 </view> -->
 
 
-<view class='order-opt'>
-  <view class='cancel' bindtap='cancel'>取消下单</view>
+<!-- <view class='order-opt'> -->
+  <!-- <view class='cancel' bindtap='cancel'>取消下单</view> -->
   <!-- <view>我要催单</view> -->
-</view>
+<!-- </view> -->
 <view wx:if="{{status == 's2'}}" class='orderinfo-bar'>
   <view class='orderinfo-bar-head'>
     取消原因

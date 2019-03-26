@@ -55,9 +55,9 @@ button::after {
   top: 0;
   width: 100%;
   left: 0;
-  height: 100%;
-  z-index: 886;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.7);
+  z-index: 886;
 }
 
 .pop-up {
@@ -359,6 +359,18 @@ button::after {
   margin-left: 20rpx;
 }
 
+.order-opt-item.gray {
+  border: 2rpx solid #cfcfcf;
+  background: #cfcfcf;
+  color: #fff;
+}
+
+.order-opt-item.line {
+  background: #fff;
+  color: #ff5102;
+}
+
+
 /**小号的签收信息**/
 
 .order-table-bar {
@@ -435,60 +447,4 @@ button::after {
 .order-other-bar view {
   display: flex;
   align-items: center;
-}
-
-
-/**日历插件**/
-
-.canlendarBgView {
-  background: #fff;
-  position: fixed;
-  width: 80%;
-  top: 50%;
-  left: 10%;
-  margin-top: -308rpx;
-  z-index: 1001;
-}
-
-.canlendarTopView {
-  display: flex;
-  justify-content: center;
-  padding: 20rpx;
-  font-size: 28rpx;
-}
-
-.centerView {
-  padding: 0 80rpx;
-}
-
-.weekBgView, .dateBgView {
-  overflow: hidden;
-  font-size: 28rpx;
-}
-
-.weekView {
-  float: left;
-  width: 14.2857%;
-  text-align: center;
-}
-
-.dateEmptyView, .dateView {
-  float: left;
-  width: 14.2857%;
-  text-align: center;
-  height: 60rpx;
-  padding: 20rpx 0;
-}
-
-.datesView {
-  width: 60rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 50%;
-  margin: auto;
-}
-
-.dateSelectView {
-  background: #e52019;
-  color: #fff;
 }

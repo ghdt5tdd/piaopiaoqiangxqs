@@ -20,16 +20,25 @@
 
 .orderinfo-bar-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin: 30rpx 0 20rpx;
   font-size: 30rpx;
   border-left: 4rpx solid #272d4d;
   padding-left: 20rpx;
+  line-height: 40rpx
 }
 
 .orderinfo-bar-head text, .orderinfo-bar-time {
   font-size: 26rpx;
+}
+
+.orderinfo-bar-id {
+  width: calc(100% - 230rpx);
+}
+
+.orderinfo-bar-time {
+  width: 220rpx;
 }
 
 .orderinfo-receive {
@@ -178,3 +187,4 @@
   height: 40rpx;
   margin-right: 20rpx;
 }
+

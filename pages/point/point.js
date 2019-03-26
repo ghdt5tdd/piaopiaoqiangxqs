@@ -66,10 +66,19 @@ Page({
             v.createDate = v.create_date.substring(0, 10)
             v.createTime = v.create_date.substring(11)
           })
-        this.setData({
-          orderNodes
-        })
+          this.setData({
+            orderNodes
+          })
+        } else {
+          wx.showToast({
+            title: '暂无节点',
+          })
         }
+      } else {
+        wx.showToast({
+          title: res.text,
+          duration: 1000
+        })
       }
     })
   },

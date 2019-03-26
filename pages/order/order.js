@@ -34,61 +34,59 @@ Page({
     loadCompleted: false,
     select: 0,
     bookingOrders:[],
+  },
 
-    order: [{
-      id: 'QY20181127542',
-      time: "2018-11-27 12:30",
-      sendCity: "温州市",
-      sendName: '黄晓克',
-      reciveCity: '武汉市',
-      reciveName: '李思',
-      forwarder: "浙江乐清物流公司",
-      cargoName: '图书印刷品',
-      cargoNum: '2',
-      sta: 's1',
-      status: '待揽件',
-      statusPic: '../../images/order1.png'
-    }, {
-      id: 'QY20181112116',
-      time: "2018-11-12 15:46",
-      sendCity: "武汉市",
-      sendName: '李思',
-      reciveCity: '温州市',
-      reciveName: '黄晓克',
-      forwarder: "武汉乐清物流公司",
-      cargoName: '电子',
-      cargoNum: '1',
-      sta: 's2',
-      status: '已取消',
-      statusPic: '../../images/order2.png'
-    }, {
-      id: 'QY20181127542',
-      time: "2018-11-08 12:30",
-      sendCity: "温州市",
-      sendName: '黄晓克',
-      reciveCity: '武汉市',
-      reciveName: '李思',
-      forwarder: "浙江乐清物流公司",
-      cargoName: '图书印刷品',
-      cargoNum: '2',
-      sta: 's1',
-      status: '待揽件',
-      statusPic: '../../images/order1.png'
-    }, {
-      id: 'QY20181112116',
-      time: "2018-11-08 11:46",
-      sendCity: "温州市",
-      sendName: '黄晓克',
-      reciveCity: '武汉市',
-      reciveName: '李思',
-      forwarder: "浙江乐清物流公司",
-      cargoName: '纸制品',
-      cargoNum: '1',
-      sta: 's2',
-      status: '已取消',
-      statusPic: '../../images/order2.png'
-    }, ]
+  handCommand(e) {
+    const id = e.currentTarget.dataset.id
+    const index = e.currentTarget.dataset.index
+    const code = e.currentTarget.dataset.code
+    const command = e.currentTarget.dataset.command
+    const commandText = e.currentTarget.dataset.commandText
+    const _this = this
 
+    //对指令判断进行捕捉，处理特殊指令的需求
+    if (command === 'xxxx') {
+      //处理指令
+  
+      return;
+    } else {
+      wx.showModal({
+        title: '操作确认',
+        content: '您确定要对此订单进行' + commandText + '吗?(订单号:' + code + ')',
+        success(res) {
+          if (res.confirm) {
+            wx.showLoading({
+              title: '操作中...',
+            })
+            ajax.postApi('mini/program/order/bookingOrderCommand', {
+              id,
+              command
+            }, (err, res) => {
+              wx.hideLoading()
+              if (res && res.success) {
+                wx.showToast({
+                  title: '操作成功',
+                })
+                _this.setData({
+                  page: 1,
+                  bookingOrders: [],
+                  loadCompleted: false
+                }, () => {
+                  _this.getListBookingOrder()
+                })
+              } else {
+                if (res.text) {
+                  wx.showToast({
+                    title: res.text,
+                    duration: 1000
+                  })
+                }
+              }
+            })
+          }
+        },
+      })
+    }
   },
 
   //选择订单状态
@@ -105,6 +103,23 @@ Page({
     wx.navigateTo({
       url: '../orderinfo/orderinfo?id=' + e.currentTarget.dataset.id 
     })
+  },
+
+  //更多按钮
+  optmore: function (e) {
+    const index = e.currentTarget.dataset.index
+    const bookingOrders = this.data.bookingOrders
+    const order = bookingOrders[index]
+
+    if (order.showMore) {
+      order.showMore = !order.showMore
+    } else {
+      order.showMore = true
+    }
+
+    this.setData({
+      bookingOrders,
+    });
   },
 
   //选择状态
@@ -136,7 +151,24 @@ Page({
       if (res && res.success) {
         if (res.data.length > 0) {
           const bookingOrders = this.data.bookingOrders
-          Array.prototype.push.apply(bookingOrders, res.data)
+          const newBookingOrders = res.data
+
+          newBookingOrders.forEach(v => {
+            const command_list = v.command_list
+            if (command_list instanceof Array && command_list.length > 0) {
+              let hide_command_list, show_command_list
+              if (command_list.length > 3) {
+                show_command_list = command_list.slice(0, 3)
+                hide_command_list = command_list.slice(3)
+              } else {
+                show_command_list = command_list
+                hide_command_list = []
+              }
+              v.hide_command_list = hide_command_list
+              v.show_command_list = show_command_list
+            }
+          })
+          Array.prototype.push.apply(bookingOrders, newBookingOrders)
           this.setData({
             bookingOrders
           })

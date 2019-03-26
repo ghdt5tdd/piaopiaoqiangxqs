@@ -42,6 +42,7 @@ Page({
     actualTime: undefined,
     timeliness: undefined, 
     now:undefined,
+    shopOrderId: undefined,
 
     hide: true,
     hideCoupon: true,
@@ -51,7 +52,7 @@ Page({
   },
 
   signOrder: function () {
-    const idList = this.data.selectOrder.id
+    const idList = this.data.shopOrderId
     const latitude = this.data.latitude
     const longitude = this.data.longitude
     const actualDate = this.data.actualDate
@@ -68,15 +69,17 @@ Page({
       return;
     }
 
-    if (!timely && util.compareDate(estimated_arriver_date, actual_arrive_date) >= 0) {
-      wx.showModal({
-        title: '日期错误',
-        content: '不及时的情况下实际到货时间不能小于等于预计到货时间',
-      })
-      return;
+    if (estimated_arriver_date) {
+      if (!timely && util.compareDate(estimated_arriver_date, actual_arrive_date) >= 0) {
+        wx.showModal({
+          title: '日期错误',
+          content: '不及时的情况下实际到货时间不能小于等于预计到货时间',
+        })
+        return;
+      }
     }
 
-    if (this.data.getlocation) {
+    if (this.data.latitude) {
       wx.showLoading({
         title: '正在签收中...',
       })
@@ -100,7 +103,7 @@ Page({
           })
         } else {
           wx.showToast({
-            title: res.text,
+            title: res.text || '500',
             duration: 1000
           })
         }
@@ -231,9 +234,6 @@ Page({
           })
         },
         fail: res => {
-          this.setData({
-            getlocation: false
-          })
           wx.showModal({
             title: '坐标异常',
             content: '获取用户当前坐标失败,无法进行签收',
@@ -255,6 +255,7 @@ Page({
         const selectOrder = res.data
         const isTimely = util.compareDate(selectOrder.estimated_arriver_date, this.data.operatingTime)
         this.setData({
+          shopOrderId,
           selectOrder,
           actualNumber: selectOrder.total_packing_quantity,
           actualDate: this.data.operatingTime.substring(0, 10),

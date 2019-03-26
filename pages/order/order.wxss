@@ -8,22 +8,17 @@
   height: calc(100vh - 86rpx);
 }
 
-.order-list {
-  overflow: hidden;
-}
-
 .order-bar {
   background: #fff;
   font-size: 30rpx;
   border-radius: 10rpx;
   margin: 20rpx;
   padding: 0 20rpx;
-  overflow: hidden;
 }
 
 .order-bar-head {
   line-height: 40rpx;
-  margin: 20rpx 0 10rpx;
+  padding: 20rpx 0 10rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +26,22 @@
 
 .order-bar-id text, .order-bar-time {
   font-size: 26rpx;
+}
+
+.order-bar-id {
+  width: calc(100% - 230rpx);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.order-bar-time {
+  width: 220rpx;
+}
+
+.order-bar-content {
+  position: relative;
+  padding-bottom: 20rpx;
 }
 
 .order-bar-info {
@@ -82,20 +93,64 @@
   background: #fb6a6d;
 }
 
-.order-bar-forwarder {
+.order-bar-cargo {
   margin-top: 20rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 40rpx;
 }
 
-.order-bar-cargo {
-  margin-top: 20rpx;
+.order-bar-node {
+  position: absolute;
+  color: #ff5102;
+  right: 0;
+  bottom: 20rpx;
+  font-size: 30rpx;
+}
+
+.order-bar-other {
   border-top: 1px solid #e7e7e7;
-  color: #999;
-  font-size: 28rpx;
+  padding: 20rpx 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  line-height: 80rpx;
 }
+
+.order-bar-code {
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.order-bar-opt {
+  width: 100%;
+  text-align: right;
+  position: relative;
+}
+
+.order-opt-more {
+  position: absolute;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  color: #999;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.order-opt-float {
+  position: absolute;
+  bottom: -80rpx;
+  left: 0;
+}
+
+.order-opt-float .order-opt-item {
+  box-shadow: 0rpx -10rpx 10rpx #eee,
+                -10rpx 0rpx 10rpx #eee,
+                10rpx 0rpx 10rpx #eee,
+                0rpx 10rpx 10rpx #eee;
+}
+

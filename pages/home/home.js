@@ -538,7 +538,7 @@ Page({
     }
   },
 
-    commitComment: function () {
+  commitComment: function () {
     const id = this.data.selectOrder.id
     const comment_star = this.data.starSelect
     const comment = this.data.comment
@@ -682,7 +682,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    ajax.getApi('mini/program/order/getShopOrderDetail?shopOrderId=03a29fea5a4149e7ab3662f6f2c578db', {
 
+    }, (err, res) => {
+      if (res && res.success) {
+
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })	
   },
 
   /**
@@ -704,8 +717,14 @@ Page({
         })
         return;
       }
-      this.getShopOrderList()
-      this.getShopOrderCount()
+      this.setData({
+        page: 1,
+        shopOrders: [],
+        loadCompleted: false
+      }, () => {
+        this.getShopOrderList()
+        this.getShopOrderCount()
+      })
     }, () => {
       return app.globalData.memberInfo !== null
     })
