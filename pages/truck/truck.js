@@ -2,6 +2,7 @@
 var plateli = [];
 const app = getApp()
 const util = require('../../utils/util.js')
+const coordtransform = require('../../utils/coordtransform.js')
 const ajax = require('../../utils/ajax.js')
 const QQMapWX = require('../qqmap/qqmap-wx-jssdk.js');
 const demo = new QQMapWX({
@@ -362,8 +363,12 @@ Page({
         if (res && res.success) {
           if (res.data.status === 1001) {
             const result = res.data.result
+            //后台返回坐标为原始坐标，需除以60W，才是正常的84坐标系
             result.lon /= 600000
             result.lat /= 600000
+            //微信小地图只支持火星坐标系，因此84坐标系需转成火星坐标系
+            const tLocation = coordtransform.wgs84togcj02(result.lon, result.lat)
+            
             const rotate = - ((360 - 90) - parseInt(result.drc))
             result.utc = util.getFormatDate(1, result.utc)
             result.drc = this.getDrcText(result.drc)
@@ -373,8 +378,8 @@ Page({
                 id: vclN,
                 width: 30,
                 height: 30,
-                longitude: result.lon,
-                latitude: result.lat,
+                longitude: tLocation[0],
+                latitude: tLocation[1],
                 iconPath: '../../images/truck2.png',
                 rotate,
                 callout: {
