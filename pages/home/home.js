@@ -50,6 +50,8 @@ Page({
       payAmount: "20.00",
       btn: "在线支付",
       open: "showPay",
+
+      
     }, {
       id: "18352790283072",
       time: "2018-01-10",
@@ -682,20 +684,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    ajax.getApi('mini/program/order/getShopOrderDetail?shopOrderId=03a29fea5a4149e7ab3662f6f2c578db', {
-
-    }, (err, res) => {
-      if (res && res.success) {
-
-      } else {
-        if (res.text) {
-          wx.showToast({
-            title: res.text,
-            duration: 1000
-          })
-        }
+    this.loadUserInfo()
+    util.callIf(() => {
+      if (app.globalData.isBindPhone) {
+        this.setData({
+          page: 1,
+          shopOrders: [],
+          loadCompleted: false
+        }, () => {
+          this.getShopOrderList()
+          this.getShopOrderCount()
+        })
       }
-    })	
+    }, () => {
+      return app.globalData.memberInfo !== null
+    })
+
   },
 
   /**
@@ -709,7 +713,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.loadUserInfo()
     util.callIf(() => {
       if (!app.globalData.isBindPhone) {
         wx.navigateTo({
@@ -717,14 +720,6 @@ Page({
         })
         return;
       }
-      this.setData({
-        page: 1,
-        shopOrders: [],
-        loadCompleted: false
-      }, () => {
-        this.getShopOrderList()
-        this.getShopOrderCount()
-      })
     }, () => {
       return app.globalData.memberInfo !== null
     })

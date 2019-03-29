@@ -56,7 +56,7 @@
 <view class='orderinfo-bar'>
   <view class='orderinfo-bar-head'>
     货物详情
-  </view>
+  </view> 
   <view class='orderinfo-cargo'>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物名称：</view>
@@ -105,6 +105,24 @@
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
   </view> 
+</view>
+
+<view class='orderinfo-bar' wx:if="{{bookingOrder.truck_driver}}">
+  <view class='orderinfo-bar-head'>
+    司机信息
+  </view>
+  <view class='orderinfo-receive'>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>姓名</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.driver_full_name}}</view>
+    </view>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>联系电话</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.driver_mobile}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.driver_mobile}}">
+        <image src='../../images/call.png'></image>拨打电话</view>
+    </view>
+  </view>
 </view>
 
 <view class='orderinfo-bar' wx:if="{{bookingOrder.add_services && bookingOrder.add_services.length > 0}}">

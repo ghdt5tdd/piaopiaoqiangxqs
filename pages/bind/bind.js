@@ -144,13 +144,9 @@ Page({
           app.globalData.memberInfo.phone = phone
           app.globalData.isBindPhone = true
           callback()
-          // var pages = getCurrentPages();
-          // var prevPage = pages[pages.length - 2]; //上一个页面
-          // //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-
-          // prevPage.setData({
-          //   first: false,
-          // })
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          prevPage.onLoad()
         } else {
           wx.showToast({
             title: res.text,
