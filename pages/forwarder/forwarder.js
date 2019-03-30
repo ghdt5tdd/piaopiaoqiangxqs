@@ -43,6 +43,13 @@ Page({
     })
   },
 
+  //拨打电话
+  call: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.tel
+    })
+  },
+  
   search(e) {
     this.setData({
       page: 1,

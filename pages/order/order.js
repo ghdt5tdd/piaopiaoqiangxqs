@@ -10,9 +10,6 @@ Page({
    */
   data: {
     status: [{
-      name: '全部',
-      value: 0
-    }, {
       name: '待发布',
       value: 1
     }, {
@@ -27,13 +24,19 @@ Page({
     }, {
       name: '待评价',
       value: 5
+    }, {
+      name: '全部',
+      value: 0
     }],
     page: 1,
     pageSize: 10,
     count: 0,
     loadCompleted: false,
-    select: 0,
+    select: 1,
     bookingOrders:[],
+    hideShadow: true,
+    hideOrdering: true,
+    hide: true,
   },
 
   handCommand(e) {
@@ -44,10 +47,8 @@ Page({
     const commandText = e.currentTarget.dataset.commandText
     const _this = this
 
-    //对指令判断进行捕捉，处理特殊指令的需求
-    if (command === 'xxxx') {
-      //处理指令
-  
+    if (command === 'order') {
+      this.order(index)
       return;
     } else {
       wx.showModal({
@@ -55,39 +56,71 @@ Page({
         content: '您确定要对此订单进行' + commandText + '吗?(订单号:' + code + ')',
         success(res) {
           if (res.confirm) {
-            wx.showLoading({
-              title: '操作中...',
-            })
-            ajax.postApi('mini/program/order/bookingOrderCommand', {
-              id,
-              command
-            }, (err, res) => {
-              wx.hideLoading()
-              if (res && res.success) {
-                wx.showToast({
-                  title: '操作成功',
-                })
-                _this.setData({
-                  page: 1,
-                  bookingOrders: [],
-                  loadCompleted: false
-                }, () => {
-                  _this.getListBookingOrder()
-                })
-              } else {
-                if (res.text) {
-                  wx.showToast({
-                    title: res.text,
-                    duration: 1000
-                  })
-                }
-              }
-            })
+            _this.postCommand(id, command)
           }
         },
       })
     }
   },
+
+  postCommand(id, command) {
+    wx.showLoading({
+      title: '操作中...',
+    })
+    ajax.postApi('mini/program/order/bookingOrderCommand', {
+      id,
+      command
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        wx.showToast({
+          title: '操作成功',
+        })
+        this.setData({
+          page: 1,
+          bookingOrders: [],
+          loadCompleted: false
+        }, () => {
+          this.getListBookingOrder()
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+
+  hide: function (e) {
+    this.setData({
+      hideShadow: true,
+      hidePickup: true,
+      hideOrdering: true,
+    })
+  },
+
+  //弹出订单信息窗口
+  order(index) {
+    const selectOrder = this.data.bookingOrders[index]
+    this.setData({
+      hideShadow: false,
+      hideOrdering: false,
+      selectOrder,
+    })
+  },
+
+  sureOrder() {
+    const id = this.data.selectOrder.id
+    this.setData({
+      hideShadow: true,
+      hideOrdering: true,
+    })
+    this.postCommand(id, 'order')
+  },
+
 
   //选择订单状态
   select: function(e) {
