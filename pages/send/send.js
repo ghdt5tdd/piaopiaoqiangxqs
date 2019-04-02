@@ -85,7 +85,7 @@ Page({
 
 
 
-  //收件地址选择
+  //收件地址选择 
   toReceive: function(e) {
     wx.navigateTo({
       url: '../addSend/addSend?select=2'
@@ -163,10 +163,13 @@ Page({
     }
     //利用构造函数创建对象
     function calendar(date, week) {
+      if (date < 10) {
+        date = "0" + date
+      }
       this.date = cur_year + '-' + cur_month + '-' + date;
       if (date == cur_date) {
         this.week = "今天";
-      } else if (date == cur_date + 1) {
+      } else if (date == parseInt(cur_date) + 1) {
         this.week = "明天";
       } else {
         this.week = '星期' + week;
