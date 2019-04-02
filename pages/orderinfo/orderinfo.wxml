@@ -16,7 +16,7 @@
   </view>
 </view>
 
-<view class='orderinfo-bar'>
+<view class='orderinfo-bar' wx:if="{{bookingOrder.consignee_man}}">
   <view class='orderinfo-bar-head'>
     收货人信息
   </view>
@@ -38,7 +38,7 @@
   </view>
 </view>
 
-<view class='orderinfo-bar'>
+<view class='orderinfo-bar' wx:if="{{bookingOrder.consigner_man}}">
   <view class='orderinfo-bar-head'>
     发货人信息
   </view>

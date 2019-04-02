@@ -206,7 +206,9 @@ Page({
     let timeArr = this.data.timeArr
     for (var i = 0; i < timeArr.length; i++) {
       if (this.data.currentIndex == 0) {
-        if (cur_hour > timeArr[i].timeBegin) {
+        const c_h = date.getHours()
+        const e_h = timeArr[i].timeEnd.slice(0, 2)
+        if (c_h >= e_h) {
           timeArr[i].overtime = true
         }
       } else {
@@ -335,15 +337,16 @@ Page({
       })
       return false;
 
-    } else if (this.data.WReceive == true) {
-      wx.showToast({
-        title: '请选择收件地址！',
-        icon: 'none',
-        duration: 3000,
-      })
-      return false;
-
-    } else if (this.data.WCargo == true) {
+    } 
+    // else if (this.data.WReceive == true) {
+    //   wx.showToast({
+    //     title: '请选择收件地址！',
+    //     icon: 'none',
+    //     duration: 3000,
+    //   })
+    //   return false;
+    // } 
+    else if (this.data.WCargo == true) {
       wx.showToast({
         title: '请填写货物信息！',
         icon: 'none',
@@ -376,7 +379,7 @@ Page({
       const cargo = this.data.cargo
       const tServices = this.data.tServices
       const sendAddr = this.data.sendAddr
-      const receiveAddr = this.data.receiveAddr
+      const receiveAddr = this.data.receiveAddr || {}
       const carrier = this.data.carrier
       const remark = this.data.remark
 
