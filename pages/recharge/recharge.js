@@ -89,13 +89,14 @@ Page({
       amount
     }, (err, res) => {
       if (res && res.success) {
+        const data = res.data.payParameters
         wx.hideLoading()
         wx.requestPayment({
-          timeStamp: res.data.timeStamp,
-          nonceStr: res.data.nonceStr,
-          package: res.data.package,
-          signType: res.data.signType,
-          paySign: res.data.paySign,
+          timeStamp: data.timeStamp,
+          nonceStr: data.nonceStr,
+          package: data.packageValue,
+          signType: data.signType,
+          paySign: data.paySign,
           success: function (res) {
             // success
             wx.showModal({

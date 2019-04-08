@@ -41,9 +41,9 @@ App({
       this.globalData.openId = openId
       this.globalData.unionId = unionId
       this.globalData.sessionKey = sessionKey
+      this.getUserSetting()
     }
 
-    this.getUserSetting()
   },
 
   getUserSetting() {
