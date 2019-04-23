@@ -28,6 +28,7 @@ Page({
     if (this.data.getlocation) {
       wx.showLoading({
         title: '正在转接中...',
+        mask: true
       })
       ajax.postApi('mini/program/order/scanReceiptAndTransferShopOrder', {
         id,

@@ -66,6 +66,7 @@ Page({
   postCommand(id, command) {
     wx.showLoading({
       title: '操作中...',
+      mask: true
     })
     ajax.postApi('mini/program/order/bookingOrderCommand', {
       id,

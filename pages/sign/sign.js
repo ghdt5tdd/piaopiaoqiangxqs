@@ -82,6 +82,7 @@ Page({
     if (this.data.latitude) {
       wx.showLoading({
         title: '正在签收中...',
+        mask: true
       })
       ajax.postApi('mini/program/order/receiptShopOrder', {
         idList,

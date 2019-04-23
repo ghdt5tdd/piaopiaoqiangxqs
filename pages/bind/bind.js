@@ -138,6 +138,7 @@ Page({
     } else {
       wx.showLoading({
         title: '绑定中...',
+        mask: true
       })
       ajax.postApi('mini/program/member/bindPhone', {
         phone,
