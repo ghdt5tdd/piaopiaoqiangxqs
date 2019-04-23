@@ -126,7 +126,7 @@ Page({
   //承运商选择
   toforwarder: function (e) {
     wx.navigateTo({
-      url: '../forwarder/forwarder'
+      url: '../forwarder/forwarder?check=0'
     })
   },
 
@@ -374,6 +374,7 @@ Page({
     else {
       wx.showLoading({
         title: '提交中...',
+        mask: true
       })
 
       const cargo = this.data.cargo

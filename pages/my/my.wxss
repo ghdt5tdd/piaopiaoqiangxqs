@@ -8,6 +8,32 @@
   font-size: 0;
 }
 
+.my-head-news {
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+  font-size: 24rpx;
+  width: 60rpx;
+  text-align: center;
+  z-index: 99
+}
+
+.my-head-news image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.my-head-news text {
+  display: block;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  background: #ff5102;
+  border-radius: 50%;
+  color: #fff;
+  padding: 0 8rpx;
+}
+
 .userinfo {
   display: flex;
   align-items: center;

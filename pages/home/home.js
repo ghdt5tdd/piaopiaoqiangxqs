@@ -553,6 +553,7 @@ Page({
     }
     wx.showLoading({
       title: '评价提交中...',
+      mask: true
     })
     ajax.postApi('mini/program/order/evaluateShopOrder', {
       id,
@@ -621,6 +622,7 @@ Page({
     const state = this.data.selectStatus
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
     const params = {
       page,

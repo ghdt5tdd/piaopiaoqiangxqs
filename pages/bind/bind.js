@@ -54,28 +54,34 @@ Page({
       })
       return false;
     } else {
-      let num = 60
-      var timer = setInterval(() => {
-        num--;
-        if (num <= 0) {
-          clearInterval(timer);
-          this.setData({
-            codename: '重新发送',
-            disabled: false,
-          })
-        } else {
-          this.setData({
-            codename: num + "s",
-            disabled: true
-          })
-        }
-      }, 1000)
+      wx.showLoading({
+        title: '发送中',
+        mask: true
+      })
+
 
       ajax.getApi('mini/program/member/sendSMS', {
         phone,
         mToken: 'bindMemberToken'
       }, (err, res) => {
+        wx.hideLoading()
         if (res && res.success) {
+          let num = 60
+          var timer = setInterval(() => {
+            num--;
+            if (num <= 0) {
+              clearInterval(timer);
+              this.setData({
+                codename: '重新发送',
+                disabled: false,
+              })
+            } else {
+              this.setData({
+                codename: num + "s",
+                disabled: true
+              })
+            }
+          }, 1000)
           wx.showToast({
             title: '发送成功',
             duration: 1000

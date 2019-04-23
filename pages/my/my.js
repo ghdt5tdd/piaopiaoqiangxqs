@@ -1,4 +1,7 @@
 // pages/my/my.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
 const app = getApp()
 Page({
 
@@ -8,6 +11,21 @@ Page({
   data: {
     punchTip:"还有5分钟将记一次缺席",
     phone: ''
+  },
+
+
+  //消息通知
+  toNotice: function(e) {
+    wx.navigateTo({
+      url: '../notice/notice'
+    })
+  },
+  
+  toShopOrder(e) {
+    const type = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: '../receiver/receiver?type=' + type,
+    })
   },
 
   loadUserInfo() {
@@ -46,6 +64,26 @@ Page({
 
     }
   },
+
+  getUnreadMessageCount() {
+    ajax.getApi('mini/program/member/getMessageTypeByRole', {
+
+    }, (err, res) => {
+      if (res && res.success) {
+        const messageList = res.data
+        let unReadNum = 0
+        messageList.forEach(v => {
+          unReadNum += v.unread_message_count
+        })
+        if (unReadNum > 0) {
+          this.setData({
+            newsnum: unReadNum
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -56,6 +94,7 @@ Page({
       })
     }
     this.loadUserInfo()
+    this.getUnreadMessageCount()
   },
 
   /**

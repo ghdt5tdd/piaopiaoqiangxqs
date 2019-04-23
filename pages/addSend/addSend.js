@@ -198,6 +198,7 @@ Page({
 
     wx.showLoading({
       title: '设置中...',
+      mask: true
     })
 
     ajax.postApi('mini/program/member/setDefaultPubAddress', {
@@ -246,6 +247,7 @@ Page({
 
     wx.showLoading({
       title: '删除中...',
+      mask: true
     })
 
     ajax.postApi('mini/program/member/delPubAddress', {

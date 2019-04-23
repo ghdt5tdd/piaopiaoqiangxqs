@@ -1,0 +1,14 @@
+<!--pages/noticeTransport/noticeTransport.wxml-->
+<view class='notice'>
+  <view class='notice-item' wx:for="{{noticeItem}}" bindtap='toInfo'>
+    <image class='notice-item-icon' src="../../images/notice2.png"></image>
+    <view class='notice-item-head'>
+      <view class='notice-item-title'>
+        <text class='notice-read' wx:if="{{!item.read}}"></text>
+        <text>{{item.title}}</text>
+      </view>
+      <view class='notice-item-time'>{{item.time}}</view>
+    </view>
+    <view class='notice-item-info'>{{item.info}}</view>
+  </view>
+</view>

@@ -3,9 +3,9 @@
   <view class='search-info'>
     <input placeholder='输入货运单号查询' value="{{billNo}}" bindinput='bindBillNo' bindconfirm="confirmInput"></input>
   </view>
-  <!-- <view class='search-head-news'>
+  <!-- <view class='search-head-news' bindtap='toNotice'>
     <image src='../../images/news.png'></image>
-    <text>{{newsnum}}</text>
+    <text wx:if="{{newsnum !=''}}">{{newsnum}}</text>
     <view>消息</view>
   </view> -->
 </view>
@@ -23,7 +23,7 @@
 
 <view wx:else>
   <view class='order-status ul-4'>
-    <block wx:for="{{orderStatus}}">
+    <block wx:for="{{orderStatus}}" wx:key="value">
       <view class="order-status-items  {{selectStatus == item.value?'on':''}}" bindtap='selectStatus' data-index="{{item.value}}">
         {{item.name}} {{orderCount[item.value]? orderCount[item.value] : 0}}
       </view>

@@ -1,5 +1,5 @@
 /**app.wxss #fd8436**/
-
+@import 'icon.wxss';
 page {
   background: #f3f4f5;
 }

@@ -6,9 +6,19 @@
 <scroll-view scroll-y class='forwarder-content' bindscrolltolower="lower">
   <view class='forwarder-list'>
     <view class='forwarder-item' wx:for="{{forwarderList}}" wx:key="id" bindtap='toSend' data-index="{{index}}">
+      <view class='forwarder-item-check' wx:if="{{checkList}}"  bindtap='toSend' data-index="{{index}}">
+         <image src='{{item.check}}'></image>
+      </view>
       <view class='forwarder-item-head'> 
         <image class='forwarder-item-logo' src='{{item.logo_img}}'></image>
         <view class='forwarder-item-name'>{{item.client_name}}</view>
+     <view class='forwarder-item-level level-{{item.icon_number}}' catchtap='toLevel' data-level="{{item.icon_number}}" data-pic="{{item.icon_file}}">
+          <image src='{{item.icon_file}}'></image>
+          <image src='{{item.icon_file}}'></image>
+          <image src='{{item.icon_file}}'></image>
+          <image src='{{item.icon_file}}'></image>
+          <image src='{{item.icon_file}}'></image>
+        </view>
         <!-- <view class='forwarder-item-spec'>{{item.about_introduce}}</view> -->
       </view>
       <view class='forwarder-item-info'>
@@ -20,7 +30,7 @@
           <image src='../../images/send-tel.png'></image>
           <view catchtap='call' data-tel="{{item.contact_way}}" class="orange">{{item.contact_way}}</view>
         </view>
-        <view class='forwarder-item-bar'>
+        <view class='forwarder-item-bar' catchtap='networkMap' data-name="{{item.address}}">
           <image src='../../images/send-location.png'></image>
           <view>{{item.address}}</view>
         </view>

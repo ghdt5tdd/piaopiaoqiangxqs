@@ -7,6 +7,10 @@
       <view class="userinfo-nicktel">{{phone}}</view>
     </view>
   </view>
+  <view class='my-head-news' bindtap='toNotice'>
+    <image src='../../images/news-w.png'></image>
+    <text wx:if="{{newsnum}}">{{newsnum}}</text>
+  </view>
 </view>
 <view class='my-content'>
   <view class='card-title'>个人信息</view>
@@ -15,13 +19,6 @@
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my1.png'></image>
         <view class='my-bar-name'>个人资料</view>
-        <image class='my-bar-next' src='../../images/w_next.png'></image>
-      </view>
-    </navigator>
-    <navigator url="../order/order" hover-class='none'>
-      <view class='my-bar'>
-        <image class='my-bar-icon' src='../../images/my8.png'></image>
-        <view class='my-bar-name'>订单记录</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator>
@@ -47,8 +44,43 @@
       </view>
     </navigator> -->
   </view>
-  <view class='card-title'>个人记录</view>
+    <view class='card-title'>订单管理</view>
   <view class='card-order'>
+    <!-- <navigator url="../ordersearch/ordersearch" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my8.png'></image>
+        <view class='my-bar-name'>订单查询</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator> -->
+    <navigator url="../order/order" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my9.png'></image>
+        <view class='my-bar-name'>预约发货记录</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
+    <view class='my-bar' bindtap='toShopOrder' data-type = '0'>
+      <image class='my-bar-icon' src='../../images/my10.png'></image>
+      <view class='my-bar-name'>我是收货人</view>
+      <image class='my-bar-next' src='../../images/w_next.png'></image>
+    </view>
+    <view class='my-bar' bindtap='toShopOrder' data-type = '1'>
+      <image class='my-bar-icon' src='../../images/my11.png'></image>
+      <view class='my-bar-name'>我是发货人</view>
+      <image class='my-bar-next' src='../../images/w_next.png'></image>
+    </view>
+  </view>
+
+  <view class='card-title'>工具中心</view>
+  <view class='card-order'>
+    <navigator url="../truck/truck" hover-class='none'>
+      <view class='my-bar'>
+        <image class='my-bar-icon' src='../../images/my6.png'></image>
+        <view class='my-bar-name'>货车定位</view>
+        <image class='my-bar-next' src='../../images/w_next.png'></image>
+      </view>
+    </navigator>
     <!-- <navigator url="../punch/punch" hover-class='none'>
       <view class='my-bar my-barinfo'>
         <image class='my-bar-icon' src='../../images/my4.png'></image>
@@ -57,19 +89,17 @@
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator> -->
-    <navigator url="../truck/truck" hover-class='none'>
-      <view class='my-bar'>
-        <image class='my-bar-icon' src='../../images/my6.png'></image>
-        <view class='my-bar-name'>货车定位</view>
-        <image class='my-bar-next' src='../../images/w_next.png'></image>
-      </view>
-    </navigator>
     <!-- <navigator url="../coupon/coupon" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my5.png'></image>
         <view class='my-bar-name'>附近红包</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator> -->
+    </navigator>
+    <view class='my-bar'>
+      <image class='my-bar-icon' src='../../images/my12.png'></image>
+      <view class='my-bar-name'>自助订货</view>
+      <image class='my-bar-next' src='../../images/w_next.png'></image>
+    </view> -->
   </view>
 </view>

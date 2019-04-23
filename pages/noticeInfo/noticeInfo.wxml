@@ -1,0 +1,9 @@
+<!--pages/noticeInfo/noticeInfo.wxml-->
+<view class='notce-headline'>{{messageInfo.title}}</view>
+<view class='notce-spec'>
+  <view class='notce-mold'>{{messageInfo.message_type}}</view>
+  <view class='notce-time'>{{messageInfo.create_date}}</view>
+</view>
+<view class='notce-info'>
+  <view> {{messageInfo.context}}</view>
+</view>

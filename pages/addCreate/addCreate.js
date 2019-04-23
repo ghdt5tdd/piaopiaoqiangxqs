@@ -117,6 +117,7 @@ Page({
     } else {
       wx.showLoading({
         title: '保存中...',
+        mask: true
       })
 
       const params = {
