@@ -99,10 +99,10 @@ Page({
           paySign: data.paySign,
           success: function (res) {
             // success
-            wx.showModal({
-              title: '支付结果',
-              content: JSON.stringify(res),
-            });
+            // wx.showModal({
+            //   title: '支付结果',
+            //   content: JSON.stringify(res),
+            // });
             // wx.navigateBack({
             //   delta: 1
             // })

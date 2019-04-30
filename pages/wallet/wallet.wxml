@@ -26,7 +26,7 @@
     </view>
     <view class='wallet-record-right'>
       <view class='wallet-record-time'>{{item.create_date}}</view>
-      <view class='wallet-record-spec'>{{app.globalData.memberCode === item['from_bank_id.code'].slice(1) ? '-':'+'}}{{item.amount}}</view>
+      <view class='wallet-record-spec'>{{item.action === 0 ? '-':'+'}}{{item.amount}}</view>
     </view>
   </view>
 </scroll-view>
