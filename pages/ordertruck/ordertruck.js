@@ -1,8 +1,12 @@
-// pages/truck/truck.js
+// pages/ordertruck/ordertruck.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 var plateli = [];
 var QQMapWX = require('../qqmap/qqmap-wx-jssdk.js');
 var demo = new QQMapWX({
-  key: 'I5GBZ-ZQULP-6MTD5-L4RVA-XAPAJ-DKB4G' // 必填 换成自己申请到的
+  key: app.globalData.qqMapKey // 必填 换成自己申请到的
 });
 
 Page({
@@ -12,6 +16,7 @@ Page({
    */
   data: {
     firstTruck: 0,
+    shopOrderDetail: undefined,
 
     Rule: [{
       info: "您好！感谢您选择XXXX运输有限公司（以下简称我公司）。",
@@ -33,13 +38,13 @@ Page({
       info: "2.1查询一次费用从账户余额扣除，使用此功能时请确保账户余额充足"
     }, {
       info: "2.2后续可能会添加包月功能，敬请期待"
-    }, ],
+    },],
 
     hideClear: true,
     placeholder: true,
 
     markers: [{
-      id:"1",
+      id: "1",
       iconPath: '../../images/truck2.png',
       longitude: "119.65",
       latitude: "29.08",
@@ -68,145 +73,13 @@ Page({
     time: "2018-12-24 08:56:23",
 
     hideTruck: true,
-    plateFrist: [{
-      name: "京"
-    }, {
-      name: "津"
-    }, {
-      name: "沪"
-    }, {
-      name: "渝"
-    }, {
-      name: "翼"
-    }, {
-      name: "豫"
-    }, {
-      name: "鲁"
-    }, {
-      name: "晋"
-    }, {
-      name: "陕"
-    }, {
-      name: "皖"
-    }, {
-      name: "苏"
-    }, {
-      name: "浙"
-    }, {
-      name: "鄂"
-    }, {
-      name: "湘"
-    }, {
-      name: "赣"
-    }, {
-      name: "闽"
-    }, {
-      name: "粤"
-    }, {
-      name: "桂"
-    }, {
-      name: "琼"
-    }, {
-      name: "川"
-    }, {
-      name: "贵"
-    }, {
-      name: "云"
-    }, {
-      name: "辽"
-    }, {
-      name: "吉"
-    }, {
-      name: "黑"
-    }, {
-      name: "蒙"
-    }, {
-      name: "甘"
-    }, {
-      name: "宁"
-    }, {
-      name: "青"
-    }, {
-      name: "新"
-    }, {
-      name: "藏"
-    }, ],
     truckOrder: 0,
-    plateOther: [{
-      name: "A"
-    }, {
-      name: "B"
-    }, {
-      name: "C"
-    }, {
-      name: "D"
-    }, {
-      name: "E"
-    }, {
-      name: "F"
-    }, {
-      name: "G"
-    }, {
-      name: "H"
-    }, {
-      name: "J"
-    }, {
-      name: "K"
-    }, {
-      name: "L"
-    }, {
-      name: "M"
-    }, {
-      name: "N"
-    }, {
-      name: "P"
-    }, {
-      name: "Q"
-    }, {
-      name: "R"
-    }, {
-      name: "S"
-    }, {
-      name: "T"
-    }, {
-      name: "U"
-    }, {
-      name: "V"
-    }, {
-      name: "W"
-    }, {
-      name: "X"
-    }, {
-      name: "Y"
-    }, {
-      name: "Z"
-    }, {
-      name: "1"
-    }, {
-      name: "2"
-    }, {
-      name: "3"
-    }, {
-      name: "4"
-    }, {
-      name: "5"
-    }, {
-      name: "6"
-    }, {
-      name: "7"
-    }, {
-      name: "8"
-    }, {
-      name: "9"
-    }, {
-      name: "0"
-    }, ],
-    platetwo: plateli,
+
   },
 
 
   //同意条款
-  agreeRule: function(e) {
+  agreeRule: function (e) {
     this.setData({
       firstTruck: 1
     })
@@ -216,26 +89,14 @@ Page({
 
 
   //打开车牌号弹窗
-  showTruck: function(e) {
+  showTruck: function (e) {
     this.setData({
       hideTruck: false,
     })
   },
 
-  //选择车牌号首位
-  selectFrist: function(e) {
-    var index = e.currentTarget.dataset.index
-    var name = this.data.plateFrist[index].name
-    this.setData({
-      fristIndex: index,
-      plateone: name,
-      hideClear: false,
-      placeholder: false
-    })
-  },
-
   //选择车牌号下一步
-  nextPlate: function(e) {
+  nextPlate: function (e) {
     if (this.data.fristIndex != undefined && this.data.fristIndex != 99) {
       this.setData({
         truckOrder: 1
@@ -244,7 +105,7 @@ Page({
   },
 
   //选择车牌号剩余位数
-  selectOther: function(e) {
+  selectOther: function (e) {
     var index = e.currentTarget.dataset.index
     var name = this.data.plateOther[index].name
     plateli.push(name)
@@ -256,7 +117,7 @@ Page({
   },
 
   //删除
-  deleteTruck: function(e) {
+  deleteTruck: function (e) {
     if (this.data.truckOrder == 0) {
       this.setData({
         fristIndex: 99,
@@ -275,14 +136,14 @@ Page({
   },
 
   //关闭弹窗
-  hide: function(e) {
+  hide: function (e) {
     this.setData({
       hideTruck: true
     })
   },
 
 
-  sureTruck: function(e) {
+  sureTruck: function (e) {
     this.setData({
       hideTruck: true,
       truckOrder: 0, //下次打开弹窗复位
@@ -291,20 +152,20 @@ Page({
 
 
   //车辆当前信息弹窗
-  hideInfo: function(e) {
+  hideInfo: function (e) {
     this.setData({
       hideInfo: true
     })
   },
 
-  showInfo: function(e) {
+  showInfo: function (e) {
     this.setData({
       hideInfo: false
     })
   },
 
   //清空选择
-  clearTruck: function(e) {
+  clearTruck: function (e) {
     plateli = [];
     this.setData({
       fristIndex: '99',
@@ -320,9 +181,71 @@ Page({
 
 
   //行驶轨迹
-  truckcallout: function(e) {
+  truckcallout: function (e) {
     wx.navigateTo({
       url: '../ordertrail/ordertrail'
+    })
+  },
+
+  getShopOrderRealTimeTrackingByShopOrderId(shopOrderId) {
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    ajax.getApi('mini/program/order/getShopOrderRealTimeTrackingByShopOrderId', {
+      shopOrderId
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        const shopOrderDetail = res.data
+        if (shopOrderDetail.gps) {
+          const location = shopOrderDetail.gps.location
+          if (location) {
+            const lo = location.split(",")
+            shopOrderDetail.gps.x = lo[0]
+            shopOrderDetail.gps.y = lo[1]
+          } else {
+            wx.showToast({
+              title: '暂无车辆定位',
+            })
+          }
+
+          const province = shopOrderDetail.gps.province
+          if (province) {
+            shopOrderDetail.gps.markers = [{
+              id: "1",
+              iconPath: '../../images/truck2.png',
+              longitude: "119.65",
+              latitude: "29.08",
+              width: 30,
+              height: 30,
+              callout: {
+                content: "当前位置：" + location.gps.province + location.gps.city + location.gps.district,
+                fontSize: "16",
+                borderRadius: "5",
+                bgColor: "#ffffff",
+                padding: "10",
+                display: "ALWAYS",
+                textAlign: "left" //左对齐
+              },
+            }]
+          }
+        } else {
+          wx.showToast({
+            title: '暂无车辆定位',
+          })
+        }
+        this.setData({
+          shopOrderDetail
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
     })
   },
 
@@ -330,62 +253,62 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    const id = options.id
+    this.getShopOrderRealTimeTrackingByShopOrderId(id)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-    var first = wx.getStorageSync('firstTruck')
-    this.setData({
-      firstTruck: first,
-      plateone: '',
-      platetwo: '',
-    })
-
+  onReady: function () {
+    // var first = wx.getStorageSync('firstTruck')
+    // this.setData({
+    //   firstTruck: first,
+    //   plateone: '',
+    //   platetwo: '',
+    // })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

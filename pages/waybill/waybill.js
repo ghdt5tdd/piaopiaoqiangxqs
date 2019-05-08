@@ -1,12 +1,19 @@
 // pages/waybill/waybill.js
+const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    shopOrderDetail: undefined,
+    shopOrderNodes: undefined,
+
     status: '待签收',
-    time:'2018-11-27 08:30',
+    time: '2018-11-27 08:30',
     id: '201927352637845',
     start: '浙江温州',
     end: '湖北武汉',
@@ -94,22 +101,22 @@ Page({
         'date': '2018-11-27',
         'time': '08:30',
       }],
-    }, ],
+    },],
 
     signPic: "https://img000.hc360.cn/y1/M02/DE/6A/wKhQc1SXrbeEdFP3AAAAAOl0pFk816.jpg" //签收回单图片
 
   },
 
   //查看实时定位
-  toLoaction: function(e) {
+  toLoaction: function (e) {
     wx.navigateTo({
-      url: '../ordertruck/ordertruck'
+      url: '../ordertruck/ordertruck?id=' + this.data.shopOrderDetail.id
     })
   },
 
 
   //放大预览签收回单
-  aspect: function(e) {
+  aspect: function (e) {
     var array = [];
     var pic = this.data.signPic
     array.push(pic)
@@ -120,59 +127,111 @@ Page({
     }
   },
 
+  getShopOrderDetail(shopOrderId) {
+    wx.showLoading({
+      title: '运单加载中...',
+    })
+
+    ajax.getApi('mini/program/order/getShopOrderDetail', {
+      shopOrderId
+    }, (err, res) => {
+      wx.hideLoading()
+      if (res && res.success) {
+        const shopOrderDetail = res.data
+        this.setData({
+          shopOrderDetail
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+
+  getNodeDataByShopOrder(shopOrderId) {
+    ajax.getApi('mini/program/order/getNodeDataByShopOrder', {
+      shopOrderId
+    }, (err, res) => {
+      if (res && res.success) {
+        const shopOrderNodes = res.data
+
+        shopOrderNodes.forEach(v => {
+          v.createData = v.create_date.substr(0, 10)
+          v.createTime = v.create_date.substr(11)
+        })
+        this.setData({
+          shopOrderNodes
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    const id = options.id
+    this.getShopOrderDetail(id)
+    this.getNodeDataByShopOrder(id)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
