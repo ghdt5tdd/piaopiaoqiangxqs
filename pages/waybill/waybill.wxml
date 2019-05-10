@@ -82,7 +82,7 @@
         <view class='iconfont icon-gou'></view> -->
       </view>
       <view class="trail-item-txt">
-        <view class="trail-item-status">{{item.node_state}}</view>
+        <view class="trail-item-status">{{item.node_state_text}}</view>
         <view class='trail-item-content'>
           <view class='trail-item-detail'>
             <view class='trail-item-point'></view>

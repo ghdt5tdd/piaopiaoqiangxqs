@@ -7,11 +7,11 @@
         <image wx:else src="../../images/track.png" mode="widthFix"></image>
       </view>
       <view class="logistics-list-txt">
-        <view class="logistics-list-status">{{item.node_content}}</view>
+        <view class="logistics-list-status">{{item.node_state_text}}</view>
         <view class='logistics-list-content'>
           <view class='logistics-list-detail'>
             <view class='logistics-list-point'></view>
-            <view class="logistics-list-info">{{item.node_remark}}</view>
+            <view class="logistics-list-info">{{item.node_content}}</view>
             <view wx:if="{{index == 0}}" class='logistics-list-location' bindtap='toLoaction'>
                <image src="../../images/position.png"></image>
                <view>查看实时定位</view>

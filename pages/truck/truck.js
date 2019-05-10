@@ -432,7 +432,6 @@ Page({
    */
   onLoad: function(options) {
  
-
   },
 
   /**
@@ -448,11 +447,47 @@ Page({
 
   },
 
+  quickFill() {
+    const _this = this
+    wx.getClipboardData({
+      success(res) {
+        if (res.data) {
+          const data = res.data
+          wx.showModal({
+            title: '快捷获取',
+            content: '检测到您的粘贴内容： ' + res.data + ', 是否填入',
+            success(res) {
+              if (res.confirm) {
+                if (data[0]) {
+                  _this.setData({
+                    plateone: data[0],
+                    hideClear: false,
+                    placeholder: false
+                  })
+                }
+                if (data[1]) {
+                  const platetwo = data.substr(1)
+                  _this.setData({
+                    platetwo: platetwo,
+                  })
+                }
+              }
+              wx.setClipboardData({
+                data: '',
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
     plateli = []
+    this.quickFill()
   },
 
   /**

@@ -69,7 +69,7 @@ Page({
         })
       } else {
         wx.showToast({
-          title: res.text,
+          title: res.text || '访问失败',
           duration: 1000
         })
       }

@@ -65,9 +65,55 @@ Page({
       })
       return;
     }
-    
+
+    const shopOrderDetail = this.data.shopOrderDetail
+    const phone = app.globalData.memberInfo.phone
+
+    //发货人
+    if (shopOrderDetail.consigner_tel.indexOf(phone) !== -1) {
+      wx.navigateTo({
+        url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
+      })
+      return;
+    }
+
+    //收货人
+    if (shopOrderDetail.consignee_tel.indexOf(phone) !== -1) {
+      wx.navigateTo({ 
+        url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
+      })
+      return;
+    }
+
+    //司机
+    // ajax.getApi('mini/program/order/getShopOrderDetail', {
+    //   shopOrderId
+    // }, (err, res) => {
+    //   wx.hideLoading()
+    //   if (res && res.success) {
+    //     wx.navigateTo({ 
+    //       url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
+    //     })
+    //   } else {
+    //     if (res.text) {
+    //       wx.showToast({
+    //         title: res.text || '您没有权限',
+    //         duration: 1000
+    //       })
+    //     }
+    //   }
+    //   return;
+    // })	
+
+    wx.showToast({
+      title: '您没有权限',
+      duration: 1000
+    })
+  },
+
+  toNode(e) {
     wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
-      url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
+      url: '../point/point?id=' + this.data.shopOrderId
     })
   },
 
@@ -196,21 +242,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const q = options.q
-    if(!q) {
-      wx.showToast({
-        title: '非法错误',
-      })
-      return ;
-    }
+    // const q = options.q
+    // if(!q) {
+    //   wx.showToast({
+    //     title: '非法错误',
+    //   })
+    //   return ;
+    // }
+    // const scanUrl = decodeURIComponent(options.q)
+    // const shopOrderId = util.getQueryString(scanUrl, 'id')
+    // const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+
     this.loadUserInfo()
-    const scanUrl = decodeURIComponent(options.q)
-    const shopOrderId = util.getQueryString(scanUrl, 'id')
-    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     //测试
-    // const shopOrderId = '03a29fea5a4149e7ab3662f6f2c578db' 
-    // const ac = 'qs' 
+    const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
+    const ac = 'qs' 
 
     let acText = this.getAcText(ac)
 
