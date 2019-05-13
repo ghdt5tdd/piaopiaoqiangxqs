@@ -67,12 +67,13 @@ Page({
     }
 
     const shopOrderDetail = this.data.shopOrderDetail
+    const shopOrderId = this.data.shopOrderId
     const phone = app.globalData.memberInfo.phone
 
     //发货人
     if (shopOrderDetail.consigner_tel.indexOf(phone) !== -1) {
       wx.navigateTo({
-        url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
+        url: '../transportdetail/transportdetail?id=' + shopOrderId
       })
       return;
     }
@@ -80,35 +81,32 @@ Page({
     //收货人
     if (shopOrderDetail.consignee_tel.indexOf(phone) !== -1) {
       wx.navigateTo({ 
-        url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
+        url: '../transportdetail/transportdetail?id=' + shopOrderId
       })
       return;
     }
 
     //司机
-    // ajax.getApi('mini/program/order/getShopOrderDetail', {
-    //   shopOrderId
-    // }, (err, res) => {
-    //   wx.hideLoading()
-    //   if (res && res.success) {
-    //     wx.navigateTo({ 
-    //       url: '../transportdetail/transportdetail?id=' + this.data.shopOrderId
-    //     })
-    //   } else {
-    //     if (res.text) {
-    //       wx.showToast({
-    //         title: res.text || '您没有权限',
-    //         duration: 1000
-    //       })
-    //     }
-    //   }
-    //   return;
-    // })	
+    ajax.getApi('mini/program/order/shopOrderDriverValidate', {
+      shopOrderId
+    }, (err, res) => {
+      if (res && res.success) {
+        wx.navigateTo({ 
+          url: '../transportdetail/transportdetail?id=' + shopOrderId
+        })
+        return;
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text || '您没有权限',
+            duration: 1000
+          })
+        }
+        return;
+      }
 
-    wx.showToast({
-      title: '您没有权限',
-      duration: 1000
-    })
+      return;
+    })	
   },
 
   toNode(e) {
@@ -242,22 +240,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // const q = options.q
-    // if(!q) {
-    //   wx.showToast({
-    //     title: '非法错误',
-    //   })
-    //   return ;
-    // }
-    // const scanUrl = decodeURIComponent(options.q)
-    // const shopOrderId = util.getQueryString(scanUrl, 'id')
-    // const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+    const q = options.q
+    if(!q) {
+      wx.showToast({
+        title: '非法错误',
+      })
+      return ;
+    }
+    const scanUrl = decodeURIComponent(options.q)
+    const shopOrderId = util.getQueryString(scanUrl, 'id')
+    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     this.loadUserInfo()
 
-    //测试
-    const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
-    const ac = 'qs' 
+    //--------------测试----------------------
+    // const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
+    // const ac = 'qs' 
+    //--------------测试----------------------
 
     let acText = this.getAcText(ac)
 
