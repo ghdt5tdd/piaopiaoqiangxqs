@@ -318,7 +318,7 @@ Page({
 
   commitComment: function () {
     const id = this.data.selectOrder.id
-    const comment_star = this.data.starSelect
+    const comment_star = this.data.starSelect || 5
     const comment = this.data.comment
     const imgs = JSON.stringify(this.data.imgs)
 
@@ -331,7 +331,7 @@ Page({
       title: '评价提交中...',
       mask: true
     })
-    ajax.postApi('app/order/evaluateShopOrder', {
+    ajax.postApi('mini/program/order/evaluateShopOrder', {
       id,
       comment_content: comment,
       comment_star,

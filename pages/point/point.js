@@ -42,6 +42,14 @@ Page({
     })
   },
 
+//查看实时定位
+  toTruck: function (e) {
+    const shopOrderId = this.data.shopOrderId
+    wx.navigateTo({
+      url: '../truck/truck?truckNumber=' + '粤CF8373'
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载

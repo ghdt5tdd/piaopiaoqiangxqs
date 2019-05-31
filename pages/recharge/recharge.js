@@ -76,56 +76,9 @@ Page({
   },
 
   recharge() {
-    wx.showLoading({
-      title: '正在发起支付请求...',
-    })
-    const id = this.data.orderId
-    const app_id = app.globalData.appId
-    const open_id = app.globalData.openId
-    const amount = this.data.amount
-    ajax.getApi('mini/program/member/recharge', {
-      app_id,
-      open_id,
-      amount
-    }, (err, res) => {
-      if (res && res.success) {
-        const data = res.data.payParameters
-        wx.hideLoading()
-        wx.requestPayment({
-          timeStamp: data.timeStamp,
-          nonceStr: data.nonceStr,
-          package: data.packageValue,
-          signType: data.signType,
-          paySign: data.paySign,
-          success: function (res) {
-            // success
-            // wx.showModal({
-            //   title: '支付结果',
-            //   content: JSON.stringify(res),
-            // });
-            // wx.navigateBack({
-            //   delta: 1
-            // })
-          },
-          fail: function (res) {
-            // fail
-            console.log(res);
-          },
-          complete: function (res) {
-            // complete
-            console.log(res);
-          }
-        })
-      } else {
-        if (res.text) {
-          wx.showToast({
-            title: res.text,
-            duration: 1000
-          })
-        }
-      }
-    })
+    app.pay(this.data.amount)
   },
+
 
 
   // //选择支付方式

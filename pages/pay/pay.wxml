@@ -1,7 +1,7 @@
 <!--pages/pay/pay.wxml-->
 <view class='card-order'>
   <view class='pay-head'>¥
-    <text>{{payAmount}}</text>
+    <text>{{amount || 0}}</text>
   </view>
   <view class="pay-list">
     <view wx:for="{{pays}}" data-select="{{item.select}}" class="pay-item {{item.select == paySelect ? 'active':''}}" bindtap="choosePay" data-name="{{item.payName}}">
@@ -14,7 +14,7 @@
   </view>
 </view>
 
-<view class='button-bottom'>
+<view class='button-bottom' bindtap='pay' >
   <!-- <navigator url="../success/success" hover-class='none'>立即付款</navigator> -->
-  <button bindtap='pay' hover-class='none'>立即付款</button>
+  立即付款
 </view>

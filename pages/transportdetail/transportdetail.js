@@ -269,6 +269,15 @@ Page({
         if (shoporderDetail.estimated_arriver_date_short) {
           shoporderDetail.estimated_arriver_date_short = shoporderDetail.estimated_arriver_date.substring(0, 10)
         }
+        if (shoporderDetail.consigner_tel) {
+          const consigner_tel = shoporderDetail.consigner_tel
+          shoporderDetail.consigner_tel_hide = consigner_tel.length >= 11 ? consigner_tel.substring(0, 4) + "****" + consigner_tel.substring(8, 11) : consigner_tel
+        }
+        if (shoporderDetail.consignee_tel) {
+          const consignee_tel = shoporderDetail.consignee_tel
+          shoporderDetail.consignee_tel_hide = consignee_tel.length >= 11 ? consignee_tel.substring(0, 4) + "****" + consignee_tel.substring(8, 11) : consignee_tel
+        }
+
         if (shoporderDetail.bill_no) {
           this.createBarCode('canvas', shoporderDetail.bill_no)
           // 

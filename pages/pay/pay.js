@@ -16,19 +16,15 @@ Page({
         "payName": "余额",
         "image": "../../images/zhifu1.png",
         "icon": "../../images/uncheck.png",
+        "action": "balance",
         "select": 0
       },
-      // {
-      //   "payName": "支付宝",
-      //   "image": "../../images/zhifu2.jpg",
-      //   "icon": "../../images/check.png",
-      //   "select": 1
-      // },
       {
         "payName": "微信",
         "image": "../../images/zhifu3.png",
         "icon": "../../images/uncheck.png",
-        "select": 2
+        "action": "wechat",
+        "select": 1
       },
     ],
     paySelect: 1,
@@ -53,6 +49,23 @@ Page({
   },
 
   pay() {
+    const paySelect = this.data.paySelect
+    const action = this.pays[paySelect].action
+
+    if (action === 'balance') {
+      this.balancePay()
+    } else if (action === 'wechat') {
+      this.wechatPay()
+    } else {
+
+    }
+  },
+
+  balancePay(){
+
+  },
+
+  wechatPay() {
     wx.showLoading({
       title: '正在发起支付请求...',
     })

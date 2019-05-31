@@ -139,6 +139,50 @@ App({
     })
   },
 
+  pay(amount, callback) {
+    wx.showLoading({
+      title: '正在发起支付请求...',
+    })
+
+    const app_id = this.globalData.appId
+    const open_id = this.globalData.openId
+    ajax.getApi('mini/program/member/recharge', {
+      app_id,
+      open_id,
+      amount
+    }, (err, res) => {
+      if (res && res.success) {
+        const data = res.data.payParameters
+        wx.hideLoading()
+        wx.requestPayment({
+          timeStamp: data.timeStamp,
+          nonceStr: data.nonceStr,
+          package: data.packageValue,
+          signType: data.signType,
+          paySign: data.paySign,
+          success: function (res) {
+            callback(res)
+          },
+          fail: function (res) {
+            // fail
+            console.log(res);
+          },
+          complete: function (res) {
+            // complete
+            console.log(res);
+          }
+        })
+      } else {
+        if (res.text) {
+          wx.showToast({
+            title: res.text,
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
+
   globalData: {
     platformAppArea: 'wlhnGxqs',
     qqMapKey: 'ZJIBZ-2DZLR-BTNWK-WNUAG-JCMJ6-C4BHJ',

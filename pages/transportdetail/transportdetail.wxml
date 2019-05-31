@@ -35,7 +35,7 @@
           <view class='order-address-company'>{{shoporderDetail.consigner_unit}}</view>
           <view class='order-address-name'>
             <text>{{shoporderDetail.consigner_man}}</text>
-            <text>{{shoporderDetail.consigner_tel}}</text>
+            <text>{{shoporderDetail.consigner_tel_hide}}</text>
           </view>
           <view class='order-address-door'>{{shoporderDetail.consigner_address}}</view>
         </view>
@@ -46,7 +46,7 @@
           <view class='order-address-company'>{{shoporderDetail.consignee_unit}}</view>
           <view class='order-address-name'>
             <text>{{shoporderDetail.consignee_man}}</text>
-            <text>{{shoporderDetail.consignee_tel}}</text>
+            <text>{{shoporderDetail.consignee_tel_hide}}</text>
           </view>
           <view class='order-address-door'>{{shoporderDetail.consignee_address}}</view>
         </view>
@@ -184,7 +184,7 @@
           <view class='order-address-company'>{{shoporderDetail.startconsigner_unitCompany}}</view>
           <view class='order-address-name'>
             <text>{{shoporderDetail.consigner_man}}</text>
-            <text>{{shoporderDetail.consigner_tel}}</text>
+            <text>{{shoporderDetail.consigner_tel_hide}}</text>
           </view>
           <view class='order-address-door'>{{shoporderDetail.consigner_address}}</view>
         </view>
@@ -195,7 +195,7 @@
           <view class='order-address-company'>{{shoporderDetail.consignee_unit}}</view>
           <view class='order-address-name'>
             <text>{{shoporderDetail.consignee_man}}</text>
-            <text>{{shoporderDetail.consignee_tel}}</text>
+            <text>{{shoporderDetail.consignee_tel_hide}}</text>
           </view>
           <view class='order-address-door'>{{shoporderDetail.consignee_address}}</view>
         </view>

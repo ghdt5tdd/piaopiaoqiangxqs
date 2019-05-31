@@ -542,7 +542,7 @@ Page({
 
   commitComment: function () {
     const id = this.data.selectOrder.id
-    const comment_star = this.data.starSelect
+    const comment_star = this.data.starSelect || 5
     const comment = this.data.comment
     const imgs = JSON.stringify(this.data.imgs)
 
@@ -566,12 +566,11 @@ Page({
         wx.showToast({
           title: '提交成功',
         })
-        this.data.orders.splice(this.data.selectIndex, 1)
+        this.data.shopOrders.splice(this.data.selectIndex, 1)
         this.setData({
-          orders: this.data.orders,
-          hide: true,
-          hideComment: true,
+          shopOrders: this.data.shopOrders,
         })
+        this.hide()
       } else {
         wx.showToast({
           title: res.text,

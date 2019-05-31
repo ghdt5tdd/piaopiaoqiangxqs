@@ -413,6 +413,18 @@ Page({
                 title: '车辆无信息',
                 duration: 1000
               })
+            } else if (res.text === '余额不足') {
+              wx.showModal({
+                title: '余额不足',
+                content: '是否前往充值?',
+                success(res) {
+                  if (res.confirm) {
+                    app.pay(1, () => {
+                      this.searchTruck()
+                    })
+                  } 
+                }
+              })
             } else {
               wx.showToast({
                 title: res.text,
@@ -431,19 +443,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
- 
+    const truckNumber = options.truckNumber
+    console.log(truckNumber)
+    if (truckNumber[0]) {
+      console.log(truckNumber[0])
+      this.setData({
+        plateone: truckNumber[0],
+        hideClear: false,
+        placeholder: false
+      })
+    }
+    if (truckNumber[1]) {
+      const platetwo = truckNumber.substr(1)
+      this.setData({
+        platetwo: platetwo,
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    var first = wx.getStorageSync('firstTruck')
-    this.setData({
-      firstTruck: first,
-      plateone: '',
-      platetwo: '',
-    })
 
   },
 

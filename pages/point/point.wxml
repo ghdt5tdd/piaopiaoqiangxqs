@@ -14,8 +14,12 @@
             <view class="logistics-list-info">{{item.node_content}}</view>
             <view wx:if="{{index == 0}}" class='logistics-list-location' bindtap='toLoaction'>
                <image src="../../images/position.png"></image>
-               <view>查看实时定位</view>
-            </view>            
+               <view>查看内部定位</view>
+            </view>     
+            <view wx:if="{{index == 0}}" class='logistics-list-location' bindtap='toTruck'>
+               <image src="../../images/position.png"></image>
+               <view>查看实时货车定位</view>
+            </view>             
             <view class="logistics-list-time">
               <view class='logistics-list-date'>{{item.createDate}}</view>
               <view class='logistics-list-hour'>{{item.createTime}}</view>
