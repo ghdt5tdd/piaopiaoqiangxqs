@@ -445,7 +445,8 @@ Page({
   onLoad: function(options) {
     const truckNumber = options.truckNumber
     console.log(truckNumber)
-    if (truckNumber[0]) {
+
+    if (truckNumber && truckNumber[0]) {
       console.log(truckNumber[0])
       this.setData({
         plateone: truckNumber[0],
@@ -453,7 +454,7 @@ Page({
         placeholder: false
       })
     }
-    if (truckNumber[1]) {
+    if (truckNumber && truckNumber[1]) {
       const platetwo = truckNumber.substr(1)
       this.setData({
         platetwo: platetwo,

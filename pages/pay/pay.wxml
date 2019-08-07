@@ -1,7 +1,7 @@
 <!--pages/pay/pay.wxml-->
 <view class='card-order'>
   <view class='pay-head'>¥
-    <text>{{amount || 0}}</text>
+    <text>{{consignee_arrive_pay_amount || 0}} <block wx:if="{{debours_amount && debours_amount > 0}}">+ {{debours_amount}}</block></text>
   </view>
   <view class="pay-list">
     <view wx:for="{{pays}}" data-select="{{item.select}}" class="pay-item {{item.select == paySelect ? 'active':''}}" bindtap="choosePay" data-name="{{item.payName}}">

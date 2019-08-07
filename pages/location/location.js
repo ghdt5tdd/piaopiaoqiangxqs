@@ -69,8 +69,8 @@ Page({
         })
       } else {
         wx.showToast({
-          title: res.text || '访问失败',
-          duration: 1000
+          title: res.text || '无GPS信息',
+          duration: 2000
         })
       }
     }) 

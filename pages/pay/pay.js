@@ -22,7 +22,7 @@ Page({
       {
         "payName": "微信",
         "image": "../../images/zhifu3.png",
-        "icon": "../../images/uncheck.png",
+        "icon": "../../images/check.png",
         "action": "wechat",
         "select": 1
       },
@@ -114,8 +114,12 @@ Page({
    */
   onLoad: function (options) {
     const amount = options.amount
+    const consignee_arrive_pay_amount = options.consignee_arrive_pay_amount
+    const debours_amount = options.debours_amount
     const orderId = options.id
     this.setData({
+      consignee_arrive_pay_amount,
+      debours_amount,
       amount,
       orderId
     })

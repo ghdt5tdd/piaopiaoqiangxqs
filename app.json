@@ -49,6 +49,7 @@
     "pages/noticeInfo/noticeInfo",
     "pages/noticeTransport/noticeTransport",
     "pages/noticeOrder/noticeOrder",
+    "pages/signorder/signorder",
     "pages/orderinfo/orderinfo"
   ],
   "window": {

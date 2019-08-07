@@ -39,60 +39,7 @@ Page({
     selectStatus: 1,
     shopOrders:[],
 
-    orderTable: [{
-      id: "18352790280265",
-      time: "2018-01-02",
-      start: "浙江温州",
-      end: "北京市",
-      receive: "北京海淀雷蒙赛博机电技术有限公司",
-      num: "150",
-      payStyle: "到付",
-      payAmount: "20.00",
-      btn: "在线支付",
-      open: "showPay",
-
-      
-    }, {
-      id: "18352790283072",
-      time: "2018-01-10",
-      start: "浙江温州",
-      end: "湖北武汉",
-      receive: "武汉恒望科技有限公司",
-      num: "210",
-      status: "红包奖励",
-      btn: "一键签收",
-      couponAmount: "10", //带红包的运单，不带就没有couponAmount、couponLimit的数据
-      couponLimit: "30",
-      open: "showSign",
-    }, {
-      id: "18352790280265",
-      time: "2018-01-02",
-      start: "浙江温州",
-      end: "北京市",
-      receive: "北京海淀雷蒙赛博机电技术有限公司",
-      num: "150",
-      status: "面单生成",
-      btn: "一键签收", //不带红包运单
-      open: "showSign",
-    }, {
-      id: "18352790283072",
-      time: "2018-01-01",
-      start: "浙江温州",
-      end: "湖北武汉",
-      receive: "武汉恒望科技有限公司",
-      num: "210",
-      status: "一键签收",
-      btn: "去评价",
-      open: "showComment",
-    }, {
-      id: "18352790283072",
-      time: "2018-01-01",
-      start: "浙江温州",
-      end: "湖北武汉",
-      receive: "武汉恒望科技有限公司",
-      num: "120",
-      status: "已评价",
-    }, ],
+     
     hide: true,
     hidePay: true,
     hideSign: true,

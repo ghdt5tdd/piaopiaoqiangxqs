@@ -23,7 +23,10 @@
           <image src="../../images/cargo.png"></image>
           <view>{{shopOrderDetail.goods_name}} {{shopOrderDetail.total_packing_quantity}}件  {{shopOrderDetail.total_weight}}kg {{shopOrderDetail.total_volume}}    m³</view>
         </view>
-
+        <view class='order-cargo-info'>
+          <!-- <image src="../../images/person.png"></image> -->
+          <view>{{shopOrderDetail.order_state}}</view>
+        </view>
       </view>
     </view>
 
@@ -44,6 +47,6 @@
   <view class='button-tip'>
     <view bindtap='toDetail'>点击查看运单详情 </view>
   </view>
-  <view class='button-bottom' bindtap='toSign'>{{acText}}</view>
+  <view wx:if="{{shopOrderDetail.is_sign && shopOrderDetail.is_sign !== '1'}}" class='button-bottom' bindtap='toSign'>{{acText}}</view>
   </block>
 </view>

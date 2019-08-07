@@ -45,9 +45,24 @@ Page({
 //查看实时定位
   toTruck: function (e) {
     const shopOrderId = this.data.shopOrderId
-    wx.navigateTo({
-      url: '../truck/truck?truckNumber=' + '粤CF8373'
-    })
+    const truckNumber = this.data.truckNumber
+    if (truckNumber) {
+      wx.navigateTo({
+        url: '../truck/truck?truckNumber=' + truckNumber
+      })
+    } else {
+      wx.showModal({
+        title: '无车牌号',
+        content: '此运单暂无车牌号绑定，是否手动查询?',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../truck/truck'
+            })
+          }  
+        }
+      })
+    }
   },
 
 
@@ -56,9 +71,15 @@ Page({
    */
   onLoad: function(options) {
     const shopOrderId = options.id
+    const truckNumber = options.truckNumber
     this.setData({
       shopOrderId
     })
+    if (truckNumber && truckNumber !== 'undefined') {
+      this.setData({
+        truckNumber
+      })
+    }
     wx.showLoading({
       title: '节点加载中',
     })

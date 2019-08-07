@@ -103,15 +103,16 @@ Page({
           })
         }
         return;
-      }
+      } 
 
       return;
     })	
   },
 
   toNode(e) {
+    const transnport_truck_flight_number = this.data.shopOrderDetail.transnport_truck_flight_number
     wx.navigateTo({ //第一次登录需要绑定手机号，以后直接登录
-      url: '../point/point?id=' + this.data.shopOrderId
+      url: '../point/point?id=' + this.data.shopOrderId + '&truckNumber=' + transnport_truck_flight_number
     })
   },
 
@@ -145,18 +146,24 @@ Page({
     } else if(ac === 'qs'){
       //判断运单是否为接收人到付，到付则先须先进行付款，不为到付则直接进入签收页面
       if (this.data.shopOrderDetail.settlement_mode === 'receiver_pay') {
+        const consignee_arrive_pay_amount = this.data.shopOrderDetail.consignee_arrive_pay_amount
+        const debours_amount = this.data.shopOrderDetail.debours_amount
+        const amount = this.data.shopOrderDetail.amount
         //这里还需要判断运单的支付状态，已支付的话也是直接跳转到签收
-        // if (this.data.shopOrderDetail.已支付){
-        //   wx.navigateTo({
-        //     url: '../sign/sign?id=' + this.data.shopOrderId
-        //   })
-        //   return;
-        // }else {
+        if (this.data.shopOrderDetail.is_pay == 1){
           wx.navigateTo({
-            url: '../pay/pay?amount=' + this.data.shopOrderDetail.insured_amount + '&id=' + this.data.shopOrderDetail.id
+            url: '../sign/sign?id=' + this.data.shopOrderId
           })
           return;
-        // }
+        } else {
+          wx.navigateTo({
+            url: '../pay/pay?amount=' + this.data.shopOrderDetail.amount 
+              + '&consignee_arrive_pay_amount=' + this.data.shopOrderDetail.consignee_arrive_pay_amount
+              + '&debours_amount=' + this.data.shopOrderDetail.debours_amount
+              + '&id=' + this.data.shopOrderDetail.id
+          })
+          return;
+        }
       } else {
         wx.navigateTo({
           url: '../sign/sign?id=' + this.data.shopOrderId
@@ -240,22 +247,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const q = options.q
-    if(!q) {
-      wx.showToast({
-        title: '非法错误',
-      })
-      return ;
-    }
-    const scanUrl = decodeURIComponent(options.q)
-    const shopOrderId = util.getQueryString(scanUrl, 'id')
-    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
-
     this.loadUserInfo()
+    // const q = options.q
+    // if(!q) {
+    //   wx.showToast({
+    //     title: '非法错误',
+    //   })
+    //   return ;
+    // }
+    // const scanUrl = decodeURIComponent(options.q)
+    // const shopOrderId = util.getQueryString(scanUrl, 'id')
+    // const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     //--------------测试----------------------
-    // const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
-    // const ac = 'qs' 
+    const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
+    const ac = 'qs' 
     //--------------测试----------------------
 
     let acText = this.getAcText(ac)

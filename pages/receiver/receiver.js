@@ -10,20 +10,23 @@ Page({
    */
   data: {
     orderStatus: [{
-      name: "待支付",
-      value: "0",
+      name: "全部",
+      value: "all",
+    }, {
+      name: "待发货",
+      value: "wait_delivery",
+    }, {
+      name: "运输中",
+      value: "transport",
     }, {
       name: "待签收",
-      value: "1",
+      value: "wait_sign",
     }, {
-      name: "待评价",
-      value: "2",
-    }, {
-      name: "已评价",
-      value: "3",
-    },],
+      name: "已签收",
+      value: "wait_evaluate",
+    }],
     orderNo: '',
-    selectStatus: 0,
+    selectStatus: 'all',
     shopOrders: [],
     page: 1,
     pageSize: 10,
@@ -164,7 +167,7 @@ Page({
 
   //选择状态
   selectStatus: function (e) {
-    var index = parseInt(e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index
     this.setData({
       selectStatus: index,
       page: 1,
@@ -503,7 +506,8 @@ Page({
       pageSize,
       type,
       orderNo,
-      state
+      state,
+      getAllAreaData: 1
     }, (err, res) => {
       wx.hideLoading()
       if (res && res.success) {
@@ -559,13 +563,35 @@ Page({
     }
   },
 
+  setTitle(type) {
+    console.log(type)
+    switch (type) {
+      case '0':
+        wx.setNavigationBarTitle({
+          title: '我是收货人'
+        })
+        break;
+      case '1':
+        wx.setNavigationBarTitle({
+          title: '我是发货人'
+        })
+        break;
+      default:
+        wx.showToast({
+          title: '页面参数错误',
+        })
+        break
+    }
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setNowDate()
     const type = options.type
+    this.setNowDate()
+    this.setTitle(type)
     this.setData({
       type
     }, () => {

@@ -94,7 +94,7 @@ Page({
       })
     }
     this.loadUserInfo()
-    this.getUnreadMessageCount()
+    // this.getUnreadMessageCount()
   },
 
   /**

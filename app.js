@@ -67,7 +67,6 @@ App({
           }
         }
       })
-
     })
 
     updateManager.onUpdateFailed(function () {
@@ -157,7 +156,7 @@ App({
         wx.requestPayment({
           timeStamp: data.timeStamp,
           nonceStr: data.nonceStr,
-          package: data.packageValue,
+          package: data.package,
           signType: data.signType,
           paySign: data.paySign,
           success: function (res) {
