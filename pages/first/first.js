@@ -248,20 +248,20 @@ Page({
    */
   onLoad: function(options) {
     this.loadUserInfo()
-    // const q = options.q
-    // if(!q) {
-    //   wx.showToast({
-    //     title: '非法错误',
-    //   })
-    //   return ;
-    // }
-    // const scanUrl = decodeURIComponent(options.q)
-    // const shopOrderId = util.getQueryString(scanUrl, 'id')
-    // const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+    const q = options.q
+    if(!q) {
+      wx.showToast({
+        title: '非法错误',
+      })
+      return ;
+    }
+    const scanUrl = decodeURIComponent(options.q)
+    const shopOrderId = util.getQueryString(scanUrl, 'id')
+    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
 
     //--------------测试----------------------
-    const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
-    const ac = 'qs' 
+    // const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
+    // const ac = 'qs' 
     //--------------测试----------------------
 
     let acText = this.getAcText(ac)

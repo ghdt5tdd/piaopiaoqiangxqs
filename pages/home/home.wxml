@@ -22,7 +22,7 @@
 
 
 <view wx:else>
-  <view class='order-status ul-4'>
+  <view class='order-status ul-5'>
     <block wx:for="{{orderStatus}}" wx:key="value">
       <view class="order-status-items  {{selectStatus == item.value?'on':''}}" bindtap='selectStatus' data-index="{{item.value}}">
         {{item.name}} {{orderCount[item.value]? orderCount[item.value] : 0}}

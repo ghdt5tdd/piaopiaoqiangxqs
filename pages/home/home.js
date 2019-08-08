@@ -17,26 +17,25 @@ Page({
     billNo:'',
     orderCount:undefined,
     orderStatus: [{
-      name: "待支付",
-      value: 0,
-      num: "1",
+      name: "全部",
+      value: "all",
+    }, {
+      name: "待发货",
+      value: "wait_delivery",
+    }, {
+      name: "运输中",
+      value: "transport",
     }, {
       name: "待签收",
-      value: 1,
-      num: "2",
+      value: "wait_sign",
     }, {
-      name: "待评价",
-      value: 2,
-      num: "1",
-    }, {
-      name: "已评价",
-      value: 3,
-      num: "3",
+      name: "已签收",
+      value: "wait_evaluate",
     }],
+    selectStatus: 'all',
     page: 1,
     pageSize: 10,
     loadCompleted: false,
-    selectStatus: 1,
     shopOrders:[],
 
      
@@ -529,7 +528,7 @@ Page({
 
   //选择状态
   selectStatus: function (e) {
-    var index = parseInt(e.target.dataset.index);
+    var index = e.target.dataset.index
     this.setData({
       selectStatus: index,
       billNo: '',
