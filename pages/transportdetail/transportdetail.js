@@ -388,6 +388,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    const url = "https://fall.wlhn.com/ppq?id=" + shoporderDetail.id
+    return {
+      title: shoporderDetail.bill_no,
+      path: '/pages/first/first?q=' + url,
+      imageUrl: ''
+    }
   }
 })
