@@ -102,7 +102,7 @@ Page({
       if (res && res.success) {
         const orderDetails = res.data
         let carrier_name = orderDetails.carrier_name
-        if (carrier_name.length > 6) {
+        if (carrier_name && carrier_name.length > 6) {
           carrier_name = carrier_name.substring(0, 6) + '...'
           orderDetails.carrier_name = carrier_name
         }

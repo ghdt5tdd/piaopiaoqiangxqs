@@ -37,8 +37,6 @@ Page({
     pageSize: 10,
     loadCompleted: false,
     shopOrders:[],
-
-     
     hide: true,
     hidePay: true,
     hideSign: true,

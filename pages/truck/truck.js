@@ -477,7 +477,7 @@ Page({
           const data = res.data
           wx.showModal({
             title: '快捷获取',
-            content: '检测到您的粘贴内容： ' + res.data + ', 是否填入',
+            content: '检测到您的复制内容： ' + res.data + ', 是否填入',
             success(res) {
               if (res.confirm) {
                 if (data[0]) {
