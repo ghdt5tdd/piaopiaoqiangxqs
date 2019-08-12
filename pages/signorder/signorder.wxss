@@ -554,3 +554,39 @@
   float: left;
   width: 50%;
 }
+
+.popup-sign, .popup-comment {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  background: #f3f4f5;
+}
+
+.popup-sign-head {
+  background: #eee;
+  text-align: center;
+  font-size: 32rpx;
+  padding-bottom: 30rpx;
+}
+
+.popup-sign-head image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin-top: -70rpx;
+  margin-bottom: 10rpx;
+}
+
+.popup-sign-content {
+  height: calc(100% - 282rpx);
+}
+
+.popup-comment{
+  background: #fff
+}
+
+.popup-comment-content {
+  overflow: hidden;
+  height: calc(100% - 80rpx)
+}
