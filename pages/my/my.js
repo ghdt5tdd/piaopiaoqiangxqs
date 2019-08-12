@@ -95,6 +95,19 @@ Page({
     }
     this.loadUserInfo()
     // this.getUnreadMessageCount()
+    wx.canvasToTempFilePath({
+      canvasId: 'content',
+      quality: 1,
+      success(res) {
+        console.log()
+        this.setData({
+          shareImg: res.tempFilePath
+        })
+        
+      }
+    })
+
+    
   },
 
   /**
@@ -143,6 +156,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    console.log(this.data.shareImg)
+    return {
+      title: 'test',
+      path: '/pages/my/my?q=1',
+      imageUrl: this.data.shareImg
+    }
   }
 })
