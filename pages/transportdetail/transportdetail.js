@@ -95,35 +95,6 @@ Page({
 
     //异常上报
     abnormalItems: [
-    //   {
-    //   name: "张三",
-    //   time: "2018-01-08",
-    //   status: "等待处理",
-    //   row: [{
-    //     label: "异常类型",
-    //     name: "货损",
-    //   }, {
-    //     label: "发生环节",
-    //     name: "取货",
-    //   }, {
-    //     label: "联系人",
-    //     name: "张三",
-    //   }],
-    // }, {
-    //   name: "李思",
-    //   time: "2018-01-08",
-    //   status: "等待处理",
-    //   row: [{
-    //     label: "异常类型",
-    //     name: "货差",
-    //   }, {
-    //     label: "发生环节",
-    //     name: "交接",
-    //   }, {
-    //     label: "联系人",
-    //     name: "李思",
-    //   }],
-    // }
     ],
 
 
@@ -193,11 +164,16 @@ Page({
         label: "备注",
         text: "",
       }]
-    }, ]
-
-
-
-
+    }, ],
+    shareData: {
+      orderId: "无",
+      send: "无",
+      sendAdd: "无",
+      receive: "无",
+      receiveAdd: "无",
+      sendTime: "无",
+    },
+    shareResultImgPath: ''
   },
 
 
@@ -282,8 +258,25 @@ Page({
           this.createBarCode('canvas', shoporderDetail.bill_no)
           // 
         }
+        const shareData = {
+          orderId: shoporderDetail.bill_no,
+          send: shoporderDetail.consigner_man + shoporderDetail.consigner_tel,
+          sendAdd: shoporderDetail.consigner_address,
+          receive: shoporderDetail.consignee_man + shoporderDetail.consignee_tel,
+          receiveAdd: shoporderDetail.consignee_address,
+          sendTime: shoporderDetail.bill_date
+        }
+
         this.setData({
-          shoporderDetail
+          shoporderDetail,
+          shareData
+        }, () => {
+          const shareDataCompoent = this.selectComponent("#shareData")
+          shareDataCompoent.draw(res => {
+            this.setData({
+              shareResultImgPath: res.tempFilePath
+            })
+          })
         })
       } else {
         wx.showToast({
@@ -388,11 +381,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    const url = "https://fall.wlhn.com/ppq?id=" + shoporderDetail.id
+    let url = "https://fall.wlhn.com/ppq?id=" + this.data.shopOrderDetail.id
+    url = encodeURIComponent(url) 
     return {
-      title: shoporderDetail.bill_no,
+      title: this.data.shoporderDetail.carrier_name,
       path: '/pages/first/first?q=' + url,
-      imageUrl: ''
+      imageUrl: this.data.shareResultImgPath
     }
   }
 })

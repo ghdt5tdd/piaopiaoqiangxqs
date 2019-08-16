@@ -1,8 +1,15 @@
 <!--pages/first/first.wxml-->
-<view class='card-bg'>
-  <image src='../../images/cardbg.png' mode='widthFix'></image>
-</view>
-<view class='card-order' wx:if="{{shopOrderDetail}}">
+<swiper class='card-bg' autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
+  <block wx:for="{{banner}}" wx:key="key">
+    <swiper-item>
+      <view class='banner-box'>
+        <image mode='aspectFill' src="{{item.pic}}" class="slide-image" />
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<scroll-view scroll-y class='card-order' wx:if="{{shopOrderDetail}}">
   <view class="order-table-items">
     <view class='order-table-head'>
       <view class='order-table-id'>货运单号：{{shopOrderDetail.bill_no}}</view>
@@ -30,11 +37,43 @@
       </view>
     </view>
 
-    <view class='order-table-opt'>
-      <view class='order-opt-node'  bindtap='toNode'>节点查询</view>
+    <view class='node-head'>
+      <view>节点信息</view>
+      <view class='node-head-forwarder'>{{shopOrderDetail.carrier_name}}</view>
+    </view>
+   <view class='node-logistics'>
+  <view wx:for="{{orderNodes}}" wx:key="node_state" class="logistics-list">
+    <view class="logistics-list-item">
+      <view class="logistics-list-circle">
+        <image wx:if="{{index == 0}}" src="../../images/track-on.png" mode="widthFix"></image>
+        <image wx:else src="../../images/track.png" mode="widthFix"></image>
+      </view>
+      <view class="logistics-list-txt">
+        <view class="logistics-list-status">{{item.node_state_text}}</view>
+        <view class='logistics-list-content'>
+          <view class='logistics-list-detail'>
+            <view class='logistics-list-point'></view>
+            <view class="logistics-list-info">{{item.node_content}}</view>
+            <view wx:if="{{index == 0}}" class='logistics-list-location' bindtap='toLoaction'>
+               <image src="../../images/position.png"></image>
+               <view>查看内部定位</view>
+            </view>     
+            <view wx:if="{{index == 0}}" class='logistics-list-location' bindtap='toTruck'>
+               <image src="../../images/position.png"></image>
+               <view>查看实时货车定位</view>
+            </view>             
+            <view class="logistics-list-time">
+              <view class='logistics-list-date'>{{item.createDate}}</view>
+              <view class='logistics-list-hour'>{{item.createTime}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>
+  </view>
+</scroll-view>
 
 <view wx:if="{{!hasUserInfo && canIUse}}">
   <view class='button-tip'>首次扫码签收请先登录</view>
@@ -50,3 +89,4 @@
   <view wx:if="{{shopOrderDetail.is_sign && shopOrderDetail.is_sign !== '1'}}" class='button-bottom' bindtap='toSign'>{{acText}}</view>
   </block>
 </view>
+<share-canvas id="shareData" share-data="{{shareData}}"></share-canvas>

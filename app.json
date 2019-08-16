@@ -2,11 +2,11 @@
   "pages": [
     "pages/home/home",
     "pages/first/first",
+    "pages/bind/bind",
     "pages/pay/pay",
     "pages/success/success",
     "pages/sign/sign",
     "pages/receipt/receipt",
-    "pages/bind/bind",
     "pages/bindcard/bindcard",
     "pages/point/point",
     "pages/location/location",
@@ -35,6 +35,7 @@
     "pages/recharge/recharge",
     "pages/set/set",
     "pages/handover/handover",
+    "pages/handwriting/handwriting",
     "pages/order/order",
     "pages/forwarderLevel/forwarderLevel",
     "pages/about/about",
@@ -50,6 +51,8 @@
     "pages/noticeTransport/noticeTransport",
     "pages/noticeOrder/noticeOrder",
     "pages/signorder/signorder",
+    "pages/ordersign/ordersign",
+    "pages/orderhand/orderhand",
     "pages/orderinfo/orderinfo"
   ],
   "window": {

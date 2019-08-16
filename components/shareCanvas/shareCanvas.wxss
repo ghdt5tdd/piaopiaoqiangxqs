@@ -1,0 +1,9 @@
+/* pages/canvas/canvas.wxss */
+canvas {
+  line-height: 20px;
+  background: #fff;
+  box-shadow: 0rpx -10rpx 10rpx #eee,
+                -10rpx 0rpx 10rpx #eee,
+                10rpx 0rpx 10rpx #eee,
+                0rpx 10rpx 10rpx #eee;
+}

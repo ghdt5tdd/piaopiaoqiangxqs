@@ -1,1 +1,5 @@
-{}
+{
+    "usingComponents": {
+      "share-canvas": "../../components/shareCanvas/shareCanvas"
+    }
+}

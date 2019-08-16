@@ -26,6 +26,10 @@ Page({
 
     hideFilter: true,
     hide: true,
+    hideTip: true,
+    hideCoupon: true,
+    hidePay: true,
+    hideReceipt: true,
     filter: [],
     selectIndex: 0,
     now: null,
@@ -818,7 +822,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**

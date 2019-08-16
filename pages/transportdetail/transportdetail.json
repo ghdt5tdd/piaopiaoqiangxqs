@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "货运单详情"
+  "navigationBarTitleText": "货运单详情",
+  "usingComponents": {
+    "share-canvas": "../../components/shareCanvas/shareCanvas"
+  }
 }

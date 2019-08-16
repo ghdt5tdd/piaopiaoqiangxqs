@@ -5,7 +5,7 @@ page {
 }
 
 input {
-  min-height: none;
+  min-height: 0;
 }
 
 button::after {
@@ -49,6 +49,18 @@ button::after {
 }
 
 /*公共样式*/
+.w-10 {
+  width: 100%;
+}
+
+.w-6 {
+  width: 60%;
+}
+
+.w-4 {
+  width: 40%;
+}
+
 
 .pop-shadow {
   position: fixed;

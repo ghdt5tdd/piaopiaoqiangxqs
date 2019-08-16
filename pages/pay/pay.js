@@ -50,7 +50,7 @@ Page({
 
   pay() {
     const paySelect = this.data.paySelect
-    const action = this.pays[paySelect].action
+    const action = this.data.pays[paySelect].action
 
     if (action === 'balance') {
       this.balancePay()

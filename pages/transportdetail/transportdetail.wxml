@@ -282,3 +282,5 @@
 
 
 </scroll-view>
+
+<share-canvas id="shareData" share-data="{{shareData}}"></share-canvas>

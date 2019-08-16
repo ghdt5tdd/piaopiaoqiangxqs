@@ -5,19 +5,21 @@ page {
   text-align: center;
 }
 
+.card-bg, .card-bg image {
+  width: 100%;
+  height: 240rpx;
+}
+
 .card-order {
   margin: 20rpx;
   border-radius: 10rpx;
   overflow: hidden;
+  height: calc(100vh - 480rpx);
+  width: calc(100% - 40rpx);
   box-shadow: 0rpx -10rpx 10rpx #eee,
                 -10rpx 0rpx 10rpx #eee,
                 10rpx 0rpx 10rpx #eee,
                 0rpx 10rpx 10rpx #eee;
-}
-
-.card-bg image {
-  width: 70%;
-  margin: 5% 0;
 }
 
 .order-opt-node {
@@ -49,4 +51,136 @@ page {
   width: 40rpx;
   height: 40rpx;
   margin-right: 10rpx;
+}
+
+.node-head {
+  line-height: 40rpx;
+  font-size: 32rpx;
+  padding: 30rpx 0 20rpx;
+  border-top: 2rpx solid #e7e7e7;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.node-head-forwarder {
+  text-align: right;
+  width: calc(100% - 140rpx);
+  font-size: 28rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.node-logistics {
+  background: #fff;
+  padding: 50rpx 20rpx 50rpx 190rpx;
+  text-align: left;
+}
+
+.logistics-list-item {
+  position: relative;
+  border-left: 1px solid #e7e7e7;
+  margin-left: 24rpx;
+  padding: 0 0 20rpx 56rpx;
+}
+
+.logistics-list-item .logistics-list-circle {
+  display: block;
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  left: -20rpx;
+  top: -3rpx;
+  background: #fff;
+  color: #999;
+  text-align: center;
+}
+
+.logistics-list:first-child .logistics-list-item .logistics-list-circle {
+  width: 48rpx;
+  height: 48rpx;
+  left: -24rpx;
+  top: -4rpx;
+}
+
+.logistics-list-circle image {
+  width: 100%;
+}
+
+.logistics-list-txt {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.logistics-list-status {
+  font-size: 36rpx;
+}
+
+.logistics-list:first-child .logistics-list-txt .logistics-list-detail:first-child,
+.logistics-list:first-child .logistics-list-txt .logistics-list-status {
+  color: #f9871b;
+}
+
+.logistics-list-detail {
+  margin: 10rpx 0 20rpx;
+  position: relative;
+  min-height: 80rpx;
+}
+
+.logistics-list-point {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  position: absolute;
+  background: #b5b5b5;
+  top: 15rpx;
+  left: -62rpx;
+}
+
+.logistics-list-detail:first-child .logistics-list-point {
+  display: none;
+}
+
+.logistics-list-time {
+  position: absolute;
+  top: 0rpx;
+  left: -250rpx;
+  text-align: right;
+}
+
+.logistics-list-detail:first-child .logistics-list-time {
+  top: -60rpx;
+}
+
+.logistics-list-date {
+  font-size: 30rpx;
+}
+
+.logistics-list-hour {
+  font-size: 24rpx;
+}
+
+.logistics-list-location {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #1296db;
+  margin: 10rpx 0 40rpx;
+}
+
+.logistics-list-location image {
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 10rpx;
+}
+
+.button-tip {
+  margin-top: 0rpx;
+  line-height: 60rpx;
+}
+
+.button-bottom {
+  margin: 20rpx 20rpx 40rpx;
 }

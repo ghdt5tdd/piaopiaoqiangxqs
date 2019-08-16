@@ -1,0 +1,2 @@
+<!--components/shareCanvas/shareCanvas.wxml-->
+<canvas class="poster__my-canvas" hidden="true" disable-scroll='true' canvas-id="myCanvas" style="  width: 80vw;height: 350px;margin: 80px  auto;" />

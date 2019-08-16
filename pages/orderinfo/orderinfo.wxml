@@ -105,8 +105,8 @@
     </view>
   </view>
 
-  <image wx:if="{{status == 's1'}}" class='orderinfo-status' src='../../images/status1.png'></image>
-  <image wx:if="{{status == 's2'}}" class='orderinfo-status' src='../../images/status2.png'></image>
+  <!-- <image wx:if="{{status == 's1'}}" class='orderinfo-status' src='../../images/status1.png'></image>
+  <image wx:if="{{status == 's2'}}" class='orderinfo-status' src='../../images/status2.png'></image> -->
 </view>
 
 

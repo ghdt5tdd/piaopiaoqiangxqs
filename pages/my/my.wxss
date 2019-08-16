@@ -1,7 +1,8 @@
 /* pages/my/my.wxss */
 
 .my-head {
-  background: #ba7a26;
+  background: #ff6a00;
+  background-image: linear-gradient(to right, #ff6a00, #ffa711);
   position: relative;
   overflow: hidden;
   color: #fff;
@@ -15,7 +16,7 @@
   font-size: 24rpx;
   width: 60rpx;
   text-align: center;
-  z-index: 99
+  z-index: 99;
 }
 
 .my-head-news image {
@@ -28,7 +29,7 @@
   position: absolute;
   top: -10rpx;
   right: -10rpx;
-  background: #ff5102;
+  background: #e50219;
   border-radius: 50%;
   color: #fff;
   padding: 0 8rpx;
@@ -62,6 +63,7 @@
 
 .my-content {
   margin-top: 20rpx;
+  min-height: calc(100vh - 460rpx);
 }
 
 .card-title {
@@ -83,6 +85,10 @@
 .card-order .my-bar {
   margin: 0 20rpx;
   padding: 20rpx 0;
+}
+
+.card-order navigator:last-child .my-bar {
+  border: none;
 }
 
 .my-bar-icon {
@@ -109,4 +115,17 @@
   width: calc(100% - 325rpx);
   text-align: right;
   color: #999;
+}
+
+.my-support {
+  padding: 50rpx 30rpx 90rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #b8bac4;
+  line-height: 40rpx;
+}
+
+.my-support image {
+  width: 80rpx;
+  height: 48rpx;
 }

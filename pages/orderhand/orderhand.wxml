@@ -1,0 +1,85 @@
+<!--pages/home/home.wxml-->
+<view class='search-group'>
+  <view class='search-bar w-6'>
+    <view class='search-label'>物流公司</view>
+    <view class='search-info'>
+       <input placeholder="输入物流公司查询" bindinput='bindInput'  data-key="orderNo" />
+    </view>
+  </view>
+
+  <view class='search-bar w-4'>
+    <view class='search-label'>发货人</view>
+    <view class='search-info'>
+      <input placeholder="输入发货人查询" bindinput='bindInput'  data-key="orderNo" />
+    </view>
+  </view>
+
+  <view class='search-bar w-10'>
+    <view class='search-label'>货运单号</view>
+    <view class='search-info'>
+      <input placeholder="输入货运单号查询" bindinput='bindInput'  data-key="orderNo" />
+    </view>
+  </view>
+  
+</view>
+
+
+<view class='order-status ul-2'>
+  <block wx:for="{{orderStatus}}" wx:key="value">
+    <view class="order-status-items  {{query.state == item.value?'on':''}}" bindtap='selectStatus' data-state="{{item.value}}">
+      {{item.name}}
+    </view>
+  </block>
+</view>
+
+<scroll-view scroll-y="true" style="height:calc(100vh - 406rpx);" bindscrolltolower="lower">
+  <view class='card-box'>
+    <view class='order-table'>
+      <block wx:for="{{orders}}" wx:key="id">
+        <view class="order-table-items">
+          <view class='order-table-head'>
+            <view class='order-table-id'>货运单号：{{item.bill_no}}</view>
+            <view class='order-table-time'>{{item.start_departing_date}}</view>
+          </view>
+          <view class='order-table-content' bindtap='toInfo' data-shoporder-id="{{item.id}}">
+              <view class='order-table-line'>
+                <view class='order-line-route'>
+                  <view class='order-route-point'>{{item.consignment_station_name}}</view>
+                  <image mode="widthFix" src="../../images/arrow.png"></image>
+                  <view class='order-route-point'>{{item.receiving_station_name}}</view>
+                </view>
+                <view class='order-line-cargo'>
+                  <view class='order-cargo-receive'>
+                    <image src="../../images/person.png"></image>
+                    <view>{{item.consignee_name}}收</view>
+                  </view>
+                  <view class='order-cargo-num'>
+                    <image src="../../images/cargo.png"></image>
+                    <view>{{item.total_packing_quantity}}件</view>
+                  </view>
+                </view>
+              </view>
+              <image class='order-table-to' src='../../images/next.png'></image>
+          </view>
+
+        <view class='order-table-opt'>
+          <view class='order-opt-status'>{{item.order_state}}</view>
+          <view class='order-opt-tip'>{{handoverTip}}</view>
+          <image class='order-opt-code' bindtap='showCode' data-no="{{item.bill_no}}" data-url="{{item.qrcodeURL}}" data-index="{{index}}" src='../../images/code.png'></image>
+        </view>
+
+
+        </view>
+      </block>
+    </view>
+  </view>
+</scroll-view>
+
+<view class='pop-shadow' hidden="{{hide}}" bindtap='hide'></view>
+
+<view class='pop-code' hidden='{{hideCode}}'>
+  <view class='pop-code-head'>扫一扫接收</view>
+  <view class='pop-code-id'>货运单号：{{codeId}}</view>
+  <view style='margin:0 auto; display:flex;justify-content: center; '><canvas class='pop-code-pic' 
+  canvas-id="canvas" ></canvas></view>
+</view>

@@ -11,7 +11,39 @@ Page({
     hasUserInfo: false, //未登录
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    banner: [{
+      pic: "../../images/banner1.jpg",
+    }, {
+      pic: "../../images/banner2.jpg",
+    },],
+    interval: 5000,
+    duration: 1000, 
+    logistics: [{
+      'status': '在途中',
+      'detail': [{
+        'loginfo': '预计到达时间：剩余5小时',
+        'logdate': '2018-08-21',
+        'logtime': '18:37',
+      }, {
+        'loginfo': '由[浙江乐清]发往[浙江杭州]',
+        'logdate': '2018-08-18',
+        'logtime': '06:05',
+      }, {
+        'loginfo': '货物已由[浙江乐清物流公司]装车',
+        'logdate': '2018-08-18',
+        'logtime': '01:32',
+      }],
+    }, {
+      'status': '已发货',
+      'detail': [{
+        'loginfo': '您的货物已出库',
+        'logdate': '2018-08-17',
+        'logtime': '20:26',
+      },],
+    },],
+
     shopOrderId:'',
+    forwarder: "浙江华安物流",
     ac:'',
     acText:'一键签收',
     shopOrderDetail: undefined,
@@ -24,6 +56,15 @@ Page({
     payStyle: "到付1",
     payAmount: "20.00",
     first: true,
+    shareData: {
+      orderId: "无",
+      send: "无",
+      sendAdd: "无",
+      receive: "无",
+      receiveAdd: "无",
+      sendTime: "无",
+    },
+    shareResultImgPath: '',
     sign: "toEnvelope",
     signedState:"415,420,425,430,435,440,490,500"
   },
@@ -156,10 +197,13 @@ Page({
           })
           return;
         } else {
+          const amount = this.data.shopOrderDetail.amount || 0
+          const consignee_arrive_pay_amount = this.data.shopOrderDetail.consignee_arrive_pay_amount || 0
+          const debours_amount = this.data.shopOrderDetail.debours_amount || 0
           wx.navigateTo({
-            url: '../pay/pay?amount=' + this.data.shopOrderDetail.amount 
-              + '&consignee_arrive_pay_amount=' + this.data.shopOrderDetail.consignee_arrive_pay_amount
-              + '&debours_amount=' + this.data.shopOrderDetail.debours_amount
+            url: '../pay/pay?amount=' + amount
+              + '&consignee_arrive_pay_amount=' + consignee_arrive_pay_amount
+              + '&debours_amount=' + debours_amount
               + '&id=' + this.data.shopOrderDetail.id
           })
           return;
@@ -173,6 +217,36 @@ Page({
     } else {
       wx.showLoading({
         title: '错误',
+      })
+    }
+  },
+
+  //查看实时定位
+  toLoaction: function (e) {
+    wx.navigateTo({
+      url: '../location/location?shop_order_id=' + this.data.shopOrderId
+    })
+  },
+
+  //查看实时定位
+  toTruck: function (e) {
+    const shopOrderId = this.data.shopOrderId
+    const truckNumber = this.data.shopOrderDetail.transnport_truck_flight_number
+    if (truckNumber) {
+      wx.navigateTo({
+        url: '../truck/truck?truckNumber=' + truckNumber
+      })
+    } else {
+      wx.showModal({
+        title: '无车牌号',
+        content: '此运单暂无车牌号绑定，是否手动查询?',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../truck/truck'
+            })
+          }
+        }
       })
     }
   },
@@ -227,10 +301,26 @@ Page({
           ac = 'qs'
           acText = this.getAcText(ac)
         }
+        const shareData = {
+          orderId: res.data.bill_no,
+          send: res.data.consigner_man + res.data.consigner_tel,
+          sendAdd: res.data.consigner_address,
+          receive: res.data.consignee_man + res.data.consignee_tel,
+          receiveAdd: res.data.consignee_address,
+          sendTime: res.data.bill_date
+        }
         this.setData({
           shopOrderDetail: res.data,
           ac,
-          acText
+          acText,
+          shareData
+        }, () => {
+          const shareDataCompoent = this.selectComponent("#shareData")
+          shareDataCompoent.draw(res => {
+            this.setData({
+              shareResultImgPath: res.tempFilePath
+            })
+          })
         })
       } else {
         if (res.text) {
@@ -243,10 +333,41 @@ Page({
     })	
   },
 
+  getNodeDataByShopOrder(shopOrderId){
+    ajax.getApi('mini/program/order/getNodeDataByShopOrder', {
+      shopOrderId
+    }, (err, res) => {
+      if (res && res.success) {
+        if (res.data.length > 0) {
+          const orderNodes = res.data
+          orderNodes.forEach(v => {
+            if (v.create_date) {
+              v.createDate = v.create_date.substring(0, 10)
+              v.createTime = v.create_date.substring(11)
+            }
+          })
+          this.setData({
+            orderNodes
+          })
+        } else {
+          wx.showToast({
+            title: '暂无节点',
+          })
+        }
+      } else {
+        wx.showToast({
+          title: res.text,
+          duration: 1000
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
     this.loadUserInfo()
     const q = options.q
     if(!q) {
@@ -277,6 +398,7 @@ Page({
     })
 
     util.callIf(() => {
+      this.getNodeDataByShopOrder(shopOrderId)
       this.getShopOrderDetail(shopOrderId)
     }, () => {
       return app.globalData.memberInfo !== null
@@ -341,6 +463,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    let url = "https://fall.wlhn.com/ppq?id=" + this.data.shopOrderDetail.id
+    url = encodeURIComponent(url) 
+    return {
+      title: this.data.shopOrderDetail.carrier_name,
+      path: '/pages/first/first?q=' + url,
+      imageUrl: this.data.shareResultImgPath
+    }
   }
 })

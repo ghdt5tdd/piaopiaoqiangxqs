@@ -1,82 +1,81 @@
-<!--pages/receiver/receiver.wxml-->
+<!--pages/home/home.wxml-->
 <view class='search-group'>
-  <view class='search-bar w-10'>
+  <view class='search-bar w-6'>
     <view class='search-label'>物流公司</view>
     <view class='search-info'>
-      <input placeholder='输入物流公司查询' value="{{companyName}}" bindinput='bindInput' data-key="{{companyName}}" bindconfirm="confirmInput"></input>
+       <input placeholder="输入物流公司查询" bindinput='bindInput'  data-key="orderNo" />
+    </view>
+  </view>
+
+  <view class='search-bar w-4'>
+    <view class='search-label'>发货人</view>
+    <view class='search-info'>
+      <input placeholder="输入发货人查询" bindinput='bindInput'  data-key="orderNo" />
     </view>
   </view>
 
   <view class='search-bar w-10'>
     <view class='search-label'>货运单号</view>
     <view class='search-info'>
-      <input placeholder='输入货运单号查询' value="{{orderNo}}" bindinput='bindInput' data-key="{{orderNo}}" bindconfirm="confirmInput"></input>
+      <input placeholder="输入货运单号查询" bindinput='bindInput'  data-key="orderNo" />
     </view>
   </view>
+  
 </view>
 
-<view class="order-status ul-5">
+
+<view class='order-status ul-3'>
   <block wx:for="{{orderStatus}}" wx:key="value">
-    <view class="order-status-items {{selectStatus == item.value ? 'on':''}}" bindtap='selectStatus' data-index="{{item.value}}">
+    <view class="order-status-items  {{query.state == item.value?'on':''}}" bindtap='selectStatus' data-state="{{item.value}}">
       {{item.name}}
     </view>
   </block>
 </view>
 
-<scroll-view scroll-y="true" style="height:calc(100vh - 226rpx);">
+<scroll-view scroll-y="true" style="height:calc(100vh - 406rpx);">
   <view class='card-box'>
     <view class='order-table'>
-      <block wx:for="{{shopOrders}}" wx:key="id">
+      <block wx:for="{{orders}}" wx:key="id">
         <view class="order-table-items">
           <view class='order-table-head'>
-            <view class='order-table-id'>运单号：
-              <text>{{item.bill_no}}</text>
-            </view>
+            <view class='order-table-id'>货运单号：{{item.bill_no}}</view>
             <view class='order-table-time'>{{item.start_departing_date}}</view>
           </view>
-          <view class='order-table-content'>
-              <view class='order-table-line' catchtap="toShopOrderInfo" data-id="{{item.id}}">
+           <view class='order-table-content' bindtap='toInfo' data-shoporder-id="{{item.id}}">
+              <view class='order-table-line'>
                 <view class='order-line-route'>
                   <view class='order-route-point'>{{item.consignment_station_name}}</view>
                   <image mode="widthFix" src="../../images/arrow.png"></image>
                   <view class='order-route-point'>{{item.receiving_station_name}}</view>
                 </view>
-                <view class='order-cargo-info'>
-                  <image src="../../images/person.png"></image>
-                  <view>{{item.consignee_name}}收</view>
-                </view>
-                <view class='order-cargo-info'>
-                  <image src="../../images/cargo.png"></image>
-                  <view>{{item.goods_name}} {{item.total_packing_quantity}}件  {{item.total_weight}}kg {{item.total_volume}}m³</view>
+                <view class='order-line-cargo'>
+                  <view class='order-cargo-receive'>
+                    <image src="../../images/person.png"></image>
+                    <view>{{item.consignee_name}}收</view>
+                  </view>
+                  <view class='order-cargo-num'>
+                    <image src="../../images/cargo.png"></image>
+                    <view>{{item.total_packing_quantity}}件</view>
+                  </view>
                 </view>
               </view>
-              <image class='order-table-to' src='../../images/w_next.png'></image>
+              <image class='order-table-to' src='../../images/next.png'></image>
           </view>
 
           <view class='order-table-opt'>
-            <view class='order-opt-status' wx:if="{{item.payStyle == '到付'}}">{{item.order_state}}
-              <text class='red'>¥{{item.payAmount}}</text>
-            </view>
-            <view class='order-opt-status' wx:else>{{item.order_state}}</view>
-            <view class='order-opt-right' wx:if="{{type == 0}}">
-              <!-- <view class='order-opt-node'>
-                <navigator url="../logistics/logistics" hover-class='none'>物流跟踪</navigator>
-              </view> -->
-              <view class='order-opt-bar'>
-                <view class='order-opt-item' wx:if="{{item.order_state_dic == '155' || item.order_state_dic == '160' ||item.order_state_dic == '310' ||item.order_state_dic == '320' ||item.order_state_dic == '330' || item.order_state_dic == '356'}}" bindtap='toSign' data-shoporder-id="{{item.id}}" data-index="{{index}}">一键签收</view>
-              </view>
-              <view class='order-opt-bar'>
-                <view class='order-opt-item' wx:if="{{item.order_state_dic == '425' || item.order_state_dic == '430' ||item.order_state_dic == '435'}}" 
-                bindtap='showComment' data-shoporder-id="{{item.id}}" data-index="{{index}}">评价</view>
-              </view>
-              
-            </view>
+            <view class='order-opt-status'>{{item.order_state}}</view>
+            <view class='order-opt-item on' wx:if="{{item.order_state_dic == '155' || item.order_state_dic == '160' ||item.order_state_dic == '310' ||item.order_state_dic == '320' || item.order_state_dic == '330' || item.order_state_dic == '356' }}" bindtap='showSign' data-shoporder-id="{{item.id}}" data-index="{{index}}">一键签收</view>
+            <view class='order-opt-item on' wx:if="{{item.order_state_dic == '425' ||item.order_state_dic == '430' ||item.order_state_dic == '435'}}" bindtap='showComment' data-shoporder-id="{{item.id}}" data-index="{{index}}">去评价</view>
           </view>
         </view>
       </block>
     </view>
   </view>
 </scroll-view>
+
+
+
+
 
 
 
@@ -104,50 +103,30 @@
   </view>
 
 </view>
-
-<view class='popup-shadow' hidden="{{hide}}" bindtap='hide'></view>
-
-<view class="canlendarBgView" wx:if="{{showDate}}">
-  <view class="canlendarView">
-    <view class="canlendarTopView">
-      <view class="leftBgView" bindtap="handleCalendar" data-handle="prev">
-        <view class="leftView">《</view>
-      </view>
-      <view class="centerView">{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
-      <view class="rightBgView" bindtap="handleCalendar" data-handle="next">
-        <view class="rightView">》</view>
-      </view>
-    </view>
-    <view class="weekBgView">
-      <view class="weekView" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
-    </view>
-    <view class="dateBgView">
-      <view wx:if="{{hasEmptyGrid}}" class="dateEmptyView" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}"> </view>
-      <view class="dateView" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap="dateSelectAction">
-        <view class="datesView {{index == todayIndex ? 'dateSelectView' : ''}}">{{item}}</view>
-      </view>
-    </view>
-  </view>
-
-</view>
-
 <!--一键签收-->
 <view class='pop-up pop-sign' hidden="{{hideSign}}">
+  <view class='popup-sign-head'>
+    <image src='{{memberInfo.head_img}}'></image>
+    <view class='popup-sign-name'>签收人：{{memberInfo.user_nickname}}</view>
+    <!-- <view class='popup-sign-time'>签收时间：{{now}}</view> -->
+  </view>
+
   <view class='pop-content'>
     <view class='order-table'>
       <view class="order-table-items">
         <view class='order-table-head'>
           <view class='order-table-id'>货运单号：{{selectOrder.bill_no}}</view>
-          <view class='order-table-time'>{{selectOrder.start_departing_date}}</view>
+          <view class='order-table-time'>{{selectOrder.start_departing_date}}</view> 
         </view>
         <view class='order-other-bar'>
-          <text>起运时间：</text>
-          <view>{{selectOrder.start_departing_date || '无'}}</view>
+            <text>起运时间：</text>
+            <view>{{selectOrder.start_departing_date || '无'}}</view>
         </view>
         <view class='order-other-bar'>
           <text>预计到达时间：</text>
           <view>{{selectOrder.estimated_arrive_date || '无'}}</view>
         </view>
+
         <view class='order-table-bar'>
           <view class='order-bar-route'>
             <view class='order-route-point'>{{selectOrder.consignment_station_name}}</view>
@@ -156,18 +135,18 @@
           </view>
           <view class='order-bar-cargo'>
             <view class='order-bar-dispatch'>
-              <image src="../../images/w_send.png"></image>
-              <view>{{selectOrder.consigner_name}}寄</view>
+              <image src="../../images/line-start.png"></image>
+              <view>{{selectOrder.consigner_name}}发</view>
               <view>{{selectOrder.consigner_tel}}</view>
             </view>
             <view class='order-bar-receive'>
-              <image src="../../images/w_receive.png"></image>
+              <image src="../../images/line-end.png"></image>
               <view>{{selectOrder.consignee_name}}收</view>
               <view>{{selectOrder.consignee_tel}}</view>
             </view>
             <view class='order-bar-num'>
               <image src="../../images/cargo.png"></image>
-              <view>{{selectOrder.goods_name}} {{selectOrder.total_packing_quantity}}件 {{selectOrder.total_weight}}kg {{selectOrder.total_volume}}m³</view>
+              <view>{{selectOrder.total_packing_quantity}}件</view>
             </view>
           </view>
         </view>
@@ -178,8 +157,9 @@
     <view class='order-other'>
       <view class='order-other-bar'>
         <text>实收件数：</text>
-        <input value="{{actualNumber}}" bindinput='bindActualNumberInput' ></input>
+         <input value="{{actualNumber}}" bindinput='bindActualNumberInput' ></input>件
       </view>
+     
       <view class='order-other-bar'>
         <text>是否及时：</text>
         <view class='order-other-radio'>
@@ -220,12 +200,23 @@
   </view>
 
   <view class='pop-bottom'>
-    <view class='pop-bottom-opt' bindtap='hide'>取消</view>
+    <view class='pop-bottom-opt' bindtap='hideSign'>取消</view>
     <view class='pop-bottom-opt bg-orange' bindtap="signOrder" data-shoporder-id="{{selectOrder.id}}">一键签收</view>
   </view>
 </view>
 
-
+<!--运单含有红包-->
+<view class='pop-up pop-coupon' hidden="{{hideCoupon}}">
+  <image mode='widthFix' src='../../images/coupon.png'></image>
+  <view class='pop-coupon-info'>
+    <view class='pop-coupon-amount'>¥
+      <text>{{couponAmount}}</text>
+    </view>
+    <view wx:if="{{couponLimit == ''}}">无使用门槛</view>
+    <view wx:else>满{{couponLimit}}使用</view>
+  </view>
+  <button bindtap="hideCoupon">立即领取</button>
+</view>
 
 
 <!--上传回单提示-->
@@ -274,28 +265,28 @@
     <view class='comment-info'>
       <view>我的评分</view>
       <view class='comment-star'>
-        <view wx:for="{{commentStar}}" wx:key="key" class="comment-star-pic  {{index == starSelect ? 'active':''}}" bindtap="changeEva" data-index="{{index}}">
+        <view wx:for="{{commentStar}}" class="comment-star-pic  {{index == starSelect ? 'active':''}}" bindtap="changeEva" data-index="{{index}}">
           <image src="{{item.pic}}" />
         </view>
       </view>
       <view class='comment-rank'>{{commentRank}}</view>
     </view>
 
-    <!-- <view class="comment-impress">
+    <view class="comment-impress">
       <checkbox-group name="marks">
         <label class="checkbox" wx:for="{{marks}}" wx:key="key" bindtap='chooseMark' data-index="{{index}}" data-choose="{{item.choose}}">
           <checkbox value="{{item.value}}" checked="{{item.checked}}" color="#e52019" />{{item.value}}
         </label>
       </checkbox-group>
-    </view> -->
+    </view>
 
     <view class="comment-mark">
-      <textarea name="comment" value="{{comment}}" placeholder='写下您对货运单的评价吧' bindinput='inputComment'></textarea>
+    <textarea class='comment-text' value="{{comment}}" placeholder='写下您对货运单的评价吧' bindinput='inputComment'></textarea>
     </view>
 
     <view class='comment-gallery'>
       <view class='comment-gallery-info'>
-        <view class="img" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+        <view class="img" wx:for="{{imgs}}" wx:for-item="item" >
           <image src="{{item}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImg"></image>
           <icon class="delete-btn" type="clear" data-index="{{index}}" catchtap="deleteImg" />
         </view>

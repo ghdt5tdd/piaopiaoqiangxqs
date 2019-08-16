@@ -1,22 +1,33 @@
 /* pages/receiver/receiver.wxss */
-
-.search-head {
+.search-group {
+  overflow: hidden;
+  padding: 20rpx 0 0 20rpx;
   background: #fff;
-  padding: 20rpx;
-  align-items: center;
+}
+
+.search-bar {
+  float: left;
+  margin-bottom: 20rpx;
+}
+
+.search-label {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  margin-bottom: 20rpx;
 }
 
 .search-info {
-  width: calc(100% - 40rpx);
+  width: calc(100% - 60rpx);
   border-radius: 10rpx;
   padding: 0 20rpx;
   background: #f4f4f4;
+  margin-right: 20rpx;
 }
 
 .search-info  input {
   font-size: 30rpx;
-  line-height: 80rpx;
-  height: 80rpx;
+  line-height: 60rpx;
+  height: 60rpx;
 }
 
 /**订单状态**/
@@ -177,13 +188,11 @@
   width: 180rpx;
 }
 
-
 .order-opt-status text {
   margin-left: 10rpx;
 }
 
-
-.order-opt-right{
+.order-opt-right {
   width: calc(100% - 180rpx);
   justify-content: flex-end;
   display: flex;

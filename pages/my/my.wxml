@@ -22,13 +22,13 @@
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator>
-    <navigator url="../addList/addList" hover-class='none'>
+    <!-- <navigator url="../addList/addList" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my2.png'></image>
         <view class='my-bar-name'>地址管理</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator>
+    </navigator> -->
     <navigator url="../wallet/wallet" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my7.png'></image>
@@ -44,7 +44,7 @@
       </view>
     </navigator> -->
   </view>
-    <view class='card-title'>订单管理</view>
+  <!-- <view class='card-title'>订单管理</view> -->
   <view class='card-order'>
     <!-- <navigator url="../ordersearch/ordersearch" hover-class='none'>
       <view class='my-bar'>
@@ -53,7 +53,7 @@
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
     </navigator> -->
-    <navigator url="../order/order" hover-class='none'>
+    <!-- <navigator url="../order/order" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my9.png'></image>
         <view class='my-bar-name'>预约订单</view>
@@ -76,18 +76,18 @@
       <image class='my-bar-icon' src='../../images/my10.png'></image>
       <view class='my-bar-name'>查收货</view>
       <image class='my-bar-next' src='../../images/w_next.png'></image>
-    </view>
+    </view> -->
   </view>
 
-  <view class='card-title'>工具中心</view>
+  <!-- <view class='card-title'>工具中心</view> -->
   <view class='card-order'>
-    <navigator url="../truck/truck" hover-class='none'>
+    <!-- <navigator url="../truck/truck" hover-class='none'>
       <view class='my-bar'>
         <image class='my-bar-icon' src='../../images/my6.png'></image>
         <view class='my-bar-name'>货车定位</view>
         <image class='my-bar-next' src='../../images/w_next.png'></image>
       </view>
-    </navigator>
+    </navigator> -->
     <!-- <navigator url="../punch/punch" hover-class='none'>
       <view class='my-bar my-barinfo'>
         <image class='my-bar-icon' src='../../images/my4.png'></image>
@@ -109,4 +109,14 @@
       <image class='my-bar-next' src='../../images/w_next.png'></image>
     </view> -->
   </view>
+</view>
+
+<view class='my-support'>
+  <image src="../../images/company2.png" mode='aspectFill'></image>
+  <view>
+    华翕提供技术支持
+  </view>
+  <!-- <view class='my-support-text'>
+    0577-88902568
+  </view> -->
 </view>
