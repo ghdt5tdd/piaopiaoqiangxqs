@@ -12,10 +12,8 @@ Page({
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     banner: [{
-      pic: "../../images/banner1.jpg",
-    }, {
-      pic: "../../images/banner2.jpg",
-    },],
+      pic: "",
+    }],
     interval: 5000,
     duration: 1000, 
     logistics: [{
