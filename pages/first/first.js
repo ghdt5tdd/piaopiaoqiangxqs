@@ -372,13 +372,20 @@ Page({
     const q = options.q
     if(!q) {
       wx.showToast({
-        title: '非法错误',
+        title: '非正确二维码',
       })
       return ;
     }
     const scanUrl = decodeURIComponent(options.q)
     const shopOrderId = util.getQueryString(scanUrl, 'id')
     const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+
+    if (!shopOrderId) {
+      wx.showToast({
+        title: '非正确二维码',
+      })
+      return;
+    }
 
     //--------------测试----------------------
     // const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 

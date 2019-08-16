@@ -61,7 +61,7 @@
   </view>
 
 
-  <view class='news'>
+  <view class='news' wx:if="{{news.length > 0}}">
     <view class='news-title'>
       <view>新闻资讯</view>
       <text>更多</text>
@@ -100,5 +100,5 @@
 </scroll-view>
 
 <view class='fixed-bottom'>
-  <view class='fixed-bottom-scan'>立即扫码</view>
+  <view class='fixed-bottom-scan' bindtap="showscan">立即扫码</view>
 </view>
