@@ -112,7 +112,7 @@
 </view>
 
 <view class='my-support'>
-  <image src="../../images/company2.png" mode='aspectFill'></image>
+  <image src="../../images/company2.png" mode='aspectFill'  bindtap='bookTel' data-tel="0577-88902568"></image>
   <view>
     华翕提供技术支持
   </view>

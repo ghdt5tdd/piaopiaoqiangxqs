@@ -13,6 +13,13 @@ Page({
     phone: ''
   },
 
+  //拨打电话
+  bookTel: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.tel
+    })
+  },
+
 
   //消息通知
   toNotice: function(e) {
