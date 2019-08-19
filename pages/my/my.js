@@ -20,7 +20,6 @@ Page({
     })
   },
 
-
   //消息通知
   toNotice: function(e) {
     wx.navigateTo({

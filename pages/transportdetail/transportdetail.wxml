@@ -34,8 +34,8 @@
         <view class='order-address-info'>
           <view class='order-address-company'>{{shoporderDetail.consigner_unit}}</view>
           <view class='order-address-name'>
-            <text>{{shoporderDetail.consigner_man}}</text>
-            <text>{{shoporderDetail.consigner_tel_hide}}</text>
+            <text>{{shoporderDetail.consigner_man || '无'}}</text>
+            <text>{{shoporderDetail.consigner_tel_hide || '无'}}</text>
           </view>
           <view class='order-address-door'>{{shoporderDetail.consigner_address}}</view>
         </view>
@@ -45,8 +45,8 @@
         <view class='order-address-info'>
           <view class='order-address-company'>{{shoporderDetail.consignee_unit}}</view>
           <view class='order-address-name'>
-            <text>{{shoporderDetail.consignee_man}}</text>
-            <text>{{shoporderDetail.consignee_tel_hide}}</text>
+            <text>{{shoporderDetail.consignee_man || '无'}}</text>
+            <text>{{shoporderDetail.consignee_tel_hide || '无'}}</text>
           </view>
           <view class='order-address-door'>{{shoporderDetail.consignee_address}}</view>
         </view>
@@ -177,7 +177,7 @@
 
     <view class='stub-head'>
       <view class='stub-code'>
-        <canvas style="width: 400px; height: 40px;position：static" canvas-id="canvas" ></canvas>
+        <canvas style="width: 180px; height: 40px;position：static;margin: 0 auto;" canvas-id="canvas" ></canvas>
         <view>{{shoporderDetail.bill_no}}</view> 
       </view>
       <view class='stub-spec'>
@@ -244,7 +244,7 @@
         <view class='order-bar-text'>{{shoporderDetail.consignee_man}}</view>
       </view>
       <view class='order-bar' wx:if="{{shoporderDetail.settlement_mode_text}}">
-        <view class='order-bar-label'>付款方式</view>
+        <view class='order-bar-label'>付款方式：</view>
         <view class='order-bar-text'>{{shoporderDetail.settlement_mode_text}}</view>
       </view>
       <view class='order-bar' >

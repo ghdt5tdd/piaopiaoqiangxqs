@@ -89,16 +89,9 @@ Page({
       }, ]
     }],
 
-
-
-
-
     //异常上报
     abnormalItems: [
     ],
-
-
-
     //评价星级
     commentAvatar: "../../images/avatar-sy.png",
     commentName: "张三",

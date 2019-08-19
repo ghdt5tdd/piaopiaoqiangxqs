@@ -65,7 +65,7 @@ Component({
       //寄件信息
       ctx.setFontSize(17)
       ctx.setFillStyle('#fff');
-      ctx.fillText('收', 20, 80)
+      ctx.fillText('寄', 20, 80)
       ctx.setFontSize(17)
       ctx.fillText(that.data.shareData.send, 60, 55, 0.8 * scanW - 70)
 
@@ -120,7 +120,7 @@ Component({
       //收件信息
       ctx.setFontSize(17)
       ctx.setFillStyle('#fff');
-      ctx.fillText('寄', 20, 165)
+      ctx.fillText('收', 20, 165)
       ctx.setFontSize(17)
       ctx.fillText(that.data.shareData.receive, 60, 140, 0.8 * scanW - 70)
 
