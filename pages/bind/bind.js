@@ -151,9 +151,9 @@ Page({
           app.globalData.memberInfo.phone = phone
           app.globalData.isBindPhone = true
           callback()
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.onLoad()
+          // var pages = getCurrentPages();
+          // var prevPage = pages[pages.length - 2]; //上一个页面
+          // prevPage.onLoad()
         } else {
           wx.showToast({
             title: res.text,

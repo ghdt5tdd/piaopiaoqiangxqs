@@ -119,8 +119,6 @@ Page({
    */
   onLoad: function(options) {
     this.loadUserInfo()
-
-
   },
 
   /**

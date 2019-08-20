@@ -253,9 +253,11 @@ Page({
         }
         const shareData = {
           orderId: shoporderDetail.bill_no,
-          send: shoporderDetail.consigner_man + shoporderDetail.consigner_tel,
+          send: shoporderDetail.consigner_unit,
+          sendTel: shoporderDetail.consigner_tel,
           sendAdd: shoporderDetail.consigner_address,
-          receive: shoporderDetail.consignee_man + shoporderDetail.consignee_tel,
+          receive: shoporderDetail.consignee_unit,
+          receiveTel: shoporderDetail.consignee_tel,
           receiveAdd: shoporderDetail.consignee_address,
           sendTime: shoporderDetail.bill_date
         }
@@ -377,7 +379,7 @@ Page({
     let url = "https://fall.wlhn.com/ppq?id=" + this.data.shopOrderDetail.id
     url = encodeURIComponent(url) 
     return {
-      title: this.data.shoporderDetail.carrier_name,
+      title: this.data.shoporderDetail.area_name,
       path: '/pages/first/first?q=' + url,
       imageUrl: this.data.shareResultImgPath
     }

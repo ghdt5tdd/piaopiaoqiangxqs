@@ -279,15 +279,17 @@ Page({
         timeliness: this.data.timeliness,
       }, (err, res) => {
         wx.hideLoading()
+        this.setData({
+          hide: true,
+          hideSign: true,
+        })
         if (res && res.success) {
           wx.showToast({
             title: '签收成功',
           })
-          this.data.orders.splice(this.data.selectIndex, 1)
+          this.data.shopOrders.splice(this.data.selectIndex, 1)
           this.setData({
-            orders: this.data.orders,
-            hide: true,
-            hideSign: true,
+            shopOrders: this.data.shopOrders,
           })
         } else {
           wx.showToast({
@@ -379,7 +381,7 @@ Page({
       hide: false,
       hideComment: false,
       selectIndex: index,
-      selectOrder: this.data.orders[index],
+      selectOrder: this.data.shopOrders[index],
       //评价星级
       commentStar: [{
         pic: '../../images/eva-on.png',
@@ -441,9 +443,9 @@ Page({
         wx.showToast({
           title: '提交成功',
         })
-        this.data.orders.splice(this.data.selectIndex, 1)
+        this.data.shopOrders.splice(this.data.selectIndex, 1)
         this.setData({
-          orders: this.data.orders,
+          shopOrders: this.data.shopOrders,
           hide: true,
           hideComment: true,
         })

@@ -299,13 +299,16 @@ Page({
           ac = 'qs'
           acText = this.getAcText(ac)
         }
+        const shoporderDetail = res.data
         const shareData = {
-          orderId: res.data.bill_no,
-          send: res.data.consigner_man + res.data.consigner_tel,
-          sendAdd: res.data.consigner_address,
-          receive: res.data.consignee_man + res.data.consignee_tel,
-          receiveAdd: res.data.consignee_address,
-          sendTime: res.data.bill_date
+          orderId: shoporderDetail.bill_no,
+          send: shoporderDetail.consigner_unit,
+          sendTel: shoporderDetail.consigner_tel,
+          sendAdd: shoporderDetail.consigner_address,
+          receive: shoporderDetail.consignee_unit,
+          receiveTel: shoporderDetail.consignee_tel,
+          receiveAdd: shoporderDetail.consignee_address,
+          sendTime: shoporderDetail.bill_date
         }
         this.setData({
           shopOrderDetail: res.data,
@@ -386,7 +389,7 @@ Page({
     }
 
     //--------------测试----------------------
-    // const shopOrderId = '338a44a032af4d5ebe7218f7235c393c' 
+    // const shopOrderId = '0000027797a14f9b9b499f653c5cc922' 
     // const ac = 'qs' 
     //--------------测试----------------------
 
@@ -471,7 +474,7 @@ Page({
     let url = "https://fall.wlhn.com/ppq?id=" + this.data.shopOrderDetail.id
     url = encodeURIComponent(url) 
     return {
-      title: this.data.shopOrderDetail.carrier_name,
+      title: this.data.shopOrderDetail.area_name,
       path: '/pages/first/first?q=' + url,
       imageUrl: this.data.shareResultImgPath
     }

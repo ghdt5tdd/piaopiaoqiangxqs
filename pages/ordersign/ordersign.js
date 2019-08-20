@@ -143,15 +143,17 @@ Page({
         timeliness: this.data.timeliness,
       }, (err, res) => {
         wx.hideLoading()
+        this.setData({
+          hide: true,
+          hideSign: true,
+        })
         if (res && res.success) {
           wx.showToast({
             title: '签收成功',
           })
           this.data.orders.splice(this.data.selectIndex, 1)
           this.setData({
-            orders: this.data.orders,
-            hide: true,
-            hideSign: true,
+            orders: this.data.orders
           })
         } else {
           wx.showToast({

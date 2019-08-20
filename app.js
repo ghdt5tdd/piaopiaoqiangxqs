@@ -140,7 +140,7 @@ App({
 
   pay(amount, callback) {
     wx.showLoading({
-      title: '正在发起支付请求...',
+      title: '发起支付请求...',
     })
 
     const app_id = this.globalData.appId
