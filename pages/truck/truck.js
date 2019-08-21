@@ -368,6 +368,8 @@ Page({
             result.lat /= 600000
             //微信小地图只支持火星坐标系，因此84坐标系需转成火星坐标系
             const tLocation = coordtransform.wgs84togcj02(result.lon, result.lat)
+            result.lon = tLocation[0]
+            result.lat = tLocation[1]
             
             const rotate = - ((360 - 90) - parseInt(result.drc))
             result.utc = util.getFormatDate(1, result.utc)
