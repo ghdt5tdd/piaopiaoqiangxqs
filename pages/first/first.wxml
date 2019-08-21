@@ -1,5 +1,5 @@
 <!--pages/first/first.wxml-->
-<swiper class='card-bg' autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
+<swiper class='card-bg' autoplay="true" interval="{{interval}}" wx:if="{{banner.length > 0}}" duration="{{duration}}" circular="true">
   <block wx:for="{{banner}}" wx:key="key">
     <swiper-item>
       <view class='banner-box'>

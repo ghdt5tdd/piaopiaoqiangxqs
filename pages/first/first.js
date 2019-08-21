@@ -11,9 +11,7 @@ Page({
     hasUserInfo: false, //未登录
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    banner: [{
-      pic: "",
-    }],
+    banner: [],
     interval: 5000,
     duration: 1000, 
     logistics: [{
