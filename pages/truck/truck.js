@@ -445,8 +445,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    const firstTruck = wx.getStorageSync('firstTruck')
+    if (firstTruck) {
+      this.setData({
+        firstTruck
+      })
+    }
     const truckNumber = options.truckNumber
-    console.log(truckNumber)
 
     if (truckNumber && truckNumber[0]) {
       console.log(truckNumber[0])

@@ -14,12 +14,16 @@ page {
   margin: 20rpx;
   border-radius: 10rpx;
   overflow: hidden;
-  height: calc(100vh - 480rpx);
+  height: calc(100vh - 240rpx);
   width: calc(100% - 40rpx);
   box-shadow: 0rpx -10rpx 10rpx #eee,
                 -10rpx 0rpx 10rpx #eee,
                 10rpx 0rpx 10rpx #eee,
                 0rpx 10rpx 10rpx #eee;
+}
+
+swiper~ .card-order {
+  height: calc(100vh - 480rpx);
 }
 
 .order-opt-node {

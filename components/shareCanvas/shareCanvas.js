@@ -200,17 +200,17 @@ Component({
 
  
       ctx.draw(false, function() {
-          wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
-            success: function (res) {
-              if (cb) {
-                cb(res)
-              }
-            },
-            fail: function (res) {
-              console.log(res);
+        wx.canvasToTempFilePath({
+          canvasId: 'myCanvas',
+          success: function (res) {
+            if (cb) {
+              cb(res)
             }
-          }, that);
+          },
+          fail: function (res) {
+            console.log(res);
+          }
+        }, that);
       })
 
       //logo图片部分

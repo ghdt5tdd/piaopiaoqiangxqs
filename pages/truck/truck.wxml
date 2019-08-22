@@ -9,7 +9,7 @@
         <view class="pop-rule-item textIndent">每次查询成功并在地图上显示定位信息需消耗余额1元</view>
       </view>
     </scroll-view>
-    <view class='pop-bottom' bindtap='agreeRule'>同意并不再提醒</view>
+    <view class='pop-bottom' bindtap='agreeRule'>了解并不再提醒</view>
   </view>
 </view>
 <view wx:else>
