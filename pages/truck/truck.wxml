@@ -6,7 +6,7 @@
     <scroll-view class='pop-rule-content' scroll-y>
       <view>尊敬的客户：</view>
       <view >
-        <view class="pop-rule-item textIndent">每次查询成功并在地图上显示定位信息需消耗余额1元</view>
+        <view class="pop-rule-item textIndent">每次查询成功并在地图上显示定位信息需消耗余额1元，所有查询不到信息的结果都是不进行计费的。另外注意:即使车牌号是正确的，如果此车在24小时内没有上传GPS信息，那它的位置也是查无信息的。</view>
       </view>
     </scroll-view>
     <view class='pop-bottom' bindtap='agreeRule'>了解并不再提醒</view>

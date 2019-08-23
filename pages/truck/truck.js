@@ -203,19 +203,19 @@ Page({
   
   
   getDrcText(angle) {
-    if (angle === 0 || angle === 360) {
+    if (angle == 0 || angle == 360) {
       return '正北'
     } else if(angle > 0 && angle < 90){
       return '东北'
-    } else if (angle === 90) {
+    } else if (angle == 90) {
       return '正东'
     } else if (angle > 90 && angle < 180) {
       return '东南'
-    } else if (angle === 180) {
+    } else if (angle == 180) {
       return '正东'
     } else if (angle > 180 && angle < 270) {
       return '西南'
-    } else if (angle === 270) {
+    } else if (angle == 270) {
       return '正西'
     } else if (angle > 270 && angle < 360) {
       return '西北'
@@ -387,7 +387,8 @@ Page({
                 callout: {
                   content: " 车牌号码：" + vclN
                     + "\n 当前车速：" + result.spd + "km/h"
-                    + "\n 位置信息：" + result.province + result.city + result.country
+                    // + "\n 位置信息：" + result.province + result.city + result.country
+                    + "\n 位置信息：" + result.adr
                     + "\n 行驶方向：" + result.drc
                     + "\n 更新时间：" + result.utc,
                   fontSize: "11",
@@ -412,7 +413,7 @@ Page({
           if (res.text) {
             if(res.text == 1006) {
               wx.showToast({
-                title: '车辆无信息',
+                title: '车辆查无信息',
                 duration: 1000
               })
             } else if (res.text === '余额不足') {

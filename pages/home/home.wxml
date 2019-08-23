@@ -33,10 +33,10 @@
   </view>
 
   <view class='module-block'>
-    <navigator class='module-item' hover-class='none'>
+    <view class='module-item'  bindtap='toCarrier'>
       <image src='../../images/home1.png'></image>
       <view>查物流商</view>
-    </navigator>
+    </view>
     <view class='module-item' bindtap='toShopOrder' data-type = '1' hover-class='none'>
       <image src='../../images/home2.png'></image>
       <view>查我发货</view>

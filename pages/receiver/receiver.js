@@ -45,62 +45,6 @@ Page({
     }],
 
     orderTable: [{
-      id: "18352790280265",
-      time: "2018-11-27 08:30",
-      start: "浙江温州",
-      end: "湖北武汉",
-      receive: "李思",
-      cargoName: '电子',
-      cargoNum: '5',
-      cargoPack: '纸箱',
-      cargoWeight: '1.8',
-      cargoCubage: '0.3',
-      payStyle: "到付",
-      payAmount: "20.00",
-      btn: [{
-        info: "在线支付",
-        open: "showPay",
-      },],
-
-    }, {
-      id: "18352790283072",
-      time: "2018-01-01",
-      start: "浙江温州",
-      end: "湖北武汉",
-      receive: "武汉恒望科技有限公司",
-      cargoName: '图书',
-      cargoNum: '16',
-      cargoPack: '纸箱',
-      cargoWeight: '1.8',
-      cargoCubage: '0.5',
-      status: "面单生成",
-      btn: [{
-        info: "一键签收",
-        open: "showSign",
-      },],
-
-    }, {
-      id: "18352790280265",
-      time: "2018-11-25 16:56",
-      start: "浙江温州",
-      end: "北京市",
-      receive: "北京海淀雷蒙赛博机电技术有限公司",
-      cargoName: '电子',
-      cargoNum: '2',
-      cargoPack: '纸箱',
-      cargoWeight: '0.6',
-      cargoCubage: '0.2',
-      signpic: "https://img000.hc360.cn/y1/M02/DE/6A/wKhQc1SXrbeEdFP3AAAAAOl0pFk816.jpg", //签收回单
-      status: "一键签收",
-      btn: [{
-        info: "查看回单",
-        open: "showPaper",
-      }, {
-        info: "去评价",
-        open: "showComment",
-      }],
-
-    }, {
       id: "18352790283072",
       time: "2018-01-01",
       start: "浙江温州",
@@ -612,9 +556,7 @@ Page({
         if (res.data.orderList.length > 0) {
           const shopOrders = this.data.shopOrders
           const newShopOrders = res.data.orderList
-          console.log(newShopOrders)
           Array.prototype.push.apply(shopOrders, newShopOrders)
-          console.log(shopOrders)
           this.setData({
             shopOrders
           })
@@ -690,7 +632,9 @@ Page({
     const type = options.type
     this.setNowDate()
     this.setTitle(type)
-    this.getLocation()
+    if(type == 0) {
+      this.getLocation()
+    }
     this.setData({
       type
     }, () => {
@@ -717,6 +661,7 @@ Page({
           this.setData({
             getlocation: false
           })
+          console.log(res)
           wx.showModal({
             title: '坐标异常',
             content: '获取用户当前坐标失败,无法进行签收',

@@ -51,6 +51,15 @@ Page({
     })
   },
 
+  toCarrier(e) {
+    wx.showToast({
+      title: '此模块暂不开放',
+    })
+    // wx.navigateTo({
+    //   url: '../receiver/receiver?type=' + type,
+    // })
+  },
+
   toShopOrder(e) {
     const type = e.currentTarget.dataset.type
     wx.navigateTo({
