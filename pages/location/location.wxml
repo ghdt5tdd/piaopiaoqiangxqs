@@ -9,19 +9,19 @@
       <block>
         <view class="location-info-items">
           <view class="location-info-label">承运商：</view>
-          <view class="location-info-name">{{orderDetails.carrier_name}}</view>
+          <view class="location-info-name">{{orderDetails.carrier_name || '无'}}</view>
         </view>
         <view class="location-info-items">
           <view class="location-info-label">预计到达时间：</view>
-          <view class="location-info-name">{{orderDetails.estimated_arrive_date}}</view>
+          <view class="location-info-name">{{orderDetails.estimated_arrive_date || '无'}}</view>
         </view>
         <view class="location-info-items">
           <view class="location-info-label">司机：</view>
-          <view class="location-info-name">{{orderDetails.driver_name}}</view>
+          <view class="location-info-name">{{orderDetails.driver_name || '无'}}</view>
         </view>
         <view class="location-info-items">
           <view class="location-info-label">联系方式：</view>
-          <view class="location-info-name">{{orderDetails.contact_way}}</view>
+          <view class="location-info-name">{{orderDetails.contact_way || '无'}}</view>
         </view>
       </block>
     </view>

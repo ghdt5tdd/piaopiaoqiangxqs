@@ -340,9 +340,9 @@ Page({
 
   //行驶轨迹
   truckcallout: function (e) {
-    wx.navigateTo({
-      url: '../truckTrail/truckTrail'
-    })
+    // wx.navigateTo({
+    //   url: '../truckTrail/truckTrail'
+    // })
   },
 
   //根据车牌号查询货车信息
