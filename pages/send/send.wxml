@@ -1,4 +1,14 @@
 <!--pages/send/send.wxml-->
+<scroll-view scroll-y style='height:calc(100vh - 96rpx)'> 
+<view class='send-block'>
+  <view class='send-bar send-bar-forwarder'>
+    <view class='send-bar-label'>物流商</view>
+    <view wx:if="{{carrier}}" class='send-bar-info' bindtap='toforwarder'>{{carrier.contact_man}}</view>
+    <view wx:else class='send-bar-info' bindtap='toforwarder'>请选择物流商</view>
+    <image class='send-bar-next' src='../../images/w_next.png'></image>
+  </view>
+</view>
+
 <view class='send-address'>
   <view class='send-address-item' bindtap='toSend'>
     <image class='send-address-pic' src='../../images/line-start.png'></image>
@@ -31,12 +41,12 @@
 </view>
 
 <view class='send-block'>
-  <view class='send-bar send-bar-forwarder'>
+  <!-- <view class='send-bar send-bar-forwarder'>
     <view class='send-bar-label'>承运商</view>
     <view wx:if="{{carrier}}" class='send-bar-info' bindtap='toforwarder'>{{carrier.contact_man}}</view>
     <view wx:else class='send-bar-info' bindtap='toforwarder'>请选择承运商</view>
     <image class='send-bar-next' src='../../images/w_next.png'></image>
-  </view>
+  </view> -->
 
   <view class='send-bar' bindtap='showTime'>
     <view class='send-bar-label'>预约提货时间</view>
@@ -77,6 +87,7 @@
   <textarea hidden="{{markFcous}}" value="{{remark}}" bindinput='bindInput' data-key="remark"></textarea>
 </view>
 
+</scroll-view>
 <view class='send-bottom'>
   <view class='send-bottom-rule'>
     <image src='{{ruleIcon}}' date-status="{{ruleStatus}}" bindtap='ruleCheck'></image>
@@ -84,7 +95,7 @@
       <text>《发货服务条款》</text>
     </view>
   </view>
-  <view class='send-bottom-opt' bindtap='submitOrder'>提交订单</view>
+  <view class='send-bottom-opt' catchtap='submitOrder'>提交订单</view>
 </view>
 
 

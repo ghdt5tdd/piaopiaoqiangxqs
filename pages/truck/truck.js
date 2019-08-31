@@ -305,6 +305,8 @@ Page({
     this.setData({
       hideTruck: true,
       truckOrder: 0, //下次打开弹窗复位
+    }, () => {
+      this.searchTruck()
     })
   },
 
@@ -349,7 +351,9 @@ Page({
   searchTruck: function (e) {
     this.setData({
       locationDetail: {},
-      locationMarkers: []
+      locationMarkers: [],
+      hideTruck: true
+
     }, () => {
       wx.showLoading({
         title: '查询中...',

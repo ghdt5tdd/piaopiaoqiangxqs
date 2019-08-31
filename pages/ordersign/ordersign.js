@@ -16,8 +16,8 @@ Page({
     query: {
       orderNo: '',
       state: 0,
-      startDate: '',
-      endDate: '',
+      // startDate: '',
+      // endDate: '',
       consigneeCode: '',
       page: 1,
       pageSize: 10,
@@ -515,7 +515,8 @@ Page({
     })
 
     ajax.getApi('mini/program/order/getShopOrderList', {
-      ...this.data.query
+      ...this.data.query,
+      getAllAreaData: 1
     }, (err, res) => {
       wx.hideLoading()
       if (res && res.success) {
@@ -631,8 +632,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setNowDate()
-    this.resetQuery()
+    // this.setNowDate()
+    // this.resetQuery()
     this.getOrder()
     this.getLocation()
     this.setData({

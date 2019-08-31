@@ -143,6 +143,7 @@ App({
       title: '发起支付请求...',
     })
 
+    const _this = this
     const app_id = this.globalData.appId
     const open_id = this.globalData.openId
     ajax.getApi('mini/program/member/recharge', {
@@ -152,6 +153,7 @@ App({
     }, (err, res) => {
       if (res && res.success) {
         const data = res.data.payParameters
+        const outTradeNo = res.data.outTradeNo
         wx.hideLoading()
         wx.requestPayment({
           timeStamp: data.timeStamp,
@@ -160,7 +162,10 @@ App({
           signType: data.signType,
           paySign: data.paySign,
           success: function (res) {
-            callback(res)
+            if (callback) {
+              callback(res)
+            }
+            _this.sendPayTemplateMessage(amount, data.prepay_id, outTradeNo)
           },
           fail: function (res) {
             // fail
@@ -180,6 +185,42 @@ App({
         }
       }
     })
+  },
+
+  sendPayTemplateMessage(amount, prepay_id, outTradeNo) {
+    ajax.postApi('mini/program/template/send', {
+      app_area: this.globalData.platformAppArea,
+      open_id: this.globalData.openId,
+      app_id: this.globalData.appId,
+      form_id: prepay_id,
+      template_id: 'DTGvbIKR3jTMKI1YdlyqREpIUYlsm6pF6aNNACV63Rk',
+      template_data: JSON.stringify({
+        keyword1: {
+          value: this.globalData.memberInfo.user_nickname
+        },
+        keyword2: {
+          value: amount + ''
+        },
+        keyword3: {
+          value: util.getFormatDate(0)
+        },
+        keyword4: {
+          value: outTradeNo
+        },
+        keyword5: {
+          value: '如有问题请咨询客服'
+        },
+      }),
+    }, (err, res) => {
+      if (res && res.success) {
+
+      } else {
+        wx.showToast({
+          title: res.text,
+          duration: 1000
+        })
+      }
+    })	
   },
 
   globalData: {

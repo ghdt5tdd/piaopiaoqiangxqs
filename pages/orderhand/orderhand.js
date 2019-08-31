@@ -14,8 +14,8 @@ Page({
     query: {
       orderNo: '',
       state: 1,
-      startDate: '',
-      endDate: '',
+      // startDate: '',
+      // endDate: '',
       clientAccount: '',
       page: 1,
       pageSize: 10,
@@ -31,7 +31,7 @@ Page({
     }, {
       name: "已转发货运单",
       value: 0
-    },],
+    }],
     selectStatus: 0,
     ul: "ul-2",
 
@@ -175,8 +175,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setNowDate();
-    this.resetQuery()
+    // this.setNowDate();
+    // this.resetQuery()
     this.getOrder()
     this.getLocation()
   },
@@ -276,7 +276,6 @@ Page({
     let page = this.data.query.page
     const pageSize = this.data.query.pageSize
     const loadCompleted = this.data.query.loadCompleted
-    console.log(page, pageSize)
     if (!loadCompleted) {
       wx.showLoading({
         title: '更多运单加载中...',
@@ -304,7 +303,8 @@ Page({
 
     const state = this.data.query.state
     ajax.getApi('mini/program/order/getDriverReceive', {
-      ...this.data.query
+      ...this.data.query,
+      getAllAreaData: 1
     }, (err, res) => {
       wx.hideLoading()
       if (res && res.success) {

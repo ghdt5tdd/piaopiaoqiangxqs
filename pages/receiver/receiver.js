@@ -137,9 +137,11 @@ Page({
       if (shopOrderDetail.is_pay == 1) {
         return this.showSign(index)
       } else {
-        wx.showToast({
-          title: '暂不支持支付',
-        })
+        return this.showSign(index)
+        // wx.showToast({
+        //   title: '暂不支持支付',
+        // })
+
         // const amount = shopOrderDetail.amount || 0
         // const consignee_arrive_pay_amount = shopOrderDetail.consignee_arrive_pay_amount || 0
         // const debours_amount = shopOrderDetail.debours_amount || 0
@@ -149,7 +151,7 @@ Page({
         //     + '&debours_amount=' + debours_amount
         //     + '&id=' + shopOrderDetail.id
         // })
-        return;
+        // return;
       }
     } else {
       return this.showSign(index)
