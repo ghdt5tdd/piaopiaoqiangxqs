@@ -3,7 +3,7 @@
   <view class='orderinfo-bar-head'>
     <view class='orderinfo-bar-id'>
       订单号
-      <text>{{bookingOrder.code}}</text>
+      <text>{{bookingOrder.code || '无'}}</text>
     </view>
     <view class='orderinfo-bar-time'>{{bookingOrder.create_date}}</view>
   </view>
@@ -11,7 +11,7 @@
    
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>预约时间</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.booking_time}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.booking_time || '无'}}</view>
     </view>
   </view>
 </view>
@@ -23,16 +23,16 @@
   <view class='orderinfo-receive'>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系人</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consignee_man}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_man || '无'}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>收货单位</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consignee_name}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_name || '无'}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系电话</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consignee_phone}}</view>
-      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.consignee_phone}}">
+      <view class='orderinfo-line-info'>{{bookingOrder.consignee_phone || '无'}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.consignee_phone}}" wx:if="{{bookingOrder.consignee_phone}}">
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
     <view class='orderinfo-receive-line'>
@@ -49,16 +49,16 @@
   <view class='orderinfo-receive'>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系人</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consigner_man}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consigner_man || '无'}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>发货单位</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consigner_name}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.consigner_name || '无'}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系电话</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.consigner_phone}}</view>
-      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.consigner_phone}}">
+      <view class='orderinfo-line-info'>{{bookingOrder.consigner_phone || '无'}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.consigner_phone}}" wx:if="{{bookingOrder.consigner_phone}}">
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
     <view class='orderinfo-receive-line'>
@@ -77,19 +77,19 @@
   <view class='orderinfo-cargo'>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物名称：</view>
-      <view class='orderinfo-cargo-info'>{{bookingOrder.goods_class_name}}</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.goods_class_name || '无'}}</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物件数：</view>
-      <view class='orderinfo-cargo-info'>{{bookingOrder.total_packing_quantity}}件</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.total_packing_quantity || '无'}}件</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物重量：</view>
-      <view class='orderinfo-cargo-info'>{{bookingOrder.total_weight}}kg</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.total_weight || '无'}}kg</view>
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>货物包装：</view>
-      <view class='orderinfo-cargo-info'>{{bookingOrder.pack}}</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.pack || '无'}}</view>
     </view>
     <view class='orderinfo-cargo-item' wx:if="{{bookingOrder.settlement_mode_text}}">
       <view class='orderinfo-cargo-label'>付款方式：</view>
@@ -101,7 +101,7 @@
     </view>
     <view class='orderinfo-cargo-item'>
       <view class='orderinfo-cargo-label'>备注信息：</view>
-      <view class='orderinfo-cargo-info'>{{bookingOrder.remark}}</view>
+      <view class='orderinfo-cargo-info'>{{bookingOrder.remark || '无'}}</view>
     </view>
   </view>
 
@@ -117,16 +117,16 @@
    <view class='orderinfo-receive'>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>承运商</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.carrier_name}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.carrier_name || '无'}}</view>
     </view>
         <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系人</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.carrier_contact_man}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.carrier_contact_man || '无'}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系电话</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.carrier_contact_way}}</view>
-      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.carrier_contact_way}}">
+      <view class='orderinfo-line-info'>{{bookingOrder.carrier_contact_way || '无'}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.carrier_contact_way}}" wx:if="{{bookingOrder.carrier_contact_way}}">
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
   </view> 
@@ -139,12 +139,12 @@
   <view class='orderinfo-receive'>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>姓名</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.driver_full_name}}</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.driver_full_name || '无'}}</view>
     </view>
     <view class='orderinfo-receive-line'>
       <view class='orderinfo-line-label'>联系电话</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.driver_mobile}}</view>
-      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.driver_mobile}}">
+      <view class='orderinfo-line-info'>{{bookingOrder.driver_mobile || '无'}}</view>
+      <view class='orderinfo-line-call' bindtap='call' data-tel="{{bookingOrder.driver_mobile}}" wx:if="{{bookingOrder.driver_mobile}}">
         <image src='../../images/call.png'></image>拨打电话</view>
     </view>
   </view>

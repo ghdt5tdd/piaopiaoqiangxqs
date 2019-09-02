@@ -8,15 +8,15 @@
     <view class='order-bar' wx:for="{{bookingOrders}}" wx:key="id" bindtap='toInfo' data-id="{{item.id}}" >
       <view class='order-bar-head'>
         <view class='order-bar-id'>订单
-          <text>{{item.code}}</text>
+          <text>{{item.code || '无'}}</text>
         </view>
         <view class='order-bar-time'>{{item.create_date}}</view>
       </view>
       <view class='order-bar-content'>
         <view class='order-bar-info'>
           <view class='order-bar-send'>
-            <view class='order-bar-city'>{{item.consigner_city_name}}</view>
-            <view>{{item.consigner_man}}</view>
+            <view class='order-bar-city'>{{item.consigner_city_name || '无'}}</view>
+            <view>{{item.consigner_man || '无'}}</view>
           </view>
           <view class='order-bar-status s1'>
             <text class='order-bar-line'></text>
@@ -28,18 +28,18 @@
             </block>
           </view>
           <view class='order-bar-recive'>
-            <view class='order-bar-city'>{{item.consignee_city_name}}</view>
-            <view>{{item.consignee_man}}</view>
+            <view class='order-bar-city'>{{item.consignee_city_name || '无'}}</view>
+            <view>{{item.consignee_man || '无'}}</view>
           </view>
         </view>
         
 
         <view class='order-bar-cargo'>
-          <view>货物类型：{{item.goods_class_name}}</view>
-          <view>货物件数：{{item.total_packing_quantity}}件</view>
+          <view>货物类型：{{item.goods_class_name || '无'}}</view>
+          <view>货物件数：{{item.total_packing_quantity || '0'}}件</view>
         </view>
         <view class='order-bar-cargo'>
-          承运商：{{item.carrier_name}}
+          承运商：{{item.carrier_name || '无'}}
         </view>
 
       </view>

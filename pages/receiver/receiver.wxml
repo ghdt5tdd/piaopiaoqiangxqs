@@ -37,17 +37,17 @@
           <view class='order-table-content'>
               <view class='order-table-line' catchtap="toShopOrderInfo" data-id="{{item.id}}">
                 <view class='order-line-route'>
-                  <view class='order-route-point'>{{item.consignment_station_name}}</view>
+                  <view class='order-route-point'>{{item.consignment_station_name || '无'}}</view>
                   <image mode="widthFix" src="../../images/arrow.png"></image>
-                  <view class='order-route-point'>{{item.receiving_station_name}}</view>
+                  <view class='order-route-point'>{{item.receiving_station_name || '无'}}</view>
                 </view>
                 <view class='order-cargo-info'>
                   <image src="../../images/person.png"></image>
-                  <view>{{item.consignee_name}}收</view>
+                  <view>{{item.consignee_name || '无'}} 收</view>
                 </view>
                 <view class='order-cargo-info'>
                   <image src="../../images/cargo.png"></image>
-                  <view>{{item.goods_name}} {{item.total_packing_quantity}}件  {{item.total_weight}}kg {{item.total_volume}}m³</view>
+                  <view>{{item.goods_name || '无'}} {{item.total_packing_quantity || '0'}}件  {{item.total_weight || '0'}}kg {{item.total_volume}}m³</view>
                 </view>
               </view>
               <image class='order-table-to' src='../../images/w_next.png'></image>
@@ -157,17 +157,17 @@
           <view class='order-bar-cargo'>
             <view class='order-bar-dispatch'>
               <image src="../../images/w_send.png"></image>
-              <view>{{selectOrder.consigner_name}}寄</view>
+              <view>{{selectOrder.consigner_name || '无'}}寄</view>
               <view>{{selectOrder.consigner_tel}}</view>
             </view>
             <view class='order-bar-receive'>
               <image src="../../images/w_receive.png"></image>
-              <view>{{selectOrder.consignee_name}}收</view>
+              <view>{{selectOrder.consignee_name || '无'}}收</view>
               <view>{{selectOrder.consignee_tel}}</view>
             </view>
             <view class='order-bar-num'>
               <image src="../../images/cargo.png"></image>
-              <view>{{selectOrder.goods_name}} {{selectOrder.total_packing_quantity}}件 {{selectOrder.total_weight}}kg {{selectOrder.total_volume}}m³</view>
+              <view>{{selectOrder.goods_name || '无'}} {{selectOrder.total_packing_quantity || '0'}}件 {{selectOrder.total_weight || '0'}}kg {{selectOrder.total_volume || '0'}}m³</view>
             </view>
           </view>
         </view>
