@@ -1,65 +1,65 @@
 <!--pages/ordersearch/ordersearch.wxml-->
-<view class='query'>
-  <view class='query-condition'>
-    <block wx:for="{{queryItems}}">
-      <view class="query-condition-items  {{item.status?'active':''}}">
-        <view hidden="{{!item.status}}" class='query-conditions-name'>{{item.name}}</view>
-        <input placeholder="{{item.name}}" bindinput='bindInput' value='{{item.val}}' data-index="{{index}}" />
-        <image hidden='{{!item.status}}' class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-index="{{index}}"></image>
-      </view>
-    </block>
+<scroll-view scroll-y="true" style="height:100vh;" bindscroll="scroll">
+  <view class='query'>
+    <view class='query-condition'>
+      <block wx:for="{{queryItems}}">
+        <view class="query-condition-items">
+          <view class='query-conditions-name'>{{item.name}}</view>
+          <input placeholder="{{item.input}}" bindinput='bindInput' value='{{item.val}}' data-index="{{index}}" />
+          <image hidden='{{!item.status}}' class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-index="{{index}}"></image>
+        </view>
+      </block>
+    </view>
+    <view class='query-date'>
+      <block wx:for="{{queryDate}}">
+        <view class="query-date-items">
+          <view class='query-date-name'>{{item.name}}</view>
+          <view class='query-date-val' bindtap='showDate' data-index="{{index}}">{{item.val}}</view>
+          <image hidden='{{!item.status}}' class='search-clear' src="../../images/clear.png" bindtap='DateClear' data-index="{{index}}"></image>
+        </view>
+      </block>
+    </view>
+
+    <image class='query-filter' bindtap='showFilter' src='../../images/filter.png'></image>
+    <image class='query-search' src='../../images/search-big.png'></image>
+
   </view>
-  <view class='query-date'>
-    <block wx:for="{{queryDate}}">
-      <view class="query-date-items  {{item.status?'active':''}}">
-        <view hidden="{{!item.status}}" class='query-date-name'>{{item.name}}</view>
-        <view class='query-date-val' bindtap='showDate' data-index="{{index}}">{{item.val}}</view>
-        <image hidden='{{!item.status}}' class='search-clear' src="../../images/clear.png" bindtap='DateClear' data-index="{{index}}"></image>
-      </view>
-      <view class="query-date-items" wx:if="{{0 == index}}">至</view>
-    </block>
-  </view>
-  <image class='query-filter' bindtap='showFilter' src='../../images/filter.png'></image>
-  <image class='query-search' src='../../images/search-big.png'></image>
 
-</view>
-
-
-<scroll-view class="order-status" scroll-x="true" >
-  <view style='width:{{orderWidth}}'>
-    <block wx:for="{{orderStatus}}">
-      <view class="order-status-items  {{selectStatus == index?'on':''}}" bindtap='selectStatus' data-index="{{index}}">
-        {{item.name}}
-      </view>
-    </block>
-  </view>
-</scroll-view>
+  <scroll-view class="order-status {{fixedTop?'fixed':''}} " scroll-x="true">
+    <view style='width:{{orderWidth}}'>
+      <block wx:for="{{orderStatus}}">
+        <view class="order-status-items  {{selectStatus == index?'on':''}}" bindtap='selectStatus' data-index="{{index}}">
+          {{item.name}}
+        </view>
+      </block>
+    </view>
+  </scroll-view>
 
 
 
-<scroll-view scroll-y="true" style="height:calc(100% - 302rpx);position:fixed;top:302rpx;bottom:0">
-<view class='order-table'>
-  <block wx:for="{{orderTable}}">
-    <view class="order-table-items">
-      <view class='order-table-head'>
-        <view class='order-table-id'>订单号：{{item.id}}</view>
-        <view class='order-table-time'>{{item.time}}</view>
-      </view>
-      <view class='order-table-content'>
-        <view class='order-table-bar' wx:for="{{item.bar}}">
-          <view class='order-bar-content'>
-            <view class='order-bar-info' wx:for="{{item.info}}">
-              <view class='order-bar-label' wx:if="{{item.label != ''}}">{{item.label}}：</view>
-              <view class='order-bar-name'>{{item.name}}</view>
+
+  <view class='order-table'>
+    <block wx:for="{{orderTable}}">
+      <view class="order-table-items">
+        <view class='order-table-head'>
+          <view class='order-table-id'>订单号：{{item.id}}</view>
+          <view class='order-table-time'>{{item.time}}</view>
+        </view>
+        <view class='order-table-content'>
+          <view class='order-table-bar' wx:for="{{item.bar}}">
+            <view class='order-bar-content'>
+              <view class='order-bar-info' wx:for="{{item.info}}">
+                <view class='order-bar-label' wx:if="{{item.label != ''}}">{{item.label}}：</view>
+                <view class='order-bar-name'>{{item.name}}</view>
+              </view>
             </view>
+            <view class='order-bar-opt' bindtap='toNode'>{{item.opt}}</view>
           </view>
-          <view class='order-bar-opt' bindtap='toNode'>{{item.opt}}</view>
         </view>
       </view>
-    </view>
-  </block>
+    </block>
 
-</view>
+  </view>
 
 </scroll-view>
 

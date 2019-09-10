@@ -6,25 +6,27 @@ Page({
    */
   data: {
     queryItems: [{
-      name: "请输入订单号",
+      name: "订单号",
+      input: "请输入订单号",
       status: false,
       val: "",
     }, {
-      name: "请输入物料编号",
+      name: "物料编号",
+      input: "请输入物料编号",
       status: false,
       val: "",
     }],
 
     queryDate: [{
-      name: "请选择开始时间",
+      name: "开始日期",
       status: false,
-      val: "请选择开始时间",
+      val: "请选择开始日期",
     }, {
-      name: "请选择结束时间",
+      name: "结束日期",
       status: false,
-      val: "请选择结束时间",
+      val: "请选择结束日期",
     }],
-
+    fixedTop: false,
 
     hideFilter: true,
     hide: true,
@@ -455,14 +457,36 @@ Page({
   },
 
 
+  //页面整体滚动
+  scroll: function (e) {
+    let scrollTop = this.data.scrollTop
+    let fixedTop = e.detail.scrollTop - wx.getStorageSync('fixedTop')
+    //+ (112 / 750 * wx.getSystemInfoSync().windowWidth)
 
+    // 是否固定住
+    if (fixedTop > 0) {
+      this.setData({
+        fixedTop: true
+      })
+    } else {
+      this.setData({
+        fixedTop: false
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    let query = wx.createSelectorQuery()
+    query.select('.order-status').boundingClientRect(function (rect) {
+      var fixedTop = rect.top
+      wx.setStorageSync('fixedTop', fixedTop)
+    }).exec()
 
   },
+
 
   /**
    * 生命周期函数--监听页面显示

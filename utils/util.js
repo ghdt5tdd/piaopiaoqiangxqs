@@ -64,10 +64,7 @@ function handleImgUrl (obj, imgKey) {
   }
 }
 
-function addDate(datestr, days) {
-  if (days == undefined || days == '') {
-    days = 1;
-  }
+function addDate(datestr, days = 1) {
   var date = datestr
   if(datestr instanceof String) {
     date = new Date(datestr);

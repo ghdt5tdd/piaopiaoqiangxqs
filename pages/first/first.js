@@ -120,7 +120,7 @@ Page({
       wx.navigateTo({ 
         url: '../transportdetail/transportdetail?id=' + shopOrderId
       })
-      return;
+       return;
     }
 
     //司机

@@ -1,5 +1,7 @@
 <!--pages/home/home.wxml-->
-<view class='search-group'>
+
+<scroll-view scroll-y="true" style="height:100vh;" bindscroll="scroll" bindscrolltolower="lower">
+<!-- <view class='search-group'>
   <view class='search-bar w-6'>
     <view class='search-label'>物流公司</view>
     <view class='search-info'>
@@ -21,10 +23,33 @@
     </view>
   </view>
   
+</view> -->
+
+<view class='query'>
+  <view class='query-condition'>
+      <view class="query-condition-items">
+        <view class='query-conditions-name'>物流公司</view>
+        <input placeholder="输入发货人查询" bindinput='bindInput' value="{{query.companyName}}" data-key="companyName"  />
+        <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="companyName"></image>
+      </view>
+
+      <view class="query-condition-items">
+        <view class='query-conditions-name'>发货人</view>
+        <input placeholder="请输入物流公司" bindinput='bindInput' value="{{query.consignerName}}" data-key="consignerName"  />
+        <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="consignerName"></image>
+      </view>
+
+      <view class="query-condition-items">
+        <view class='query-conditions-name'>货运单号</view>
+        <input placeholder="输入货运单号查询" bindinput='bindInput' value="{{query.orderNo}}" data-key="orderNo"  />
+        <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="orderNo"></image>
+      </view>
+  </view>
+  <image class='query-search' src='../../images/search-big.png' bindtap="search"></image>
 </view>
 
 
-<view class='order-status ul-3'>
+<view class="order-status ul-3  {{fixedTop?'fixed':''}}">
   <block wx:for="{{orderStatus}}" wx:key="value">
     <view class="order-status-items  {{query.state == item.value?'on':''}}" bindtap='selectStatus' data-state="{{item.value}}">
       {{item.name}}
@@ -32,7 +57,6 @@
   </block>
 </view>
 
-<scroll-view scroll-y="true" style="height:calc(100vh - 406rpx);">
   <view class='card-box'>
     <view class='order-table'>
       <block wx:for="{{orders}}" wx:key="id">

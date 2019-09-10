@@ -10,11 +10,14 @@ Page({
   data: {
     x: undefined,
     y: undefined,
+    fixedTop: false,
     memberInfo: null,
     selectOrder: null,
     getlocation: true,
     query: {
       orderNo: '',
+      companyName: '',
+      consignerName: '',
       state: 0,
       // startDate: '',
       // endDate: '',
@@ -232,6 +235,16 @@ Page({
     })
   },
 
+  //清除筛选条件
+  conditionClear: function (e) {
+    const key = e.currentTarget.dataset.key
+    this.data.query[key] = ''
+
+    this.setData({
+      query: this.data.query,
+    })
+  },
+
   //输入筛选条件
   bindActualNumberInput: function (e) {
     this.setData({
@@ -245,17 +258,6 @@ Page({
     })
   },
 
-  //清除筛选条件
-  conditionClear: function (e) {
-    var index = e.currentTarget.dataset.index
-    var queryItems = this.data.queryItems
-    queryItems[index].status = false
-    queryItems[index].val = ''
-
-    this.setData({
-      queryItems: queryItems,
-    })
-  },
 
   //打开日历
   showDate: function (e) {
@@ -815,19 +817,35 @@ Page({
     }
   },
 
+  //页面整体滚动
+  scroll: function (e) {
+    let scrollTop = this.data.scrollTop
+    let fixedTop = e.detail.scrollTop - wx.getStorageSync('fixedTop')
+    //+ (112 / 750 * wx.getSystemInfoSync().windowWidth)
 
-
-
-
-
+    // 是否固定住
+    if (fixedTop > 0) {
+      this.setData({
+        fixedTop: true
+      })
+    } else {
+      this.setData({
+        fixedTop: false
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
-  },
+    let query = wx.createSelectorQuery()
+    query.select('.order-status').boundingClientRect(function (rect) {
+      var fixedTop = rect.top
+      wx.setStorageSync('fixedTop', fixedTop)
+    }).exec()
 
+  },
   /**
    * 生命周期函数--监听页面显示
    */
