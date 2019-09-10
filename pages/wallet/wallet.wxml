@@ -18,7 +18,7 @@
   </block>
 </view>
 
-<scroll-view scroll-y="true" class='wallet-record' style="height:calc(100%);position:fixed;"  bindscrolltolower="lower">
+<scroll-view scroll-y="true" class='wallet-record' style="position:fixed;"  bindscrolltolower="lower">
   <view class='wallet-record-item' wx:for="{{record}}" wx:key="item.id">
     <view class='wallet-record-left'>
       <view class='wallet-record-name'>{{item.remark}}</view>
