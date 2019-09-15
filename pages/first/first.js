@@ -1,7 +1,9 @@
 // pages/first/first.js
-const app = getApp()
 const ajax = require('../../utils/ajax.js')
 const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
+const app = getApp()
+
 Page({
 
   /**
@@ -13,7 +15,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     banner: [],
     interval: 5000,
-    duration: 1000, 
+    duration: 1000,
+    role: false,  
     logistics: [{
       'status': '在途中',
       'detail': [{
@@ -37,7 +40,8 @@ Page({
         'logtime': '20:26',
       },],
     },],
-
+    banner: [],
+    getBanner: false, 
     shopOrderId:'',
     forwarder: "浙江华安物流",
     ac:'',
@@ -79,6 +83,9 @@ Page({
     } else {
       app.globalData.userInfo = userInfo
       app.bindMember(userInfo, () => {
+        if (!this.data.getBanner) {
+          this.getBanner()
+        }
         this.getShopOrderDetail(this.data.shopOrderId)
       })
 
@@ -193,16 +200,20 @@ Page({
           })
           return;
         } else {
-          const amount = this.data.shopOrderDetail.amount || 0
-          const consignee_arrive_pay_amount = this.data.shopOrderDetail.consignee_arrive_pay_amount || 0
-          const debours_amount = this.data.shopOrderDetail.debours_amount || 0
           wx.navigateTo({
-            url: '../pay/pay?amount=' + amount
-              + '&consignee_arrive_pay_amount=' + consignee_arrive_pay_amount
-              + '&debours_amount=' + debours_amount
-              + '&id=' + this.data.shopOrderDetail.id
+            url: '../sign/sign?id=' + this.data.shopOrderId
           })
           return;
+          // const amount = this.data.shopOrderDetail.amount || 0
+          // const consignee_arrive_pay_amount = this.data.shopOrderDetail.consignee_arrive_pay_amount || 0
+          // const debours_amount = this.data.shopOrderDetail.debours_amount || 0
+          // wx.navigateTo({
+          //   url: '../pay/pay?amount=' + amount
+          //     + '&consignee_arrive_pay_amount=' + consignee_arrive_pay_amount
+          //     + '&debours_amount=' + debours_amount
+          //     + '&id=' + this.data.shopOrderDetail.id
+          // })
+          // return;
         }
       } else {
         wx.navigateTo({
@@ -290,14 +301,26 @@ Page({
       if (res && res.success) {
         let ac = this.data.ac
         let acText = this.data.acText
+        let role = false
         //判断当前用户手机号与收件人手机号是否一致，一致则强制判断该用户动作为签收
         const phone = app.globalData.memberInfo.phone
         const consignee_tel = res.data.consignee_tel
+        //司机电话
+        const xxxxx = res.data.xxxxx 
+        if (phone && xxxxx && xxxxx.indexOf(phone) !== -1) {
+          ac = 'jj'
+          acText = this.getAcText(ac)
+          role = true
+        }
+
         if (phone && consignee_tel && consignee_tel.indexOf(phone) !== -1) {
           ac = 'qs'
           acText = this.getAcText(ac)
+          role = true
         }
         const shoporderDetail = res.data
+
+        shoporderDetail.consignee_name = this.noPassByName(shoporderDetail.consignee_name)
         const shareData = {
           orderId: shoporderDetail.bill_no,
           send: shoporderDetail.consigner_unit,
@@ -309,9 +332,10 @@ Page({
           sendTime: shoporderDetail.bill_date
         }
         this.setData({
-          shopOrderDetail: res.data,
+          shopOrderDetail: shoporderDetail,
           ac,
           acText,
+          role,
           shareData
         }, () => {
           const shareDataCompoent = this.selectComponent("#shareData")
@@ -377,7 +401,7 @@ Page({
     }
     const scanUrl = decodeURIComponent(options.q)
     const shopOrderId = util.getQueryString(scanUrl, 'id')
-    const ac = util.getQueryString(scanUrl, 'ac') || 'jj'
+    const ac = util.getQueryString(scanUrl, 'ac')
 
     if (!shopOrderId) {
       wx.showToast({
@@ -393,8 +417,10 @@ Page({
 
     let acText = this.getAcText(ac)
 
-    if (acText === 'error') {
-      return;
+    if (acText === 'none') {
+      this.setData({
+        role: false
+      })
     }
 
     this.setData({
@@ -406,6 +432,7 @@ Page({
     util.callIf(() => {
       this.getNodeDataByShopOrder(shopOrderId)
       this.getShopOrderDetail(shopOrderId)
+      this.getBanner()
     }, () => {
       return app.globalData.memberInfo !== null
     })
@@ -419,9 +446,58 @@ Page({
       case 'jj':
         return '一键交接'
       default:
-        return 'error'
+        return 'none'
     }
   },
+
+  // 星号处理名称
+  noPassByName(str) {
+    if (null != str && str != undefined) {
+      if (str.length <= 3) {
+        return "*" + str.substring(1, str.length);
+      } else if (str.length > 3 && str.length <= 6) {
+        return "**" + str.substring(2, str.length);
+      } else if (str.length > 6) {
+        return str.substring(0, 2) + "****" + str.substring(6, str.length)
+      }
+    } else {
+      return "";
+    }
+  },
+
+
+  getBanner() {
+    const banner = storage.get('banner')
+    console.log(banner)
+    if (banner) {
+      this.setData({
+        banner
+      })
+    } else {
+      ajax.getApi('mini/program/member/getBanner', { banner_type: 1 }, (err, res) => {
+        if (res && res.success) {
+          this.setData({
+            getBanner: true
+          })
+          if (res.data.length > 0) {
+            util.handleImgUrl(res.data, 'banner_img')
+            this.setData({
+              banner: res.data
+            })
+            storage.put('banner', res.data, 60 * 60 * 24)
+          }
+        } else {
+          if (res.text) {
+            wx.showToast({
+              title: res.text,
+              duration: 1000
+            })
+          }
+        }
+      })
+    }
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

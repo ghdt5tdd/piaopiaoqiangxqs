@@ -133,6 +133,13 @@ Page({
     })
   },
 
+  //承运商选择
+  toCompany: function (e) {
+    wx.navigateTo({
+      url: '../company/company?getInfoAble=true'
+    })
+  },
+
   getDateStr(addDay) {
     var result_date = new Date();
     result_date.setDate(result_date.getDate() + addDay);//获取AddDayCount天后的日期

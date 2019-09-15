@@ -1,18 +1,18 @@
 <!--pages/first/first.wxml-->
 <swiper class='card-bg' autoplay="true" interval="{{interval}}" wx:if="{{banner.length > 0}}" duration="{{duration}}" circular="true">
-  <block wx:for="{{banner}}" wx:key="key">
+  <block wx:for="{{banner}}" wx:key="id">
     <swiper-item>
       <view class='banner-box'>
-        <image mode='aspectFill' src="{{item.pic}}" class="slide-image" />
+        <image mode='aspectFill' src="{{item.banner_img}}" class="slide-image" />
       </view>
     </swiper-item>
   </block>
 </swiper>
 
-<scroll-view scroll-y class='card-order' wx:if="{{shopOrderDetail}}">
+<scroll-view scroll-y class="card-order  {{role?'':'full'}}" wx:if="{{shopOrderDetail}}">
   <view class="order-table-items">
     <view class='order-table-head'>
-      <view class='order-table-id'>企业名称：{{shopOrderDetail.area_name}}</view>
+      <view class='order-table-id'>物流公司：{{shopOrderDetail.area_name}}</view>
     </view>
     <view class='order-table-head'>
       <view class='order-table-id'>货运单号：{{shopOrderDetail.bill_no}}</view>
@@ -85,11 +85,13 @@
   </button>
 </view>
 <view wx:else>
-  <block wx:if="{{shopOrderDetail}}">
-  <view class='button-tip'>
-    <view bindtap='toDetail'>点击查看运单详情 </view>
-  </view>
-  <view wx:if="{{shopOrderDetail.is_sign && shopOrderDetail.is_sign !== '1'}}" class='button-bottom' bindtap='toSign'>{{acText}}</view>
+  <block wx:if="{{shopOrderDetail && role}}">
+    <view class='button-tip'>
+      <view bindtap='toDetail'>点击查看运单详情 </view>
+    </view>
+    <view wx:if="{{shopOrderDetail.is_sign && shopOrderDetail.is_sign !== '1'}}" class='button-bottom' bindtap='toSign'>
+      {{acText}}   
+    </view>
   </block>
 </view>
 <share-canvas id="shareData" share-data="{{shareData}}"></share-canvas>

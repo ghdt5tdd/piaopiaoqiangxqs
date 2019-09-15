@@ -19,7 +19,7 @@
 
   <cover-view class='search'>
     <cover-view class='input' data-plate="{{plateli}}" bindtap='showTruck'>
-      <cover-view class='input-placeholder' wx:if="{{placeholder}}">请选择车牌号码</cover-view>
+      <cover-view class='input-placeholder' wx:if="{{!plateone}}">请选择车牌号码</cover-view>
       <cover-view wx:else>{{plateone}}{{platetwo}}</cover-view>
     </cover-view>
     <cover-image class="delete-btn" hidden='{{hideClear}}' bindtap='clearTruck' src="../../images/clear.png" />

@@ -376,7 +376,7 @@ Page({
             result.lat = tLocation[1]
             
             const rotate = - ((360 - 90) - parseInt(result.drc))
-            result.utc = util.getFormatDate(1, result.utc)
+            result.utc = util.formatDate(parseInt(result.utc))
             result.drc = this.getDrcText(result.drc)
             this.setData({
               locationDetail: result,

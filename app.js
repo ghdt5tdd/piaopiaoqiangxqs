@@ -202,7 +202,7 @@ App({
           value: amount + ''
         },
         keyword3: {
-          value: util.getFormatDate(0)
+          value: util.formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss')
         },
         keyword4: {
           value: outTradeNo

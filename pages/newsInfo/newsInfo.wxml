@@ -1,0 +1,57 @@
+<!--pages/news/news.wxml-->
+<scroll-view scroll-y="true" scroll-into-view="{{toView}}" style="height:calc(100%- 100rpx);position:fixed;top:0;bottom:100rpx;" bindscrolltolower="lower">
+  <view class='news-name' id="title">{{newsInfo.title}}</view>
+  <view class='news-head'>
+    <view>{{newsInfo.nav_name}}</view>
+    <view class='news-time'>{{newsInfo.create_date}}</view>
+  </view>
+  <view class='news-content'>
+    <view class='news-info' >
+      <rich-text nodes="{{newsInfo.content}}"></rich-text>
+    </view>
+  </view>
+  <view class='news-comment' id="comment">
+    <view class='news-comment-num'>全部评价({{newsInfo.commentNum}})</view>
+    <view>
+      <view class='news-comment-item' wx:for="{{newsComment}}" wx:for-index="index" wx:key="id">
+        <image class='news-comment-avatar' src='{{item.head_img}}'></image>
+        <view class='news-comment-opt'>
+          <!-- <image wx:if="" bindtap='zan' data-is-zan="{{item.isLiked}}" data-comment-id="{{item.id}}" data-index="{{index}}" src='../../images/zan-r.png'></image> -->
+          <image bindtap='zan' data-is-zan="{{item.isLiked}}" data-comment-id="{{item.id}}" data-index="{{index}}"src='{{item.isLiked?"../../images/zan-r.png" : "../../images/zan.png"}}'></image>
+        </view>
+        <view class='news-comment-name'>{{item.user_nickname}}</view>
+        <view class='news-comment-time'>{{item.create_date}}</view>
+        <view class='news-comment-info'>{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+
+<view class='fixed-opt'>
+  <view class='fixed-opt-left' bindtap='showComment'>写评论...</view>
+  <view class='fixed-opt-right'>
+    <view class='fixed-opt-item' bindtap='collect' data-is-liked="{{newsInfo.isLiked}}" >
+      <image src="{{newsInfo.isLiked? '../../images/collect-r.png':'../../images/collect.png'}}"></image>
+      <view>{{newsInfo.likeNum}}</view>
+    </view>
+
+    <view class='fixed-opt-item' bindtap="toTitle">
+      <image src='../../images/comment.png'></image>
+      <view>{{newsInfo.commentNum}}</view>
+    </view>
+    <view class='fixed-opt-item'>
+      <image src='../../images/share.png'></image>
+      <view>分享</view>
+    </view>
+  </view>
+</view>
+
+<view class='pop-shadow' hidden="{{hide}}" bindtap='hide'></view>
+<view class='pop-comment' hidden='{{hideComment}}'>
+  <textarea placeholder='{{textComment}}' bindinput='writeComment'></textarea>
+  <view class='pop-comment-opt'>
+    <view bindtap='hide'>取消</view>
+    <view class='bg-blue' bindtap='commentNew'>发送</view>
+  </view>
+</view>

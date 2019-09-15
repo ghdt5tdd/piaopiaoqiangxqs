@@ -325,7 +325,7 @@ Page({
       hideSign: false,
       selectOrder: this.data.orders[index],
       selectIndex: index,
-      now: util.getFormatDate(1)
+      now: util.formatDate()
     }, () => {
       let isTimely = 1
       if (this.data.selectOrder.estimated_arrive_date) {

@@ -1,0 +1,22 @@
+<!--pages/newList/newList.wxml-->
+<scroll-view scroll-y="true" style="height:calc(100%);position:fixed;" bindscrolltolower="lower">
+<view class='news-content'>
+  <view class='news-block' wx:for="{{newsList}}" wx:key="id" >
+    <view class='news-headline'>
+      <view class='news-from'>
+        <image mode='aspectFill' src="{{item.logo}}" />
+        <view>{{item.from}}</view>
+      </view>
+      <view class='news-time'>{{item.create_date}}</view>
+    </view>
+    <view>
+      <view class='news-item'  bindtap='toDetail' data-id="{{item.id}}">
+        <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}"/>
+        <view class='news-name'>{{item.title}}</view>
+        <view class='news-spec'>{{item.nav_name}}</view>
+      </view>
+    </view>
+
+  </view>
+</view>
+</scroll-view>

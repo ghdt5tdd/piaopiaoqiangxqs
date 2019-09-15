@@ -1,0 +1,31 @@
+<!--pages/enterprise/enterprise.wxml-->
+<view class='enterprise-search'>
+  <input placeholder="请输入企业名称" class='search-input'  bindinput='bindQuery' bindconfirm="search"></input>
+  <icon type='search' size="16" bindtap='search'></icon>
+</view>
+
+<scroll-view scroll-y style="height:calc(100vh - 100rpx);" bindscrolltolower="lower">
+  <view class='enterprise-list overflow-h'>
+    <view class='enterprise-item' wx:for="{{forwarderList}}" wx:key="id" bindtap='toSend' data-index="{{index}}">
+      <view class='enterprise-head'>
+        <image class='enterprise-logo' src='{{item.logo_img}}'></image>
+        <view>{{item.company || '无名'}}</view>
+        <view class='enterprise-spec' catchtap='call' data-tel="{{item.contact_way}}">电话:
+          <text class='orange'>{{item.contact_way || '无'}}</text>
+        </view>
+      </view>
+      
+      <view class='enterprise-info'>
+        <view class='enterprise-bar'>
+          <view class='enterprise-bar-label'>主营业务:</view>
+          <view class='enterprise-bar-info'>{{item.service_items || '无'}}</view>
+        </view>
+        <view class='enterprise-bar'>
+          <view class='enterprise-bar-label'>企业地址:</view>
+          <view class='enterprise-bar-info'>{{item.address || '无'}}</view>
+          <image class='enterprise-bar-icon' src="../../images/icon-address.png" catchtap='navigation' data-location="{{item.address}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

@@ -1,10 +1,10 @@
 <!--pages/send/send.wxml-->
 <scroll-view scroll-y style='height:calc(100vh - 96rpx)'> 
 <view class='send-block'>
-  <view class='send-bar send-bar-forwarder'>
+  <view class='send-bar send-bar-forwarder' bindtap='toCompany'>
     <view class='send-bar-label'>物流商</view>
-    <view wx:if="{{carrier}}" class='send-bar-info' bindtap='toforwarder'>{{carrier.contact_man}}</view>
-    <view wx:else class='send-bar-info' bindtap='toforwarder'>请选择物流商</view>
+    <view wx:if="{{company}}" class='send-bar-info'>{{company.company}}</view>
+    <view wx:else class='send-bar-info' >请选择物流商</view>
     <image class='send-bar-next' src='../../images/w_next.png'></image>
   </view>
 </view>

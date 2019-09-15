@@ -166,7 +166,7 @@ Page({
       hideSign: false,
       selectOrder: this.data.shopOrders[index],
       selectIndex: index,
-      now: util.getFormatDate(1)
+      now: util.formatDate()
     }, () => {
       //有些运单没有预计到达时间，所以要判断，都改成及时
       let isTimely = 1
@@ -551,6 +551,7 @@ Page({
     const state = this.data.selectStatus
     const type = this.data.type
     const orderNo = this.data.orderNo
+    const companyName = this.data.companyName
     wx.showLoading({
       title: '查询中',
     })
@@ -559,6 +560,7 @@ Page({
       pageSize,
       type,
       orderNo,
+      branch_name: companyName,
       state,
       getAllAreaData: 1
     }, (err, res) => {

@@ -22,8 +22,16 @@ page {
                 0rpx 10rpx 10rpx #eee;
 }
 
+.card-order.full {
+  height: calc(100vh - 40rpx);
+}
+
 swiper~ .card-order {
   height: calc(100vh - 480rpx);
+}
+
+swiper~ .card-order.full {
+  height: calc(100vh - 280rpx);
 }
 
 .order-opt-node {

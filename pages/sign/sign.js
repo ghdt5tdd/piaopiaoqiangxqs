@@ -376,14 +376,13 @@ Page({
     const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
     this.calculateEmptyGrids(cur_year, cur_month);
     this.calculateDays(cur_year, cur_month);
-      now: util.getFormatDate(1)
     this.setData({
       cur_year,
       cur_month,
       cur_day,
       weeks_ch,
       todayIndex,
-      operatingTime: util.getFormatDate(1)
+      operatingTime: util.formatDate()
     })
   },
   getThisMonthDays(year, month) {

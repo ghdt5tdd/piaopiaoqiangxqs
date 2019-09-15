@@ -22,14 +22,17 @@ button::after {
 
 .bg-red {
   background: #e51c24 !important;
+  color: #fff !important;
 }
 
 .bg-orange {
   background: #ff5102 !important;
+  color: #fff !important;
 }
 
 .bg-blue {
   background: #2e8eff !important;
+  color: #fff !important;
 }
 
 .red {

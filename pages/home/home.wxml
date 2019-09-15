@@ -64,22 +64,22 @@
   <view class='news' wx:if="{{news.length > 0}}">
     <view class='news-title'>
       <view>新闻资讯</view>
-      <text>更多</text>
+      <text bindtap="toNews">更多</text>
     </view>
     <view class='news-content'>
-      <view class='news-block' wx:for="{{news}}" wx:key="key">
+      <view class='news-block' wx:for="{{news}}" wx:key="id">
         <view class='news-headline'>
           <view class='news-from'>
-            <image mode='aspectFill' src="{{item.logo}}" />
+            <image mode='aspectFill' src="{{item.banner_img}}" />
             <view>{{item.from}}</view>
           </view>
-          <view class='news-time'>{{item.time}}</view>
+          <view class='news-time'>{{item.create_date}}</view>
         </view>
         <view>
-          <view class='news-item' wx:for="{{item.info}}" wx:key="key">
-            <image class='news-pic' mode='aspectFill' src="{{item.pic}}" />
-            <view class='news-name'>{{item.name}}</view>
-            <view class='news-spec'>{{item.spec}}</view>
+          <view class='news-item' bindtap='toDetail' data-id="{{item.id}}">
+            <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}" />
+            <view class='news-name'>{{item.title}}</view>
+            <view class='news-spec'>{{item.nav_name}}</view>
           </view>
         </view>
 
@@ -88,10 +88,10 @@
   </view>
 
   <swiper class='ad' autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
-    <block wx:for="{{banner}}" wx:key="key">
+    <block wx:for="{{banner}}" wx:key="id">
       <swiper-item>
         <view class='banner-box'>
-          <image mode='aspectFill' src="{{item.pic}}" class="slide-image" />
+          <image mode='aspectFill' src="{{item.banner_img}}" class="slide-image" />
         </view>
       </swiper-item>
     </block>

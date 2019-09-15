@@ -17,25 +17,14 @@ Page({
     first: true, //第一次登录
 
 
-    banner: [ {
-      pic: "",
-    }],
+    banner: [],
+    getBanner: false, 
+    news: [],
+    getNews: false, 
     interval: 5000,
     duration: 1000,
 
-    news: [
-    //   {
-    //   logo: "",
-    //   from: "德力西物流",
-    //   time: "2019-07-08",
-    //   info: [{
-    //     pic: "",
-    //     name: "冷链为何上了政治局会议？城乡冷链物流建设将迎大发展",
-    //     spec: "立秋之后，辽宁盘锦的河蟹又将迎来销售旺季。曾在辽宁沈阳工作的小张，每逢中秋都要去一趟盘锦市，为家人买一些盘锦出产的河蟹，让家人尝尝鲜。每次买完，都用顺丰寄回老家山东，一般两天就能寄到。收到的时候，螃蟹还是活蹦乱跳的，家人煮了之后发照片给小张，小张觉得很幸福。远在辽宁的螃蟹，通过快递到了山东依然活蹦乱跳，冷链物流功不可没",
-    //   }],
-
-    // }
-    ],
+    news: [],
 
   },
 
@@ -52,12 +41,15 @@ Page({
   },
 
   toCarrier(e) {
-    wx.showToast({
-      title: '此模块暂不开放',
+    wx.navigateTo({
+      url: '../company/company',
     })
-    // wx.navigateTo({
-    //   url: '../receiver/receiver?type=' + type,
-    // })
+  },
+
+  toNews(e) {
+    wx.navigateTo({
+      url: '../newsList/newsList',
+    })
   },
 
   toShopOrder(e) {
@@ -80,7 +72,13 @@ Page({
     } else {
       app.globalData.userInfo = userInfo
       app.bindMember(userInfo, () => {
+        if (!this.data.getBanner) {
+          this.getBanner()
+        }
 
+        if (!this.data.getNews) {
+          this.getNews()
+        }
       })
 
       this.setData({
@@ -122,6 +120,66 @@ Page({
     }
   },
 
+  getBanner() {
+    const banner = storage.get('banner')
+    if(banner) {
+      this.setData({
+        banner
+      })
+    } else {
+      ajax.getApi('mini/program/member/getBanner', { banner_type : 1}, (err, res) => {
+        if (res && res.success) {
+          this.setData({
+            getBanner:true
+          })
+          if (res.data.length > 0) {
+            util.handleImgUrl(res.data, 'banner_img')
+            this.setData({
+              banner: res.data
+            })
+            storage.put('banner', res.data, 60 * 60 * 24)
+          }
+        } else {
+          if (res.text) {
+            wx.showToast({
+              title: res.text,
+              duration: 1000
+            })
+          }
+        }
+      })
+    }
+  },
+
+  getNews() {
+    const news = storage.get('news')
+    if (news) {
+      this.setData({
+        news
+      })
+    } else {
+      ajax.getApi('mini/program/member/getShopNewsList', { page: 1, pageSize : 5}, (err, res) => {
+        if (res && res.success) {
+          this.setData({
+            getNews: true
+          })
+          if (res.data.length > 0) { 
+            this.setData({
+              news: res.data
+            })
+            storage.put('news', res.data, 60 * 60 * 6)
+          }
+        } else {
+          if (res.text) {
+            wx.showToast({
+              title: res.text,
+              duration: 1000
+            })
+          }
+        }
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -151,8 +209,24 @@ Page({
     }, () => {
       return app.globalData.memberInfo !== null
     })
+
+    if (!this.data.getBanner) {
+      this.getBanner()
+    }
+
+    if (!this.data.getNews) {
+      this.getNews()
+    }
  
   },
+
+  //跳转到新闻详情页面
+  toDetail: function (e) {
+    wx.navigateTo({
+      url: '../newsInfo/newsInfo?id=' + e.currentTarget.dataset.id
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面隐藏
