@@ -1,5 +1,6 @@
 // pages/news/news.js
 const ajax = require('../../utils/ajax.js')
+const util = require('../../utils/util.js')
 const app = getApp()
 Page({
 
@@ -242,6 +243,7 @@ Page({
       wx.hideLoading()
       if (res && res.success) {
         const newsInfo = res.data
+        util.handleImgUrl(res.data, 'shop_logo_img')
         if (newsInfo.content) {
           newsInfo.content = this.formatRichText(newsInfo.content)
         }

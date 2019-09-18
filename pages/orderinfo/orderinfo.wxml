@@ -1,4 +1,17 @@
 <!--pages/orderinfo/orderinfo.wxml-->
+
+<view class='orderinfo-bar' wx:if="{{bookingOrder.consigner_man}}">
+  <view class='orderinfo-bar-head'>
+    物流商信息
+  </view>
+  <view class='orderinfo-receive'>
+    <view class='orderinfo-receive-line'>
+      <view class='orderinfo-line-label'>名称</view>
+      <view class='orderinfo-line-info'>{{bookingOrder.merchant_shop_name || '无'}}</view>
+    </view>
+  </view>
+</view>
+
 <view class='orderinfo-bar'>
   <view class='orderinfo-bar-head'>
     <view class='orderinfo-bar-id'>

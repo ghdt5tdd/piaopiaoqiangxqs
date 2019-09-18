@@ -306,8 +306,8 @@ Page({
         const phone = app.globalData.memberInfo.phone
         const consignee_tel = res.data.consignee_tel
         //司机电话
-        const xxxxx = res.data.xxxxx 
-        if (phone && xxxxx && xxxxx.indexOf(phone) !== -1) {
+        const driver_phone = res.data.driver_phone 
+        if (phone && driver_phone && driver_phone.indexOf(phone) !== -1) {
           ac = 'jj'
           acText = this.getAcText(ac)
           role = true

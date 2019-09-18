@@ -4,8 +4,8 @@
   <view class='news-block' wx:for="{{newsList}}" wx:key="id" >
     <view class='news-headline'>
       <view class='news-from'>
-        <image mode='aspectFill' src="{{item.logo}}" />
-        <view>{{item.from}}</view>
+        <image mode='aspectFill' src="{{item.shop_logo_img}}" />
+        <view>{{item.shop_name}}</view>
       </view>
       <view class='news-time'>{{item.create_date}}</view>
     </view>

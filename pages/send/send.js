@@ -43,6 +43,12 @@ Page({
     currentIndex: 0,
     currentTime: -1,
     timeArr: [{
+      "timeEnd": "07:00",
+      "overtime": false, //未超时可预约
+    }, {
+      "timeEnd": "09:00",
+      "overtime": false, //未超时可预约
+    }, {
       "timeEnd": "11:00",
       "overtime": false, //未超时可预约
     }, {
@@ -60,7 +66,10 @@ Page({
     }, {
       "timeEnd": "21:00",
       "overtime": false,
-    },],
+    }, {
+      "timeEnd": "23:00",
+      "overtime": false,
+    }],
 
     markFcous: false,
 
@@ -394,6 +403,7 @@ Page({
       const sendAddr = this.data.sendAddr
       const receiveAddr = this.data.receiveAddr || {}
       const carrier = this.data.carrier
+      const company = this.data.company
       const remark = this.data.remark
 
       const params = {
@@ -436,6 +446,11 @@ Page({
 
       if (carrier) {
         params.carrierId = carrier.id
+      }
+
+      if(company) {
+        params.merchant_app_area = company.shop_area
+        params.merchant_shop_id = company.id
       }
 
       const id = this.data.bookOrderId
@@ -607,6 +622,11 @@ Page({
           carrier: {
             contact_man: data.carrier_name,
             id: data.carrier_id
+          },
+          company: {
+            company: data.merchant_shop_name,
+            shop_area: data.merchant_app_area,
+            id: data.merchant_shop_id,
           },
           cargo: {
             cargoType: {

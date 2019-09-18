@@ -41,6 +41,9 @@
         <view class='order-bar-cargo'>
           承运商：{{item.carrier_name || '无'}}
         </view>
+        <view class='order-bar-cargo'>
+          物流商：{{item.merchant_shop_name || '无'}}
+        </view>
 
       </view>
 

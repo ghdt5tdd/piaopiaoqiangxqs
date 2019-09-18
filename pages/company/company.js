@@ -136,6 +136,7 @@ Page({
       if (res && res.success) {
         if (res.data.length > 0) {
           const forwarderList = this.data.forwarderList
+          util.handleImgUrl(res.data, 'logo_img')
           Array.prototype.push.apply(forwarderList, res.data)
           this.setData({
             forwarderList
