@@ -1,0 +1,73 @@
+<!--pages/enterprise/enterprise.wxml-->
+<view class='company-enterprise'>
+  <view class='enterprise-head'>
+    <image class='enterprise-logo' src='{{companyInfo.logo_img}}'></image>
+    <view>{{companyInfo.company}}</view>
+    <view class='enterprise-spec' bindtap='bookTel' data-tel="{{companyInfo.service_hotline}}">电话:
+      <text class='orange'>{{companyInfo.service_hotline}}</text>
+    </view>
+  </view>
+  <view class='enterprise-info'>
+    <view class='enterprise-bar'>
+      <view class='enterprise-bar-label'>主营业务:</view>
+      <view class='enterprise-bar-info'>{{companyInfo.service_items}}</view>
+    </view>
+    <view class='enterprise-bar' bindtap='navigation' data-location="{{companyInfo.address}}">
+      <view class='enterprise-bar-label'>企业地址:</view>
+      <view class='enterprise-bar-info'>{{companyInfo.address}}</view>
+      <image class='enterprise-bar-icon' src="../../images/icon-address.png"></image>
+    </view>
+  </view>
+</view>
+
+<view class='company-news'>
+  <view class='news-title'>物流新闻</view>
+  <view class='news-list'>
+    <view class='news-block' wx:for="{{news}}" wx:key="id">
+      <view class='news-headline'>
+        <view class='news-from'>
+          <image mode='aspectFill' src="{{item.shop_logo_img}}" />
+          <view>{{item.shop_name}}</view>
+        </view>
+        <!-- <view class='news-time'>{{item.time}}</view> -->
+      </view>
+      <view>
+        <view class='news-item'  bindtap='toInfo' data-id="{{item.id}}">
+          <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}" />
+          <view class='news-name'>{{item.title}}</view>
+          <view class='news-spec'>{{item.nav_name}}</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+<view class='company-network'>
+  <view class='network-title'>物流网点
+    <view>{{branchs.length || 0}}个</view>
+  </view>
+  <view class="network-list">
+    <view wx:for="{{branchs}}" wx:key="id" class="network-item" bindtap="networkMap" data-name="{{item.address}}">
+
+      <view class="network-name">
+        <view class="network-company">{{index+1}} {{item.name || '无名'}}</view>
+        <view class="network-other">
+          <view class="network-serve">
+            <!-- <text>服务：</text>{{item.serve}} -->
+          </view>
+          <view class="network-distance">{{item.distance || '0'}}km</view>
+        </view>
+      </view>
+
+      <view class="network-info">
+        <view>
+          <image class="network-icon" src="../../images/network-add.png" />{{item.address || '无'}}</view>
+        <view>
+          <image class="network-icon" src="../../images/network-tel.png" />{{item.contact_way || '无'}}</view>
+      </view>
+
+    </view>
+  </view>
+</view>

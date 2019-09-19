@@ -5,9 +5,9 @@
     物流商信息
   </view>
   <view class='orderinfo-receive'>
-    <view class='orderinfo-receive-line'>
+    <view class='orderinfo-receive-line' bindtap="toInfo">
       <view class='orderinfo-line-label'>名称</view>
-      <view class='orderinfo-line-info'>{{bookingOrder.merchant_shop_name || '无'}}</view>
+      <view class='orderinfo-line-info orange'>{{bookingOrder.merchant_shop_name || '无'}}</view>
     </view>
   </view>
 </view>

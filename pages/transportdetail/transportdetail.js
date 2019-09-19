@@ -376,7 +376,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    let url = "https://fall.wlhn.com/ppq?id=" + this.data.shopOrderDetail.id
+    let url = "https://fall.wlhn.com/ppq?id=" + this.data.shoporderDetail.id
     url = encodeURIComponent(url) 
     return {
       title: this.data.shoporderDetail.area_name,

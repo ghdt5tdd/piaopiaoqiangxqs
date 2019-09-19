@@ -54,6 +54,7 @@
     "pages/ordersign/ordersign",
     "pages/orderhand/orderhand",
     "pages/company/company",
+    "pages/companyInfo/companyInfo",
     "pages/newsInfo/newsInfo",
     "pages/newsList/newsList",
     "pages/orderinfo/orderinfo"

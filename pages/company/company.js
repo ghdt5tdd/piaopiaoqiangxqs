@@ -39,6 +39,10 @@ Page({
       prevPage.setData({
         company: this.data.forwarderList[index]
       })
+    } else {
+      wx.navigateTo({
+        url: '../companyInfo/companyInfo?id=' + this.data.forwarderList[index].id + '&app_area=' + this.data.forwarderList[index].shop_area,
+      })
     }
   },
 
@@ -76,6 +80,10 @@ Page({
       },
       fail: function (res) {
         console.log(res);
+        wx.showToast({
+          title: res.message,
+        })
+        return;
       },
       complete: function (res) {
         console.log(res);

@@ -10,8 +10,8 @@
       <view class='enterprise-head'>
         <image class='enterprise-logo' src='{{item.logo_img}}'></image>
         <view>{{item.company || '无名'}}</view>
-        <view class='enterprise-spec' catchtap='call' data-tel="{{item.contact_way}}">电话:
-          <text class='orange'>{{item.contact_way || '无'}}</text>
+        <view class='enterprise-spec' catchtap='call' data-tel="{{item.service_hotline}}">电话:
+          <text class='orange'>{{item.service_hotline || '无'}}</text>
         </view>
       </view>
       

@@ -30,6 +30,12 @@ Page({
     
   },
 
+  toInfo: function(e) {
+    wx.navigateTo({
+      url: '../companyInfo/companyInfo?id=' + this.data.bookingOrder.merchant_shop_id + '&app_area=' + this.data.bookingOrder.merchant_app_area,
+    })
+  },
+
   //拨打电话
   call: function(e) {
     wx.makePhoneCall({

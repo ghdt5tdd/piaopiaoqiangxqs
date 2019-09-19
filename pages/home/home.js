@@ -210,13 +210,20 @@ Page({
       return app.globalData.memberInfo !== null
     })
 
-    if (!this.data.getBanner) {
-      this.getBanner()
-    }
 
-    if (!this.data.getNews) {
-      this.getNews()
-    }
+    util.callIf(() => {
+      if (!this.data.getBanner) {
+        this.getBanner()
+      }
+
+      if (!this.data.getNews) {
+        this.getNews()
+      }
+    }, () => {
+      return app.globalData.memberInfo !== null
+    })
+
+ 
  
   },
 

@@ -5,6 +5,7 @@ const md5 = require('utils/md5.js')
 App({
   onLaunch: function (e) {
     this.checkUpdate()
+    this.setGlobalShareSetting()
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -221,6 +222,28 @@ App({
         })
       }
     })	
+  },
+
+  setGlobalShareSetting() {
+    wx.onAppRoute(res => {
+      //获取加载的页面
+      const pages = getCurrentPages()
+      //获取当前页面的对象
+      const view = pages[pages.length - 1]
+      if (view) {
+        const route = view.route
+        //onShareAppMessage()返回undefined说明此页面没有做特定分享操作，则统一使用默认分享
+        if (!view.onShareAppMessage || view.onShareAppMessage() === undefined) {
+          view.onShareAppMessage = function () {
+            return {
+              "title": "票票签",
+              "imageUrl": "http://sping-cloud-fall.oss-cn-shanghai.aliyuncs.com/wlhn/wxmini/resource/ppq.png",
+              "path": "pages/home/home"
+            }
+          } 
+        }
+      }
+    })
   },
 
   globalData: {
