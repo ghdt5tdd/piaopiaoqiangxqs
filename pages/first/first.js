@@ -87,6 +87,7 @@ Page({
           this.getBanner()
         }
         this.getShopOrderDetail(this.data.shopOrderId)
+        this.getNodeDataByShopOrder(this.data.shopOrderId)
       })
 
       this.setData({
@@ -545,6 +546,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    if (!this.data.shopOrderDetail) {
+      return {
+        "title": "票票签",
+        "imageUrl": "http://sping-cloud-fall.oss-cn-shanghai.aliyuncs.com/wlhn/wxmini/resource/ppq.png",
+        "path": "pages/home/home"
+      }
+    }
     let url = "https://fall.wlhn.com/ppq?id=" + this.data.shopOrderDetail.id
     url = encodeURIComponent(url) 
     return {

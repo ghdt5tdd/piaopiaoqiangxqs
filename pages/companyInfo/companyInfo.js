@@ -20,10 +20,15 @@ Page({
     news: [],
     branchs:[],
     page: 1,
-    pageSize: 10,
+    pageSize: 50,
     loadCompleted: false,
   },
 
+  preview(e) {
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.img],
+    })
+  },
 
 
   //拨打电话
@@ -203,7 +208,7 @@ Page({
       this.setData({
         page
       }, () => {
-        this.getMiniShopOrderList()
+        this.getBranch()
       })
     } else {
       wx.showToast({

@@ -46,6 +46,12 @@ Page({
     })
   },
 
+  preview(e) {
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.img],
+    })
+  },
+
   toNews(e) {
     wx.navigateTo({
       url: '../newsList/newsList',

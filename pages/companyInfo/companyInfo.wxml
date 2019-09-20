@@ -33,7 +33,7 @@
       </view>
       <view>
         <view class='news-item'  bindtap='toInfo' data-id="{{item.id}}">
-          <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}" />
+          <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}" catchtap="preview" data-img="{{item.banner_img}}" />
           <view class='news-name'>{{item.title}}</view>
           <view class='news-spec'>{{item.nav_name}}</view>
         </view>
@@ -55,7 +55,7 @@
         <view class="network-company">{{index+1}} {{item.name || '无名'}}</view>
         <view class="network-other">
           <view class="network-serve">
-            <!-- <text>服务：</text>{{item.serve}} -->
+            <text>联系人：</text>{{item.contact_man || '无'}}
           </view>
           <view class="network-distance">{{item.distance || '0'}}km</view>
         </view>
@@ -63,9 +63,11 @@
 
       <view class="network-info">
         <view>
-          <image class="network-icon" src="../../images/network-add.png" />{{item.address || '无'}}</view>
-        <view>
-          <image class="network-icon" src="../../images/network-tel.png" />{{item.contact_way || '无'}}</view>
+          <image class="network-icon" src="../../images/network-add.png" />{{item.address || '无'}}
+        </view>
+        <view catchtap='bookTel' data-tel="{{item.contact_way}}">
+          <image class="network-icon" src="../../images/network-tel.png" />{{item.contact_way || '无'}}
+        </view>
       </view>
 
     </view>

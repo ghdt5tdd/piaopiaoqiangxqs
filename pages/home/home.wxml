@@ -77,7 +77,7 @@
         </view>
         <view>
           <view class='news-item' bindtap='toDetail' data-id="{{item.id}}">
-            <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}" />
+            <image class='news-pic' mode='aspectFill' src="{{item.banner_img}}" catchtap="preview" data-img="{{item.banner_img}}"/>
             <view class='news-name'>{{item.title}}</view>
             <view class='news-spec'>{{item.nav_name}}</view>
           </view>
