@@ -41,31 +41,24 @@ Page({
 
   //导航
   navigation: function(e) {
-    //地址解析(地址转坐标)     
-    demo.geocoder({
-      address: e.currentTarget.dataset.location,
-      success: function(res) {
-        var latitude = res.result.location.lat
-        var longitude = res.result.location.lng
-        var addressOn = e.currentTarget.dataset.location
-        // 取到坐标并打开地图
-        wx.openLocation({
-          latitude: latitude,
-          longitude: longitude,
-          address: addressOn,
-          scale: 28
-        })
-      },
-      fail: function(res) {
-        // console.log(res);
-        wx.showToast({
-          title: res.message,
-        })
-      },
-      complete: function(res) {
-        // console.log(res);
-      }
-    });
+    let location = this.data.companyInfo.location
+    if(!location) {
+      wx.showToast({
+        title: '无坐标信息',
+      })
+      return;
+    }
+    location = location.split(",")
+    var latitude = Number(location[1])
+    var longitude = Number(location[0])
+    var address = this.data.companyInfo.address
+    // 取到坐标并打开地图
+    wx.openLocation({
+      latitude,
+      longitude,
+      address,
+      scale: 28
+    })
   },
 
 
@@ -89,7 +82,6 @@ Page({
   //网点地址
   networkMap: function (e) {
 
-    console.log("网点地址", e.currentTarget.dataset.name);
     wx.setStorageSync('address', e.currentTarget.dataset.name)
 
     //地址解析(地址转坐标)     
@@ -268,7 +260,6 @@ Page({
       wx.getLocation({
         type: 'gcj02',//默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标
         success: res => {
-          console.log(res)
           latitude = res.latitude
           longitude = res.longitude
           this.setData({
@@ -304,7 +295,6 @@ Page({
   getDistance: function(lat1, lng1, lat2, lng2){
     var radLat1 = lat1 * Math.PI / 180.0;
     var radLat2 = lat2 * Math.PI / 180.0;
-    console.log(lat1, lng1 + ' - ' + lat2, lng2)
     var a = radLat1 - radLat2;
     var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
     var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +

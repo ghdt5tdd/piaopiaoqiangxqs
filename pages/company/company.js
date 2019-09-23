@@ -14,7 +14,7 @@ Page({
    */
   data: {
     page: 1,
-    pageSize: 10,
+    pageSize: 20,
     loadCompleted: false,
     getInfoAble: false,
     forwarderList: []
@@ -55,40 +55,25 @@ Page({
 
   //导航
   navigation: function (e) {
-    const address = e.currentTarget.dataset.location
-    if (!address) {
+    let location = e.currentTarget.dataset.location
+    if (!location) {
       wx.showToast({
         title: '无坐标信息',
       })
       return;
     }
-    //地址解析(地址转坐标)     
-    demo.geocoder({
+    location = location.split(",")
+    var latitude = Number(location[1])
+    var longitude = Number(location[0])
+    var address = e.currentTarget.dataset.address
+    console.log(latitude, longitude)
+    // 取到坐标并打开地图
+    wx.openLocation({
+      latitude,
+      longitude,
       address,
-
-      success: function (res) {
-        console.log(res)
-        var latitude = res.result.location.lat
-        var longitude = res.result.location.lng
-        // 取到坐标并打开地图
-        wx.openLocation({
-          latitude: latitude,
-          longitude: longitude,
-          address,
-          scale: 28
-        })
-      },
-      fail: function (res) {
-        console.log(res);
-        wx.showToast({
-          title: res.message,
-        })
-        return;
-      },
-      complete: function (res) {
-        console.log(res);
-      }
-    });
+      scale: 28
+    })
   },
 
   search(e) {

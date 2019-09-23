@@ -543,4 +543,6 @@ button::after {
   margin-top: 0
 }
 
-
+.placeholder-class {
+  font-size: 26rpx;
+}

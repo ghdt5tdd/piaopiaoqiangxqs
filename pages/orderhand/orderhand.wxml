@@ -29,19 +29,19 @@
   <view class='query-condition'>
       <view class="query-condition-items">
         <view class='query-conditions-name'>物流公司</view>
-        <input placeholder="请输入物流公司" bindinput='bindInput' value="{{query.companyName}}" data-key="companyName"  />
+        <input placeholder="请输入物流公司" bindinput='bindInput' value="{{query.companyName}}" data-key="companyName" placeholder-class="placeholder-class"  />
         <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="companyName"></image>
       </view>
 
       <view class="query-condition-items">
         <view class='query-conditions-name'>发货人</view>
-        <input placeholder="输入发货人查询" bindinput='bindInput' value="{{query.consignerName}}" data-key="consignerName"  />
+        <input placeholder="输入发货人查询" bindinput='bindInput' value="{{query.consignerName}}" data-key="consignerName" placeholder-class="placeholder-class"  />
         <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="consignerName"></image>
       </view>
 
       <view class="query-condition-items">
         <view class='query-conditions-name'>货运单号</view>
-        <input placeholder="输入货运单号查询" bindinput='bindInput' value="{{query.orderNo}}" data-key="orderNo"  />
+        <input placeholder="输入货运单号查询" bindinput='bindInput' value="{{query.orderNo}}" data-key="orderNo" placeholder-class="placeholder-class"  />
         <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="orderNo"></image>
       </view>
   </view>

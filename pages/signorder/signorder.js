@@ -20,7 +20,7 @@ Page({
       endDate: '',
       consigneeCode: '',
       page: 1,
-      pageSize: 10,
+      pageSize: 30,
       loadCompleted: false
     },
 

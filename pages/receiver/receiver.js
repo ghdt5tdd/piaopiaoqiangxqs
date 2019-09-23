@@ -32,7 +32,7 @@ Page({
     selectStatus: 'all',
     shopOrders: [],
     page: 1,
-    pageSize: 10,
+    pageSize: 30,
     count: 0,
     loadCompleted: false,
     timelyArray: [{

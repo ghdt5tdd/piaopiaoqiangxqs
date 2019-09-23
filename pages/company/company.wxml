@@ -23,7 +23,7 @@
         <view class='enterprise-bar'>
           <view class='enterprise-bar-label'>企业地址:</view>
           <view class='enterprise-bar-info'>{{item.address || '无'}}</view>
-          <image class='enterprise-bar-icon' src="../../images/icon-address.png" catchtap='navigation' data-location="{{item.address}}"></image>
+          <image class='enterprise-bar-icon' src="../../images/icon-address.png" catchtap='navigation' data-location="{{item.location}}" data-address="{{item.address}}"></image>
         </view>
       </view>
     </view>

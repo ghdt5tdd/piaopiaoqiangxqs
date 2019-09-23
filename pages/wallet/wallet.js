@@ -11,7 +11,7 @@ Page({
   data: {
     account: 0.0,
     page: 1,
-    pageSize: 10,
+    pageSize: 30,
     count: 0,
     loadCompleted: false,
     orderStatus: [{

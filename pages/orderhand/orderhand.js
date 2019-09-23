@@ -21,7 +21,7 @@ Page({
       // endDate: '',
       clientAccount: '',
       page: 1,
-      pageSize: 10,
+      pageSize: 30,
       loadCompleted: false
     },
     orders: [],

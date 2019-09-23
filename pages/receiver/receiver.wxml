@@ -20,15 +20,13 @@
   <view class='query-condition'>
       <view class="query-condition-items">
         <view class='query-conditions-name'>物流公司</view>
-        <input placeholder="请输入物流公司" bindinput='bindInput' value="{{companyName}}" bindinput='bindInput' 
-        data-key="companyName"  />
+        <input placeholder="请输入物流公司" bindinput='bindInput' value="{{companyName}}" placeholder-class="placeholder-class" bindinput='bindInput' data-key="companyName"  />
         <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="companyName"></image>
       </view>
 
       <view class="query-condition-items">
         <view class='query-conditions-name'>货运单号</view>
-        <input placeholder="输入货运单号查询" bindinput='bindInput' value="{{orderNo}}" bindinput='bindInput' 
-        data-key="orderNo"  />
+        <input placeholder="输入货运单号查询" bindinput='bindInput' value="{{orderNo}}" bindinput='bindInput' placeholder-class="placeholder-class"  data-key="orderNo"  />
         <image class='search-clear' src="../../images/clear.png" bindtap='conditionClear' data-key="orderNo"></image>
       </view>
   </view>

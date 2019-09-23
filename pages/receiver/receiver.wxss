@@ -1,4 +1,5 @@
 /* pages/receiver/receiver.wxss */
+
 .search-group {
   overflow: hidden;
   padding: 20rpx 0 0 20rpx;

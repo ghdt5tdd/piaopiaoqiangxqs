@@ -20,6 +20,7 @@ Page({
     sendAddr: undefined,  //寄件地址
     receiveAddr: undefined, //收件地址
     carrier: undefined, //承运商信息
+    company: undefined, //物流商信息
 
     cargoType: undefined,
     cargoNum: undefined,
@@ -357,6 +358,13 @@ Page({
       })
       return false;
 
+    } else if (this.data.company == undefined) {
+      wx.showToast({
+        title: '请选择物流商',
+        icon: 'none',
+        duration: 3000,
+      })
+      return false;
     }
     // else if (this.data.WReceive == true) {
     //   wx.showToast({
